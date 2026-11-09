@@ -1,0 +1,131 @@
+.top-infos {
+  width: 100%;
+  max-width: 900px;
+  margin: 0px;
+  background: #f3f3f3;
+  border-radius: 16px;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+}
+
+/* ===== INNER CONTAINER ===== */
+.top-infos__container {
+  width: 100%;
+  display: flex;
+  flex-direction: row; 
+}
+
+/* ===== CONTENT (TEXTE) ===== */
+.top-infos__content {
+  flex: 1;
+  padding: clamp(15px, 3vw, 30px);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+}
+
+/* ===== BLOCK ===== */
+.top-infos__block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ===== TITLE ===== */
+.top-infos__title {
+  font-size: clamp(14px, 1.5vw, 18px);
+  font-weight: 600;
+  color: #222;
+}
+
+/* ===== TEXT ===== */
+.top-infos__text {
+  font-size: clamp(13px, 1.4vw, 15px);
+  color: #555;
+  line-height: 1.5;
+}
+
+/* ===== SEPARATOR ===== */
+.top-infos__separator {
+  width: clamp(40px, 8vw, 80px);
+  height: 3px;
+  background: #c92453;
+  border-radius: 50px;
+}
+
+/* ===== IMAGE ===== */
+.top-infos__banner {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+
+  img {
+    width: 100%;
+    height: auto; 
+    max-height: 100%;
+    object-fit: contain; 
+    border-radius: 15px;
+  }
+}
+.top-infos__link {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.top-infos__link a {
+  text-align: center;
+  color: #c92453;
+  font-weight: 600;
+  text-decoration: underline;
+}
+.marginAvis {
+  margin-top: 70px;
+} 
+/* ============================= */
+/* 📱 MOBILE → colonne */
+/* ============================= */
+@media (max-width: 768px) {
+  .top-infos__container {
+    flex-direction: column-reverse; 
+  }
+.top-infos__link a {
+  font-size: small;
+}
+  .top-infos__banner {
+    padding: 10px;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  .top-infos__content {
+    align-items: center;
+    text-align: center;
+  }
+}
+
+/* ============================= */
+/* 💻 TABLET */
+/* ============================= */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .top-infos {
+    max-width: 750px;
+  }
+}
+
+/* ============================= */
+/* 🖥 DESKTOP */
+/* ============================= */
+@media (min-width: 1024px) {
+  .top-infos {
+    max-width: 900px;
+  }
+}

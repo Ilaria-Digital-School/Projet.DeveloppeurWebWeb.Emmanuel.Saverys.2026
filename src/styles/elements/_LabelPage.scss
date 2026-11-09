@@ -1,0 +1,182 @@
+.label-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(1rem, 2vw, 2rem);
+  font-family: "Poppins", sans-serif;
+  color: #333;
+  background-color: white;
+
+  .label-content {
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 3rem;
+
+    .label-title {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 700;
+      color: #c92453;
+      text-align: center;
+    }
+
+    .label-section {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+      margin-top: 1.8rem;
+
+      .label-logo {
+        width: 220px;
+        max-width: 100%;
+        height: auto;
+        flex-shrink: 0;
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+
+      .label-text {
+        flex: 1;
+        min-width: 250px;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        .label-block {
+          h3 {
+            font-size: 1.3rem;
+            color: #d12d5d;
+            margin-bottom: 0.3rem;
+          }
+
+          p {
+            font-size: 1rem;
+            line-height: 1.5;
+          }
+        }
+      }
+    }
+  }
+}
+
+.service-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+
+  .label-tabs-section {
+    width: 100%;
+    max-width: 900px;
+
+    .label-tab-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: -20px;
+      gap: 0.6rem;
+      margin-bottom: 25px;
+
+      .label-tab-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        border: 1px solid #c92453;
+        background: #fff;
+        color: #c92453;
+        border-radius: 6px;
+        cursor: pointer;
+
+        &:hover,
+        &.active {
+          background: #c92453;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+.label-tab-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+  max-width: 850px;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+
+  .label-tab-image {
+    flex-shrink: 0;
+
+    img {
+      width: 180px;
+      height: 180px;
+      object-fit: contain;
+    }
+  }
+
+  .label-tab-text {
+    text-align: left;
+
+    h3 {
+      font-size: 1.5rem;
+      color: #c92453;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #555;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .label-page {
+    padding: 1rem;
+
+    .label-section {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      .label-logo {
+        width: 160px;
+        margin: 0 auto;
+      }
+
+      .label-text {
+        align-items: center;
+      }
+    }
+  }
+
+  .label-tab-content {
+    flex-direction: column !important;
+    text-align: center;
+
+    .label-tab-image img {
+      width: 140px;
+      height: 140px;
+    }
+
+    .label-tab-text {
+      text-align: center;
+    }
+  }
+
+  .service-group {
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+  }
+}

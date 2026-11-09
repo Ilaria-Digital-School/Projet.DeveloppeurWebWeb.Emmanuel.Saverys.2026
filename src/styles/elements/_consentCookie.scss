@@ -1,0 +1,129 @@
+.cookie-popup {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #d12d5d 0%, #c92453 60%, #b11f4a 100%);
+  color: #fff;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+  z-index: 2000;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+
+  p {
+    margin-bottom: 1rem;
+    line-height: 1.4;
+
+    a {
+      color: #fff;
+      text-decoration: underline;
+      font-weight: 600;
+
+      &:hover {
+        color: #ffe;
+      }
+    }
+  }
+
+  .cookie-actions {
+    display: flex;
+    gap: 1rem;
+
+    button {
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+
+      &.accept-btn {
+        background: #fff;
+        color: #b11f4a;
+
+        &:hover {
+          transform: scale(1.05);
+          background: #ffe6e6;
+        }
+      }
+
+      &.reject-btn {
+        background: rgba(255, 255, 255, 0.25);
+        color: #fff;
+
+        &:hover {
+          transform: scale(1.05);
+          background: rgba(255, 255, 255, 0.4);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .cookie-popup {
+    max-width: 90%;
+    padding: 1rem 1.2rem;
+
+    p {
+      font-size: 0.85rem;
+    }
+
+    .cookie-actions button {
+      font-size: 0.8rem;
+      padding: 0.5rem 1rem;
+    }
+  }
+}
+.cookies-page {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+  font-family: "Poppins", sans-serif;
+  color: #222;
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #b11f4a;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #c92453;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  ul {
+    margin-left: 1.5rem;
+    list-style-type: disc;
+
+    li {
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+    }
+  }
+
+  a {
+    color: #b11f4a;
+    text-decoration: underline;
+    &:hover {
+      color: #d12d5d;
+    }
+  }
+}

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ecsr-rafa.com/sitemap.xml
