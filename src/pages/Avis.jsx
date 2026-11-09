@@ -72,7 +72,7 @@ const Avis = () => {
           <AvisCard
             rating={5}
             comment="Une monitrice exceptionnelle ! J’ai eu mon permis de conduire très rapidement grâce à son professionnalisme et à sa façon d’expliquer clairement. Elle a toutes les qualités : patiente, motivante, bienveillante, et en plus toujours dans la bonne humeur. Les heures de conduite passent super vite avec elle, Merci encore, excellente expérience, je recommande à tous."
-            name="Emmanuel Saverys"
+            name="Manu"
             moniteur="Ilhem"
             photo={Utilisateur}
           />
