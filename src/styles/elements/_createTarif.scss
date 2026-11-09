@@ -1,0 +1,107 @@
+.tarif-section {
+  padding: 4rem 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.tarif-wrapper {
+  width: 100%;
+  max-width: 1180px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+@media (max-width: 1440px) {
+
+  .tarif-wrapper {
+    max-width: 1050px;
+    gap: 2rem;
+  }
+
+  .tarif-column {
+    padding: 1.6rem;
+
+    h3 {
+      font-size: 1.45rem;
+      margin-bottom: 1.2rem;
+    }
+  }
+
+  .tarif-row {
+    padding: 0.75rem 0;
+  }
+
+  .tarif-label {
+    span {
+      font-size: 0.9rem;
+    }
+
+    small {
+      font-size: 0.7rem;
+    }
+  }
+
+  .tarif-price {
+    font-size: 0.95rem;
+  }
+
+  .tarif-section {
+    padding: 3.2rem 1.5rem;
+  }
+}
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.tarif-column {
+  background-color: #fff;
+  border-radius: 14px;
+  padding: 2rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+
+  h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: rgb(168, 8, 8);
+    margin-bottom: 1.5rem;
+  }
+}
+
+.tarif-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid #eee;
+  gap: 1rem;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.tarif-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+
+  span {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #333;
+  }
+
+  small {
+    font-size: 0.75rem;
+    color: #777;
+  }
+}
+
+.tarif-price {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #c92453;
+  white-space: nowrap;
+}

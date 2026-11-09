@@ -1,0 +1,14 @@
+# Redirections SEO
+# /about              /contact       301
+# /livre-dor          /avis          301
+# /r%C3%A8glement     /page-pdf      301
+
+# Protection fichiers sensibles
+# *.php               /404           404
+# *.env               /404           404
+# /env.*              /404           404
+# /.git/*             /404           404
+# *.log               /404           404
+
+# Application React
+# /*                  /index.html    200

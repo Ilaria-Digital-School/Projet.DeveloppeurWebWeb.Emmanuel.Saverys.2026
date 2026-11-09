@@ -1,0 +1,212 @@
+.tuto-overlay {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.tuto-popup {
+  position: relative;
+  background: #ffffff;
+  width: 90%;
+  max-width: 800px;
+  min-width: 500px;     
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.4s ease;
+  
+  min-height: 400px;     
+  max-height: 600px;    
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  overflow: hidden;      
+}
+
+
+.tuto-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #000;
+  transition: 0.2s ease;
+}
+
+.tuto-close:hover {
+  transform: scale(1.2);
+}
+
+.tuto-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  transition: 0.4s ease;
+  text-align: center;
+}
+
+.tuto-content.top {
+  flex-direction: column-reverse;
+}
+
+.tuto-content.bottom {
+  flex-direction: column;
+}
+
+.tuto-content.left {
+  flex-direction: row;
+}
+
+.tuto-content.right {
+  flex-direction: row-reverse;
+}
+
+.tuto-image {
+  width: 250px;
+  max-width: 100%;
+  border-radius: 12px;
+}
+
+.tuto-text {
+  max-width: 400px;
+}
+
+.tuto-text h2 {
+  margin-bottom: 15px;
+  font-size: 26px;
+  color: #000;
+}
+
+.tuto-text p {
+  color: #111;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.tuto-navigation {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.tuto-navigation span {
+  font-weight: 500;
+  color: #000;
+}
+
+.tuto-navigation button {
+  background: #007bff;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.tuto-navigation button:hover {
+  transform: scale(1.1);
+  background: #0056b3;
+}
+
+.tuto-navigation button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 15px;
+  gap: 12px;
+  font-weight: 500;
+  font-size: 16px;
+  color: #000;
+  justify-content: center;
+}
+
+.checkbox-container input {
+  width: 20px;
+  height: 20px;
+  accent-color: #007bff;
+}
+
+.tuto-reopen {
+  margin-top: 10px;
+  margin-left: 8px;
+  right: 25px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: none;
+  color: rgb(158, 158, 230);
+  cursor: pointer;
+  background-color: transparent;
+  transition: 0.3s ease;
+  z-index: 999;
+}
+
+.tuto-reopen:hover {
+  transform: scale(1.2);
+}
+
+
+@media (max-width: 768px) {
+  .tuto-popup {
+    width: 100%;
+    max-width: 99%;
+    min-width: unset;
+
+    padding: 10px;
+    max-height: 90vh;
+  }
+
+  .tuto-content {
+    flex-direction: column !important;
+    text-align: center;
+  }
+
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.tuto-Title{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+

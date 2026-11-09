@@ -1,0 +1,210 @@
+.form-container {
+  max-width: 600px;
+  margin: 0 auto; 
+  padding: 2.5rem 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+
+  h2 {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: rgb(168, 8, 8);
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        font-family: "Inter", sans-serif;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #333;
+      }
+
+      input,
+      select,
+      textarea {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        outline: none;
+        transition: border 0.3s ease;
+
+        &:focus {
+          border-color: rgb(168, 8, 8);
+        }
+      }
+
+      textarea {
+        resize: vertical;
+      }
+    }
+
+   
+    .name-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .name-row .form-group {
+      flex: 1; 
+    }
+
+    .btn-submit {
+      padding: 0.75rem 1.5rem;
+      background-color: #c92453;
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: rgb(168, 8, 8);
+      }
+    }
+  }
+}
+
+@media (max-width: 1440px) {
+  .form-container {
+    max-width: 500px;          
+    padding: 1.8rem 1.2rem;   
+    margin: 2rem auto;
+
+    h2 {
+      font-size: 1.4rem;       
+      margin-bottom: 1rem;
+    }
+
+    form {
+      gap: 1rem;              
+
+      .form-group {
+        label {
+          font-size: 0.9rem;   
+        }
+
+        input,
+        select,
+        textarea {
+          padding: 0.6rem 0.8rem;
+          font-size: 0.9rem;
+        }
+      }
+
+      .name-row {
+        gap: 0.5rem;
+      }
+
+      .btn-submit {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.2rem;
+      }
+    }
+  }
+
+  .stars {
+    gap: 0.2rem;
+  }
+
+  .star {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-container {
+    padding: 2rem 1rem;
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    form {
+      gap: 1rem;
+
+      .name-row {
+        flex-direction: column; 
+      }
+
+      .form-group {
+        input,
+        select,
+        textarea {
+          font-size: 0.95rem;
+          padding: 0.6rem 0.8rem;
+        }
+      }
+
+      .btn-submit {
+        font-size: 0.95rem;
+        padding: 0.6rem 1rem;
+      }
+    }
+  }
+}
+
+.stars {
+  display: flex;
+  gap: 0.3rem;
+  cursor: pointer;
+  flex-direction: row-reverse;
+  justify-content: start; 
+}
+
+.star {
+  font-size: 1.8rem;
+  color: #ccc;
+  transition: color 0.2s ease;
+}
+
+.star.filled {
+  color: rgb(168, 8, 8);
+}
+
+.star:hover,
+.star:hover ~ .star {
+  color: rgb(200, 50, 50);
+}
+
+.publication-choice {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.choice-btn {
+  flex: 1;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.choice-btn:hover {
+  border-color: #c92453;
+}
+
+.choice-btn.active {
+  background-color: #c92453;
+  color: #fff;
+  border-color: #c92453;
+}
