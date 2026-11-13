@@ -1,5 +1,5 @@
 import React from "react";
-import PdfReg from "../../../public/PDF/questions-verifications.pdf"
+import PdfReg from "/PDF/questions-verifications.pdf"
 import useDocumentMeta from "../useDocumentMeta";
 
 const CreateMultiChoice = () => {

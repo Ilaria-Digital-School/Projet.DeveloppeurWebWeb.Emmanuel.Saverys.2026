@@ -1,39 +1,53 @@
-.status-bar {
-  width: 100%;
-  background: #111;
-  color: #fff;
-  text-align: center;
-  font-size: 0.85rem;
-  padding: 6px 10px;
-  letter-spacing: 0.5px;
+// ==========================================
+// BARRE DE STATUT
+// ==========================================
 
+.status-bar {
   position: relative;
   z-index: 1000;
 
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  padding: 6px 10px;
+
+  background: #111;
+  color: #fff;
+
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  text-align: center;
 
   opacity: 0.9;
   transition: all 0.3s ease;
 
+  // Indicateur de statut
+
   &::before {
     content: "";
+
     width: 6px;
     height: 6px;
-    border-radius: 50%;
     margin-right: 8px;
+
+    border-radius: 50%;
   }
+
+  // Statut ouvert
 
   &.open {
     &::before {
-      background: #4caf50; // 🟢 ouvert
+      background: #4caf50;
     }
   }
 
+  // Statut fermé
+
   &.closed {
     &::before {
-      background: #ff4d4d; // 🔴 fermé
+      background: #ff4d4d;
     }
   }
-}
+} 

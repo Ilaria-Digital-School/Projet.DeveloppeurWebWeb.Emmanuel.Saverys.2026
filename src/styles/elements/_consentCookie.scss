@@ -1,51 +1,92 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+// ==========================================
+// POPUP DE CONSENTEMENT
+// ==========================================
+
 .cookie-popup {
   position: fixed;
+  z-index: $z-index-modal;
+
   bottom: 1.5rem;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(135deg, #d12d5d 0%, #c92453 60%, #b11f4a 100%);
-  color: #fff;
-  padding: 1.5rem 2rem;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  width: max-content;
   max-width: 400px;
-  z-index: 2000;
-  font-family: "Poppins", sans-serif;
+
+  padding: 1.5rem 2rem;
+
+  background: linear-gradient(
+    135deg,
+    #d12d5d 0%,
+    #c92453 60%,
+    #b11f4a 100%
+  );
+  color: $text-light;
+
+  border-radius: $border-radius-lg;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+
+  font-family: $font-primary;
   text-align: center;
 
+  // ----------------------------------------
+  // TEXTE ET LIENS
+  // ----------------------------------------
+
   p {
-    margin-bottom: 1rem;
+    margin-bottom: $spacing-md;
     line-height: 1.4;
 
     a {
-      color: #fff;
+      color: inherit;
+      font-weight: $font-weight-semibold;
       text-decoration: underline;
-      font-weight: 600;
+
+      transition: color $transition-fast;
 
       &:hover {
-        color: #ffe;
+        color: #ffeeee;
       }
+
+      @include focus-visible;
     }
   }
 
+  // ----------------------------------------
+  // ACTIONS
+  // ----------------------------------------
+
   .cookie-actions {
     display: flex;
-    gap: 1rem;
+    align-items: center;
+    gap: $spacing-md;
 
     button {
       padding: 0.6rem 1.2rem;
-      border-radius: 50px;
-      border: none;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 0.9rem;
 
+      border: none;
+      border-radius: $border-radius-full;
+
+      font-size: 0.9rem;
+      font-weight: $font-weight-semibold;
+
+      cursor: pointer;
+
+      transition:
+        transform $transition-base,
+        background-color $transition-base,
+        box-shadow $transition-base;
+
+      // Bouton accepter
       &.accept-btn {
-        background: #fff;
+        background: $background-color;
         color: #b11f4a;
 
         &:hover {
@@ -54,76 +95,124 @@
         }
       }
 
+      // Bouton refuser
       &.reject-btn {
-        background: rgba(255, 255, 255, 0.25);
-        color: #fff;
+        background: rgba(255, 255, 255, 0.15);
+        color: $text-light;
 
         &:hover {
           transform: scale(1.05);
-          background: rgba(255, 255, 255, 0.4);
+          background: rgba(255, 255, 255, 0.25);
         }
       }
+
+      @include focus-visible;
     }
   }
 }
 
-@media (max-width: 480px) {
-  .cookie-popup {
-    max-width: 90%;
-    padding: 1rem 1.2rem;
+// ==========================================
+// PAGE POLITIQUE DES COOKIES
+// ==========================================
 
-    p {
-      font-size: 0.85rem;
-    }
-
-    .cookie-actions button {
-      font-size: 0.8rem;
-      padding: 0.5rem 1rem;
-    }
-  }
-}
 .cookies-page {
-  max-width: 800px;
+  width: min(100% - 2rem, 800px);
+
   margin: 3rem auto;
-  padding: 0 1rem;
-  font-family: "Poppins", sans-serif;
-  color: #222;
+  padding: 0;
+
+  color: #222222;
+  font-family: $font-primary;
+
+  // ----------------------------------------
+  // TITRE PRINCIPAL
+  // ----------------------------------------
 
   h1 {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
+    margin-bottom: $spacing-lg;
+
     color: #b11f4a;
+
+    font-size: 2rem;
+    text-align: center;
   }
+
+  // ----------------------------------------
+  // SOUS-TITRES
+  // ----------------------------------------
 
   h2 {
-    font-size: 1.3rem;
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
+    margin-top: $spacing-lg;
+    margin-bottom: $spacing-sm;
+
     color: #c92453;
+
+    font-size: 1.3rem;
   }
 
+  // ----------------------------------------
+  // PARAGRAPHES
+  // ----------------------------------------
+
   p {
+    margin-bottom: $spacing-md;
+
     font-size: 1rem;
-    line-height: 1.6;
-    margin-bottom: 1rem;
+    line-height: $line-height-base;
   }
+
+  // ----------------------------------------
+  // LISTES
+  // ----------------------------------------
 
   ul {
     margin-left: 1.5rem;
     list-style-type: disc;
 
     li {
-      margin-bottom: 0.8rem;
+      margin-bottom: $spacing-sm;
       font-size: 1rem;
     }
   }
 
+  // ----------------------------------------
+  // LIENS
+  // ----------------------------------------
+
   a {
     color: #b11f4a;
     text-decoration: underline;
+
+    transition: color $transition-fast;
+
     &:hover {
       color: #d12d5d;
+    }
+
+    @include focus-visible;
+  }
+}
+
+// ==========================================
+// RESPONSIVE
+// ==========================================
+
+@include respond-to(mobile) {
+  .cookie-popup {
+    width: 90%;
+    max-width: none;
+
+    padding: 1rem 1.2rem;
+
+    p {
+      font-size: 0.85rem;
+    }
+
+    .cookie-actions {
+      button {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+      }
     }
   }
 }

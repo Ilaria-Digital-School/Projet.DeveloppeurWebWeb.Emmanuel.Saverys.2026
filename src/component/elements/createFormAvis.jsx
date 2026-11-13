@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
 
+// Récupère les identifiants EmailJS depuis les variables d'environnement.
 export const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 export const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 export const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 const CreateFormAvis = () => {
+  // Centralise les informations saisies dans le formulaire.
   const [formData, setFormData] = useState({
     nom: "",
     prenom: "",
@@ -19,17 +21,20 @@ const CreateFormAvis = () => {
   const [isError, setIsError] = useState(false);
 
   const handleChange = (e) => {
+    // Met à jour le champ correspondant grâce à son attribut name.
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     setFormMsg("");
   };
 
   const handleRating = (value) => {
+    // Enregistre la note sélectionnée par l'utilisateur.
     setFormData((prev) => ({ ...prev, rating: value }));
     setFormMsg("");
   };
 
   const sendWithMailto = () => {
+    // Prépare le sujet et le contenu du mail en encodant les caractères spéciaux.
     const subject = encodeURIComponent("Nouvel avis client");
     const body = encodeURIComponent(
 `Nom: ${formData.nom}
@@ -42,12 +47,14 @@ Avis :
 ${formData.avis}`
     );
 
-    window.location.href = `mailto:ecsr.rafa@gmail.com?subject=${subject}&body=${body}`;
+    // Ouvre la messagerie de l'utilisateur avec le message prérempli.
+    window.location.href = `mailto:saveryse@gmail.com?subject=${subject}&body=${body}`;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Tente d'envoyer les données du formulaire avec EmailJS.
     emailjs
       .send(
         EMAILJS_SERVICE_ID,
@@ -58,6 +65,7 @@ ${formData.avis}`
       .then(() => {
         setIsError(false);
         setFormMsg("Merci pour votre avis ! ⭐");
+        // Réinitialise le formulaire après un envoi réussi.
         setFormData({
           nom: "",
           prenom: "",
@@ -68,6 +76,7 @@ ${formData.avis}`
         });
       })
       .catch(() => {
+        // En cas d'échec d'EmailJS, propose l'envoi via la messagerie de l'utilisateur.
         setIsError(true);
         setFormMsg(
           "Le service d’envoi est momentanément indisponible. Votre messagerie va s’ouvrir pour envoyer le message."

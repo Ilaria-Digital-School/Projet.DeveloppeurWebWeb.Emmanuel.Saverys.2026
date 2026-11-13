@@ -14,7 +14,7 @@ import engagementImg from "../assets/engagementSlide.png";
 import AvantageSlide from "../assets/AvantageSlide.png";
 import keyImg from "../assets/key-g174a91332_1920-a9f6f4b8-1920w-Cgmi9X5r.webp";
 import CreateLocation from "../component/elements/createLocation";
-import pdfLitige from "../../public/PDF/REclamations ET LITIGE.pdf";
+import pdfLitige from "/PDF/REclamations ET LITIGE.pdf";
 import useDocumentMeta from "../component/useDocumentMeta";
 import CertifComp from "../component/elements/CertifComp";
 

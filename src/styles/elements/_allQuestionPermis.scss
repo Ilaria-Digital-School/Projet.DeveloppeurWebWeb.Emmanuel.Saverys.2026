@@ -1,72 +1,51 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+// ==========================================
+// PROGRESSION DU QUIZ
+// ==========================================
+
 .permis-progress {
-  font-size: 1.2rem;
-  font-weight: 600;
+  margin: 0 0 $spacing-lg;
+
+  color: $text-light;
+  font-size: 17px;
+  font-weight: $font-weight-semibold;
   text-align: center;
-  margin: 1px 0;
-  color: #f3f3f3; 
-  transition: all 0.3s ease; 
-}
-/* Chrome, Safari, Edge, Opera */
-input[type=number]::-webkit-outer-spin-button,
-input[type=number]::-webkit-inner-spin-button { 
-  -webkit-appearance: none;
-  margin: 0;
+
+  transition: opacity $transition-base;
 }
 
-/* Firefox */
-input[type=number] {
+// ==========================================
+// CHAMPS NUMÉRIQUES
+// ==========================================
+
+input[type="number"] {
   -moz-appearance: textfield;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
- 
+
+// ==========================================
+// NAVIGATION DU QUIZ
+// ==========================================
 
 .permis-navigation {
-  margin-top: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: $spacing-lg;
+
+  margin-top: 40px;
 }
 
-.permis-arrows {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-  padding: 22px 25px;
-  border-radius: 40px;
-  cursor: pointer;
-}
-
-.arrow-icon {
-  cursor: pointer;
-  transition: all 0.2s ease;
-  color: #1e293b;
-}  
-
-.arrow-icon:hover {
-  transform: scale(1.2);
-  color: #2563eb;
-}
-
-.serial-counter {
-  font-weight: 600;
-  font-size: 19px;
-  color: #f3f3f3; 
-  min-width: 60px;
-  text-align: center;
-}
-
- 
-
-
-.permis-progress {
-   font-size: 17px;
-  text-align: center;
-  margin: 0px 0;
-  color: #f3f3f3; 
-  transition: all 0.3s ease; 
-  margin-bottom: 25px;
-}
-
+// ==========================================
+// FLÈCHES DE NAVIGATION
+// ==========================================
 
 .permis-arrows {
   display: flex;
@@ -74,240 +53,306 @@ input[type=number] {
   justify-content: center;
   gap: 25px;
 
+  padding: 22px 25px;
+  border-radius: $border-radius-full;
+
+  cursor: pointer;
+
   svg {
     cursor: pointer;
-    transition: all 0.2s ease;
+
+    transition:
+      transform $transition-hover,
+      opacity $transition-hover;
 
     &:hover {
       transform: scale(1.1);
       opacity: 0.85;
     }
+
+    @include focus-visible;
   }
 
   span {
     font-size: 17px;
-    font-weight: 500;
+    font-weight: $font-weight-medium;
   }
 }
 
+// ==========================================
+// ICÔNE INDIVIDUELLE
+// ==========================================
+
+.arrow-icon {
+  color: #1e293b;
+  cursor: pointer;
+
+  transition:
+    transform $transition-hover,
+    color $transition-hover;
+
+  &:hover {
+    transform: scale(1.2);
+    color: #2563eb;
+  }
+
+  @include focus-visible;
+}
+
+// ==========================================
+// COMPTEUR DE SÉRIE
+// ==========================================
+
+.serial-counter {
+  min-width: 60px;
+
+  color: $text-light;
+  font-size: 19px;
+  font-weight: $font-weight-semibold;
+  text-align: center;
+}
+
+// ==========================================
+// BOUTON SUIVANT
+// ==========================================
 
 .permis-next-btn {
-  margin: 30px auto 0;
   display: block;
+
+  margin: 30px auto 0;
   padding: 12px 30px;
-  border-radius: 30px;
+
   border: none;
-  background: white;
+  border-radius: $border-radius-full;
+
+  background-color: $background-color;
   color: #b11f4a;
-  font-weight: 600;
+
+  font-weight: $font-weight-semibold;
+
   cursor: pointer;
-  transition: all 0.25s ease;
+
+  transition:
+    transform $transition-base,
+    box-shadow $transition-base;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    box-shadow: $shadow-lg;
   }
+
+  @include focus-visible(#b11f4a);
 }
 
-
-
-
-/* =========================
-   HEADER STRUCTURE
-========================= */
+// ==========================================
+// HEADER DU QUIZ
+// ==========================================
 
 .quiz-header {
   position: relative;
+
   display: flex;
   align-items: center;
-  justify-content: center; /* centre le bloc central */
-  padding: 18px 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.4);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-  background: transparent;
-}
-
-/* =========================
-   LEFT (flèche)
-========================= */
-
-.quiz-header-left {
-  position: absolute;
-  left: 20px;
-  display: flex;
-  align-items: center;
-}
-
-.quiz-back {
-  color: white;
-  transition: all 0.2s ease;
-  cursor: pointer;
-
-  &:hover {
-    transform: translateX(-4px);
-    opacity: 0.8;
-  }
-}
-
-/* =========================
-   CENTER (boutons)
-========================= */
-
-.quiz-header-center {
-  display: flex;
   justify-content: center;
-}
 
-.permis-filters {
-  display: flex;
-  gap: 0; /* collés */
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 40px;
-  padding: 4px;
-  overflow: hidden;
-}
+  padding: 18px 20px;
 
-/* Boutons */
-.permis-filters button {
-  padding: 8px 22px;
-  border: none;
+  border-block: 1px solid rgba($text-light, 0.4);
+
   background: transparent;
-  color: white;
-  cursor: pointer;
-  font-weight: 500;
-  border-radius: 40px;
-  transition: all 0.25s ease;
-}
 
-/* Actif */
-.permis-filters button.active {
-  background: white;
-  color: #b11f4a;
-  font-weight: 600;
-}
+  // Partie gauche
+  &-left {
+    position: absolute;
+    left: 20px;
 
-/* Hover */
-.permis-filters button:not(.active):hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-/* =========================
-   RIGHT (titre)
-========================= */
-
-.quiz-header-right {
-  position: absolute;
-  right: 20px;
-  display: flex;
-  align-items: center;
-
-  h3 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: 600;
-    color: white;
-    letter-spacing: 0.5px;
-  }
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media (max-width: 768px) {
-  .quiz-header {
-    flex-direction: column;
-    gap: 12px;
+    display: flex;
+    align-items: center;
   }
 
-  .quiz-header-left,
-  .quiz-header-right {
-    position: static;
+  // Retour
+  .quiz-back {
+    color: $text-light;
+    cursor: pointer;
+
+    transition:
+      transform $transition-hover,
+      opacity $transition-hover;
+
+    &:hover {
+      transform: translateX(-4px);
+      opacity: 0.8;
+    }
+
+    @include focus-visible;
   }
 
-  .quiz-header-right h3 {
-    font-size: 16px;
+  // Centre
+  &-center {
+    display: flex;
+    justify-content: center;
   }
 
+  // Filtres
   .permis-filters {
-    width: 100%;
-    max-width: 320px;
-    border-radius: 5px;
+    display: flex;
+    gap: 0;
+
+    padding: $spacing-2xs;
+    overflow: hidden;
+
+    background: rgba($text-light, 0.15);
+    border-radius: $border-radius-full;
+
+    button {
+      padding: $spacing-sm 22px;
+
+      border: none;
+      border-radius: $border-radius-full;
+
+      background: transparent;
+      color: $text-light;
+
+      font-weight: $font-weight-medium;
+
+      cursor: pointer;
+
+      transition:
+        background-color $transition-base,
+        color $transition-base;
+
+      &.active {
+        background: $background-color;
+        color: #b11f4a;
+        font-weight: $font-weight-semibold;
+      }
+
+      &:not(.active):hover {
+        background: rgba($text-light, 0.2);
+      }
+
+      @include focus-visible;
+    }
   }
 
-  .permis-filters button {
-    flex: 1;
-    text-align: center;
-    border-radius: 2px; 
+  // Partie droite
+  &-right {
+    position: absolute;
+    right: 20px;
+
+    display: flex;
+    align-items: center;
+
+    h3 {
+      margin: 0;
+
+      color: $text-light;
+      font-size: 18px;
+      font-weight: $font-weight-semibold;
+      letter-spacing: 0.5px;
+    }
   }
 }
 
+// ==========================================
+// MINI NAVIGATION DU QUIZ
+// ==========================================
 
 .quiz-mini-nav {
   display: flex;
   align-items: center;
-  justify-content: space-between; // espace entre left, center et right
-  padding: 16px 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.4);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-  background: transparent;
-  margin-bottom: 20px;
+  justify-content: space-between;
 
+  margin-bottom: 20px;
+  padding: $spacing-md 20px;
+
+  border-block: 1px solid rgba($text-light, 0.4);
+
+  background: transparent;
+
+  // Gauche
   &__left {
     display: flex;
     align-items: center;
 
     .quiz-mini-nav__back {
+      color: $text-light;
       cursor: pointer;
-      color: white;
-      transition: all 0.2s ease;
+
+      transition:
+        transform $transition-hover,
+        opacity $transition-hover;
 
       &:hover {
         transform: translateX(-3px);
         opacity: 0.8;
       }
+
+      @include focus-visible;
     }
   }
 
+  // Centre
   &__center {
     display: flex;
+    flex: 1;
     justify-content: center;
-    flex: 1; 
-    padding: 0 10px;
+
+    padding-inline: 10px;
 
     .quiz-toggle {
+      position: relative;
+
       display: flex;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 40px;
       overflow: hidden;
 
+      background: rgba($text-light, 0.15);
+      border-radius: $border-radius-full;
+
       button {
-        padding: 8px 20px;
+        position: relative;
+        z-index: 1;
+
+        padding: $spacing-sm 20px;
+
         border: none;
+        border-radius: $border-radius-full;
+
         background: transparent;
-        color: white;
-        font-weight: 500;
+        color: $text-light;
+
+        font-weight: $font-weight-medium;
+
         cursor: pointer;
-        transition: all 0.25s ease;
+
+        transition:
+          background-color $transition-base,
+          color $transition-base;
 
         &.active {
-          background: white;
+          background: $background-color;
           color: #b11f4a;
-          font-weight: 600;
+          font-weight: $font-weight-semibold;
         }
 
         &:not(.active):hover {
-          background: rgba(255, 255, 255, 0.2);
+          background: rgba($text-light, 0.2);
         }
+
+        @include focus-visible;
       }
 
-     .quiz-toggle__slider {
-  position: absolute;
-  width: 50%;
-  border-radius: 40px;
-  transition: all 0.3s ease;
+      // Curseur visuel du toggle
+      .quiz-toggle__slider {
+        position: absolute;
 
-        // décaler quand random est actif
+        width: 50%;
+        border-radius: $border-radius-full;
+
+        transition:
+          transform $transition-base,
+          left $transition-base;
+
         .random & {
           left: 50%;
         }
@@ -315,24 +360,59 @@ input[type=number] {
     }
   }
 
+  // Droite
   &__right {
     display: flex;
     align-items: center;
-
   }
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+// ==========================================
+// RESPONSIVE
+// ==========================================
+
+@include respond-to(tablet) {
+  .quiz-header {
+    flex-direction: column;
+    gap: $spacing-md;
+
+    &-left,
+    &-right {
+      position: static;
+    }
+
+    &-right h3 {
+      font-size: $font-size-base;
+    }
+
+    .permis-filters {
+      width: 100%;
+      max-width: 320px;
+
+      border-radius: $border-radius-sm;
+
+      button {
+        flex: 1;
+        border-radius: 2px;
+        text-align: center;
+      }
+    }
+  }
+
   .quiz-mini-nav {
     flex-direction: column;
-    gap: 12px;
+    gap: $spacing-md;
 
     &__center {
       width: 100%;
+
       .quiz-toggle {
         width: 100%;
 
+        button {
+          flex: 1;
+          text-align: center;
+        }
 
         .quiz-toggle__slider {
           width: 50%;
@@ -341,7 +421,7 @@ input[type=number] {
     }
 
     &__right h3 {
-      font-size: 16px;
+      font-size: $font-size-base;
     }
   }
 }

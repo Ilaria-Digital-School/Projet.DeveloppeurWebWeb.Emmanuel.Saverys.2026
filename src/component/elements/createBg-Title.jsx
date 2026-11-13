@@ -5,14 +5,17 @@ const CreateBgTitle = ({ slides = [] }) => {
   const [autoSlide, setAutoSlide] = useState(true);
 
   const goToSlide = (index) => {
+    // Change de diapositive et désactive le défilement automatique après une sélection manuelle.
     setCurrent(index);
     setAutoSlide(false);
   };
 
   useEffect(() => {
+    // Lance le défilement automatique uniquement si plusieurs diapositives sont disponibles.
     if (!autoSlide || slides.length <= 1) return;
 
     const interval = setInterval(() => {
+      // Passe à la diapositive suivante et revient à la première après la dernière.
       setCurrent((prev) => (prev + 1) % slides.length);
     }, 7000);
 

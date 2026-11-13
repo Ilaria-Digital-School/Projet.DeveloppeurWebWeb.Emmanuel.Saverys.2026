@@ -1,6 +1,29 @@
+// ==========================================
+// FONDATIONS
+// ==========================================
+
+@use "./variables" as *;
+@use "./mixins";
+@use "./base";
+
+// ==========================================
+// STRUCTURE
+// ==========================================
+
 @use "./elements/navbar";
 @use "./elements/footer";
+
+// ==========================================
+// PAGES
+// ==========================================
+
 @use "./elements/page/Offres";
+@use "./elements/page/QuestionsExam";
+
+// ==========================================
+// COMPOSANTS
+// ==========================================
+
 @use "./elements/createBg-Title";
 @use "./elements/createSideInfos";
 @use "./elements/createInfos";
@@ -10,38 +33,20 @@
 @use "./elements/createPdfLink";
 @use "./elements/createFormContact";
 @use "./elements/createQuestion";
-@use "./elements/createTopPageInfos.scss";
+@use "./elements/createTopPageInfos";
 @use "./elements/createAvis";
 @use "./elements/createFormAvis";
 @use "./elements/loader";
 @use "./elements/error404";
 @use "./elements/questionPermis";
-@use "./elements/allQuestionPermis"; 
+@use "./elements/allQuestionPermis";
 @use "./elements/consentCookie";
 @use "./elements/createAvisGoogleMap";
-@use "./elements/createRemoveHour"; 
-@use "./elements/createMultiChoice"; 
-@use "./elements/createMethode"; 
-@use "./elements/createTuto"; 
-@use "./elements/page/handicap.scss";  
-@use "./elements/page/QuestionsExam.scss";  
-@use "./elements/createTopInfos.scss";  
-@use "./elements/CertifComp";  
-@use "./elements/useStatusHours";  
-@use "./elements/LabelPage.scss";  
- 
-
-  
-body {
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
-  color: #333;
-  margin: 0;
-  padding: 0;
-} 
-
-html {
-  scroll-behavior: smooth;
-}
-
+@use "./elements/createRemoveHour";
+@use "./elements/createMultiChoice";
+@use "./elements/createMethode";
+@use "./elements/createTuto";
+@use "./elements/createTopInfos";
+@use "./elements/CertifComp";
+@use "./elements/useStatusHours";
+@use "./elements/LabelPage";

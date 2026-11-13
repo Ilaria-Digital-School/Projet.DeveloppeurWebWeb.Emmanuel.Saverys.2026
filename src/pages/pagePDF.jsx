@@ -2,25 +2,25 @@ import React from "react";
 import CreatePdfLink from "../component/elements/createPdfLink";
 import CreateBgTitle from "../component/elements/createBg-Title";
 
-import ReglementInterieur from "../../public/PDF/reglement intérieur.pdf";
-import QuestionsVerificationsPermis from "../../public/PDF/questions-verifications.pdf";
-import GuideVoyants from "../../public/PDF/guideVoyants.pdf";
-import GestionDesRéclamations from "../../public/PDF/gestion des réclamations.pdf";
-import ParcoursDeFormation from "../../public/PDF/PARCOURS DE FORMATION CATÉGORIE B.pdf";
-import EvaluationDeDépart from "../../public/PDF/ÉVALUATION DE DEPART.pdf";
-import EnjeuxDeLaFormation from "../../public/PDF/Enjeux de la formation.pdf";
-import GuideUtilisationQuiz from "../../public/PDF/Guide d’Utilisation des Quiz.pdf";
-import VotreAvisNousEstTrèsCher from "../../public/PDF/Questionnaire de satisfaction Elève.pdf";
-import FormationPostPermis from "../../public/PDF/Formation post-permis.pdf";
-import AAC from "../../public/PDF/AAC.pdf";
-import ReclamLitige from "../../public/PDF/REclamations ET LITIGE.pdf";
-import Pdp from "../../public/PDF/Procede-de-positionnement-et-devaluation2.pdf";
-import CS from "../../public/PDF/J3DP00_DEPLIANT_CONDUITE_SUPERVISEE-web.pdf";
-import CA from "../../public/PDF/J3NE01_CA-DEPLIANT-CONDUITE-ACCOMPAGNEE-web.pdf";
-import HandicapPdf from "../../public/PDF/Handicap et permis.pdf";
+import ReglementInterieur from "/PDF/reglement intérieur.pdf";
+import QuestionsVerificationsPermis from "/PDF/questions-verifications.pdf";
+import GuideVoyants from "/PDF/guideVoyants.pdf";
+import GestionDesRéclamations from "/PDF/gestion des réclamations.pdf";
+import ParcoursDeFormation from "/PDF/PARCOURS DE FORMATION CATÉGORIE B.pdf";
+import EvaluationDeDépart from "/PDF/ÉVALUATION DE DEPART.pdf";
+import EnjeuxDeLaFormation from "/PDF/Enjeux de la formation.pdf";
+import GuideUtilisationQuiz from "/PDF/Guide d’Utilisation des Quiz.pdf";
+import VotreAvisNousEstTrèsCher from "/PDF/Questionnaire de satisfaction Elève.pdf";
+import FormationPostPermis from "/PDF/Formation post-permis.pdf";
+import AAC from "/PDF/AAC.pdf";
+import ReclamLitige from "/PDF/REclamations ET LITIGE.pdf";
+import Pdp from "/PDF/Procede-de-positionnement-et-devaluation2.pdf";
+import CS from "/PDF/J3DP00_DEPLIANT_CONDUITE_SUPERVISEE-web.pdf";
+import CA from "/PDF/J3NE01_CA-DEPLIANT-CONDUITE-ACCOMPAGNEE-web.pdf";
+import HandicapPdf from "/PDF/Handicap et permis.pdf";
 import useDocumentMeta from "../component/useDocumentMeta";
 import bgImage from "../assets/pdf-1783009_1280-CfA-P2t0.webp";
-import coursTheorique from "../../public/PDF/coursTheorique.pdf";
+import coursTheorique from "/PDF/coursTheorique.pdf";
 
 const PagePDF = () => {
   useDocumentMeta({

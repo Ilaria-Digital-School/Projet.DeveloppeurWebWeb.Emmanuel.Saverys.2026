@@ -1,44 +1,46 @@
 .service-actions {
   display: flex;
   justify-content: center;
-  gap: 1.2rem;
   flex-wrap: wrap;
+  gap: 1.2rem;
 }
+
+// ==========================================
+// BOUTONS
+// ==========================================
 
 .btn-primary,
 .btn-secondary {
   position: relative;
-  padding: 0.9rem 2.2rem;
-  border-radius: 50px;
-  font-weight: 700;
-  font-size: 0.95rem;
-  text-decoration: none;
-  text-align: center;
+
   min-width: 200px;
+  padding: 0.9rem 2.2rem;
+
+  border: 2px solid transparent;
+  border-radius: 50px;
+
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-align: center;
+  text-decoration: none;
+
   overflow: hidden;
   transition: all 0.35s ease;
-  letter-spacing: 0.3px;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
 }
 
-.btn-primary,
-.btn-secondary {
-  padding: 0.9rem 2.2rem;
-  border-radius: 50px;
-  font-weight: 700;
-  font-size: 0.95rem;
-  text-decoration: none;
-  text-align: center;
-  min-width: 200px;
-  overflow: hidden;
-  transition: all 0.35s ease;
-  letter-spacing: 0.3px;
-  border: 2px solid transparent; 
-}
+// ==========================================
+// BOUTON PRINCIPAL
+// ==========================================
 
 .btn-primary {
   background-color: #c92453;
   color: #fff;
-  border-color: #c92453; 
+  border-color: #c92453;
   box-shadow: 0 8px 20px rgba(201, 36, 83, 0.35);
 
   &:hover {
@@ -46,10 +48,12 @@
     color: #c92453;
     border-color: #c92453;
     box-shadow: none;
-    transform: translateY(-2px);
   }
 }
 
+// ==========================================
+// BOUTON SECONDAIRE
+// ==========================================
 
 .btn-secondary {
   background-color: transparent;
@@ -60,12 +64,14 @@
   &:hover {
     background-color: #c92453;
     color: #fff;
-    box-shadow: 0 8px 20px rgba(201, 36, 83, 0.35);
     border-color: #c92453;
-    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(201, 36, 83, 0.35);
   }
 }
 
+// ==========================================
+// RESPONSIVE
+// ==========================================
 
 @media (max-width: 768px) {
   .service-actions {

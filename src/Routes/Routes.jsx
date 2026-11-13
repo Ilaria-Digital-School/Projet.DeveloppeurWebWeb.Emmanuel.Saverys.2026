@@ -4,7 +4,7 @@ import Accueil from "../pages/Accueil.jsx";
 import Avis from "../pages/Avis.jsx";
 import Contact from "../pages/Contact.jsx";
 import Offres from "../pages/Offres.jsx";
-import PagePDF from "../pages/PagePDF.jsx";
+import PagePDF from "../pages/pagePDF.jsx";
 import Footer from "../component/Footer.jsx";
 import Error404 from "../component/error404.jsx";
 import CookieConsent from "../component/CookieConsent.jsx";
@@ -18,11 +18,11 @@ import QuestionsExam from "../pages/QuestionsExam.jsx";
 function App() {
   const location = useLocation();
 
-const path = location.pathname.replace(/\/$/, "").toLowerCase();
+const path = location.pathname.replace(/\/$/, "").toLowerCase(); // take the path , remove / and everething after 
 
 const allowedPaths = ["/quiz-academique", "/quiz-synthese", "/quiz-permis-page", "/label-qualite"];
 
-const isQuestionPermis = allowedPaths.includes(path);
+const isQuestionPermis = allowedPaths.includes(path);  // pour edit style : margin footer div 
   return (
     <div
       className="app"

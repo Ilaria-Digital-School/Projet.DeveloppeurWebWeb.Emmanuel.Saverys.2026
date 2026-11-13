@@ -109,7 +109,7 @@ const Footer = ({ isQuestionPermis }) => {
           <p>
             Site hébergé par <strong>Netlify</strong>
             <br />
-            <p> Hosted : Netlify © 2026 </p>
+            Hosted : Netlify © 2026 
           </p>
         </div>
       </div>

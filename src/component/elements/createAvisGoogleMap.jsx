@@ -14,6 +14,7 @@ const CreateAvisGoogleMap = ({ avis }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
+    // Bloque le défilement de la page lorsque la fenêtre des avis est ouverte.
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -23,20 +24,24 @@ const CreateAvisGoogleMap = ({ avis }) => {
   }, [isOpen]);
 
   const openAvis = (index) => {
+    // Enregistre l'index de l'avis sélectionné et ouvre la fenêtre.
     setActiveIndex(index);
     setIsOpen(true);
   };
 
   const closeAvis = () => {
+    // Réinitialise l'avis sélectionné et ferme la fenêtre.
     setActiveIndex(null);
     setIsOpen(false);
   };
 
   const nextAvis = () => {
+    // Passe à l'avis suivant et revient au premier après le dernier.
     setActiveIndex((prev) => (prev + 1) % avis.length);
   };
 
   const prevAvis = () => {
+    // Passe à l'avis précédent et revient au dernier depuis le premier.
     setActiveIndex((prev) => (prev - 1 + avis.length) % avis.length);
   };
 

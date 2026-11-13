@@ -13,6 +13,7 @@ const CreateTarif = ({ leftTitle, leftItems, rightTitle, rightItems }) => {
             <div className="tarif-row" key={index}>
               <div className="tarif-label">
                 <span>{item.label}</span>
+                {/* Affiche la note uniquement si item.note contient une valeur. */}
                 {item.note && <small>{item.note}</small>}
               </div>
               <div className="tarif-price">{item.price}</div>
