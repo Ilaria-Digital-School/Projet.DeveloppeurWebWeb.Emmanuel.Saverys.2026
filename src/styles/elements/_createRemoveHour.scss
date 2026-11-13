@@ -1,18 +1,33 @@
+// ==========================================
+// CARTE D'ANNULATION
+// ==========================================
+
 .annulation-card {
   max-width: 700px;
   margin: 4rem auto;
   padding: 2rem;
+
   border-radius: 16px;
   background: linear-gradient(145deg, #e0f2f1, #ffffff);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
   font-family: "Poppins", sans-serif;
 
+  // ----------------------------------------
+  // TITRE
+  // ----------------------------------------
+
   h2 {
-    text-align: center;
     margin-bottom: 2rem;
-    font-size: 1.8rem;
+
     color: #00796b;
+    font-size: 1.8rem;
+    text-align: center;
   }
+
+  // ----------------------------------------
+  // FORMULAIRE
+  // ----------------------------------------
 
   .form-annulation {
     display: flex;
@@ -20,7 +35,8 @@
     gap: 1.5rem;
   }
 
-  /* NOM + PRENOM EN LIGNE */
+  // Nom et prénom sur une ligne
+
   .field-row {
     display: flex;
     gap: 1rem;
@@ -30,12 +46,17 @@
     }
   }
 
-  /* DATE + HEURE EN COLONNE */
+  // Date et heure en colonne
+
   .field-column {
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
+
+  // ----------------------------------------
+  // CHAMPS DU FORMULAIRE
+  // ----------------------------------------
 
   .field-container {
     display: flex;
@@ -43,39 +64,50 @@
     gap: 0.4rem;
 
     label {
-      font-weight: 600;
-      font-size: 0.95rem;
       color: #004d40;
+      font-size: 0.95rem;
+      font-weight: 600;
     }
 
     input,
     textarea {
       padding: 14px 12px;
-      border-radius: 12px;
-      border: 2px solid #b2dfdb;
-      font-size: 1rem;
-      background: #f0fdfd;
-      transition: all 0.3s ease;
-      font-family: inherit;
-    }
 
-    input:focus,
-    textarea:focus {
-      border-color: #c92453;
-      outline: none;
-      box-shadow: 0 0 6px rgba(201, 36, 83, 0.3);
+      border: 2px solid #b2dfdb;
+      border-radius: 12px;
+
+      background: #f0fdfd;
+
+      font-family: inherit;
+      font-size: 1rem;
+
+      transition: all 0.3s ease;
+
+      &:focus {
+        border-color: #c92453;
+        outline: none;
+        box-shadow: 0 0 6px rgba(201, 36, 83, 0.3);
+      }
     }
   }
 
+  // ----------------------------------------
+  // BOUTON D'ENVOI
+  // ----------------------------------------
+
   .btn-submit {
     padding: 0.9rem 2rem;
+
+    border: none;
     border-radius: 50px;
+
     background-color: #00796b;
     color: #fff;
-    font-weight: 700;
+
     font-size: 1rem;
+    font-weight: 700;
+
     cursor: pointer;
-    border: none;
     transition: 0.3s ease;
 
     &:hover {
@@ -83,9 +115,13 @@
     }
   }
 
+  // ----------------------------------------
+  // MESSAGES
+  // ----------------------------------------
+
   .form-msg {
-    text-align: center;
     font-weight: 500;
+    text-align: center;
 
     &.error {
       color: #d32f2f;
@@ -96,7 +132,9 @@
     }
   }
 
-  /* RESPONSIVE */
+  // ========================================
+  // RESPONSIVE
+  // ========================================
 
   @media (max-width: 768px) {
     max-width: 95%;
@@ -112,13 +150,13 @@
 
     input,
     textarea {
-      font-size: 0.95rem;
       padding: 12px;
+      font-size: 0.95rem;
     }
 
     .btn-submit {
-      font-size: 0.95rem;
       padding: 0.8rem;
+      font-size: 0.95rem;
     }
   }
 }

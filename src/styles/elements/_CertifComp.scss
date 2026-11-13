@@ -1,51 +1,67 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+// ==========================================
+// CERTIFICATIONS
+// ==========================================
+
 .certif {
   position: relative;
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
   gap: 60px;
+
   padding: 20px 130px 40px 40px;
-  flex-wrap: nowrap;
-  background-color: white;
+
   overflow: hidden;
+  background-color: $background-color;
 
   a {
     display: flex;
     align-items: center;
-  }
 
-  a img {
-    height: 120px;
-    width: auto;
-    object-fit: contain;
-    transition: 0.3s;
+    img {
+      width: auto;
+      height: 120px;
+      object-fit: contain;
+      transition: transform $transition-base;
 
-    &:hover {
-      transform: scale(1.08);
+      &:hover {
+        transform: scale(1.08);
+      }
     }
   }
 
   &::after {
-    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
+
     width: 100%;
     height: 5px;
 
-    background: linear-gradient(135deg, #d12d5d 0%, #c92453 60%, #b11f4a 100%);
+    content: "";
+    background: linear-gradient(
+      135deg,
+      #d12d5d 0%,
+      #c92453 60%,
+      #b11f4a 100%
+    );
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .hide-on-medium {
+    // Masqué à partir de 1000px
   }
 }
 
-.google {
-  .google__bottom .mobile-text {
-    display: none;
-  }
+// ==========================================
+// GOOGLE
+// ==========================================
 
-  .google__bottom .desktop-text {
-    display: inline;
-  }
+.google {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,16 +69,16 @@
   &__top {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: $spacing-sm;
 
     img {
-      height: 22px !important;
       width: auto;
+      height: 22px !important;
     }
 
     span {
-      font-weight: 600;
       font-size: 18px;
+      font-weight: $font-weight-semibold;
     }
 
     .stars {
@@ -72,72 +88,92 @@
   }
 
   &__bottom {
-    font-size: 13px;
     margin-top: 4px;
+    font-size: 13px;
+
+    .mobile-text {
+      display: none;
+    }
+
+    .desktop-text {
+      display: inline;
+    }
   }
 }
-@media (max-width: 1000px) {
+
+// ==========================================
+// LIEN GOOGLE
+// ==========================================
+
+.google-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+// ==========================================
+// RESPONSIVE
+// ==========================================
+
+@include respond-to(medium) {
   .certif {
     gap: 40px;
-    padding: 0;
     padding: 25px 50px 40px 40px;
 
     .hide-on-medium {
       display: none;
     }
-     .google__bottom .desktop-text {
-    display: none;
-  }
 
-  .google__bottom .mobile-text {
-    display: inline;
-  }
-  }
+    a img {
+      height: 90px;
+    }
 
-  .certif a img {
-    height: 90px;
+    .google__bottom {
+      .desktop-text {
+        display: none;
+      }
+
+      .mobile-text {
+        display: inline;
+      }
+    }
   }
 }
 
-@media (max-width: 700px) {
+@include respond-to(small) {
   .certif {
     gap: 25px;
+
+    a img {
+      height: 70px;
+    }
   }
-
-  .certif a img {
-    height: 70px;
-  }
-
-
 }
 
-@media (max-width: 500px) {
+@include respond-to(mobile-small) {
   .certif {
     gap: 15px;
+
+    a img {
+      height: 55px;
+    }
   }
 
-  .certif a img {
-    height: 55px;
-  }
+  .google__top {
+    img {
+      height: 18px !important;
+    }
 
-  .google__top img {
-    height: 18px !important;
-  }
+    span {
+      font-size: 14px;
+    }
 
-  .google__top span {
-    font-size: 14px;
+    .stars {
+      font-size: 12px;
+    }
   }
-
-  .google__top .stars {
-    font-size: 12px;
-  }
-}
-.google-link {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
-
-.google-link:hover {
-  text-decoration: none;
 }

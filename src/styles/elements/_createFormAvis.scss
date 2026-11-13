@@ -1,16 +1,26 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+// ==========================================
+// FORMULAIRE
+// ==========================================
+
 .form-container {
   max-width: 600px;
-  margin: 0 auto; 
+  margin: 0 auto;
   padding: 2.5rem 2rem;
-  background-color: #ffffff;
+
+  background-color: $background-color;
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
 
   h2 {
+    margin-bottom: 1.5rem;
+
+    color: rgb(168, 8, 8);
     font-family: "Poppins", sans-serif;
     font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    color: rgb(168, 8, 8);
+
     text-align: center;
   }
 
@@ -24,22 +34,25 @@
       flex-direction: column;
 
       label {
+        margin-bottom: 0.5rem;
+
+        color: $text-color;
         font-family: "Inter", sans-serif;
         font-size: 1rem;
-        margin-bottom: 0.5rem;
-        font-weight: 500;
-        color: #333;
+        font-weight: $font-weight-medium;
       }
 
       input,
       select,
       textarea {
         padding: 0.75rem 1rem;
-        font-size: 1rem;
-        border-radius: 8px;
+
         border: 1px solid #ccc;
+        border-radius: $border-radius-md;
         outline: none;
-        transition: border 0.3s ease;
+
+        font-size: 1rem;
+        transition: border $transition-base;
 
         &:focus {
           border-color: rgb(168, 8, 8);
@@ -51,27 +64,30 @@
       }
     }
 
-   
     .name-row {
       display: flex;
-      gap: 1rem;
       flex-wrap: wrap;
-    }
+      gap: 1rem;
 
-    .name-row .form-group {
-      flex: 1; 
+      .form-group {
+        flex: 1;
+      }
     }
 
     .btn-submit {
       padding: 0.75rem 1.5rem;
-      background-color: #c92453;
-      color: #fff;
-      font-weight: 600;
-      font-size: 1rem;
+
       border: none;
-      border-radius: 8px;
+      border-radius: $border-radius-md;
+
+      background-color: #c92453;
+      color: $text-light;
+
+      font-size: 1rem;
+      font-weight: $font-weight-semibold;
+
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background-color $transition-base;
 
       &:hover {
         background-color: rgb(168, 8, 8);
@@ -80,23 +96,90 @@
   }
 }
 
+// ==========================================
+// ÉTOILES
+// ==========================================
+
+.stars {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: start;
+  gap: 0.3rem;
+
+  cursor: pointer;
+}
+
+.star {
+  color: #ccc;
+  font-size: 1.8rem;
+  transition: color 0.2s ease;
+
+  &.filled {
+    color: rgb(168, 8, 8);
+  }
+
+  &:hover,
+  &:hover ~ & {
+    color: rgb(200, 50, 50);
+  }
+}
+
+// ==========================================
+// CHOIX DE PUBLICATION
+// ==========================================
+
+.publication-choice {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.choice-btn {
+  flex: 1;
+  padding: 0.7rem 1rem;
+
+  border: 1px solid #ccc;
+  border-radius: $border-radius-md;
+
+  background-color: $surface-color;
+
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+
+  transition: all $transition-base;
+
+  &:hover {
+    border-color: #c92453;
+  }
+
+  &.active {
+    border-color: #c92453;
+    background-color: #c92453;
+    color: $text-light;
+  }
+}
+
+// ==========================================
+// RESPONSIVE
+// ==========================================
+
 @media (max-width: 1440px) {
   .form-container {
-    max-width: 500px;          
-    padding: 1.8rem 1.2rem;   
+    max-width: 500px;
     margin: 2rem auto;
+    padding: 1.8rem 1.2rem;
 
     h2 {
-      font-size: 1.4rem;       
       margin-bottom: 1rem;
+      font-size: 1.4rem;
     }
 
     form {
-      gap: 1rem;              
+      gap: 1rem;
 
       .form-group {
         label {
-          font-size: 0.9rem;   
+          font-size: 0.9rem;
         }
 
         input,
@@ -112,8 +195,8 @@
       }
 
       .btn-submit {
-        font-size: 0.9rem;
         padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
       }
     }
   }
@@ -127,7 +210,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@include respond-to(mobile) {
   .form-container {
     padding: 2rem 1rem;
 
@@ -139,72 +222,22 @@
       gap: 1rem;
 
       .name-row {
-        flex-direction: column; 
+        flex-direction: column;
       }
 
       .form-group {
         input,
         select,
         textarea {
-          font-size: 0.95rem;
           padding: 0.6rem 0.8rem;
+          font-size: 0.95rem;
         }
       }
 
       .btn-submit {
-        font-size: 0.95rem;
         padding: 0.6rem 1rem;
+        font-size: 0.95rem;
       }
     }
   }
-}
-
-.stars {
-  display: flex;
-  gap: 0.3rem;
-  cursor: pointer;
-  flex-direction: row-reverse;
-  justify-content: start; 
-}
-
-.star {
-  font-size: 1.8rem;
-  color: #ccc;
-  transition: color 0.2s ease;
-}
-
-.star.filled {
-  color: rgb(168, 8, 8);
-}
-
-.star:hover,
-.star:hover ~ .star {
-  color: rgb(200, 50, 50);
-}
-
-.publication-choice {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.choice-btn {
-  flex: 1;
-  padding: 0.7rem 1rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background-color: #f5f5f5;
-  cursor: pointer;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.choice-btn:hover {
-  border-color: #c92453;
-}
-
-.choice-btn.active {
-  background-color: #c92453;
-  color: #fff;
-  border-color: #c92453;
 }

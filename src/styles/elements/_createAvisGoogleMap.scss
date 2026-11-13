@@ -1,120 +1,273 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+// ==========================================
+// CONTENEUR DES AVIS GOOGLE
+// ==========================================
+
 .avis-container-GM {
-  max-width: 900px;
-  margin: 50px auto;
-  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 25px;
+
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 20px;
+
   cursor: pointer;
 
+  // ----------------------------------------
+  // TITRE
+  // ----------------------------------------
+
   &__title {
-    text-align: center;
-    font-size: 32px;
-    color: #666;
     margin-bottom: 20px;
+
+    color: #666;
+    font-size: $font-size-title;
+    text-align: center;
   }
 }
 
+// ==========================================
+// CARTE AVIS GOOGLE
+// ==========================================
+
 .avis-card-GM {
-  background: rgba(255,255,255,0.7);
-  backdrop-filter: blur(20px);
-  border-radius: 15px;
   padding: 25px;
+
   color: #666;
-  transition: 0.3s ease;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  background: rgba(255, 255, 255, 0.7);
+
+  border-radius: 15px;
+
+  backdrop-filter: blur(20px);
+
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+
   overflow-wrap: break-word;
+
+  transition:
+    transform $transition-base,
+    box-shadow $transition-base;
 
   &:hover {
     transform: translateY(-3px);
-    box-shadow: 0 0 25px rgba(0,0,0,0.3);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
   }
 
-  &__author { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
-  &__rating { color: #ffd700; margin-bottom: 10px; }
-  &__text { font-size: 15px; line-height: 1.6; margin-bottom: 15px; }
-  &__date { font-size: 13px; opacity: 0.8; text-align: right; display: block; }
+  // ----------------------------------------
+  // AUTEUR
+  // ----------------------------------------
+
+  &__author {
+    margin-bottom: $spacing-sm;
+
+    font-size: $font-size-large;
+    font-weight: $font-weight-semibold;
+  }
+
+  // ----------------------------------------
+  // NOTE
+  // ----------------------------------------
+
+  &__rating {
+    margin-bottom: $spacing-md;
+
+    color: #ffd700;
+  }
+
+  // ----------------------------------------
+  // COMMENTAIRE
+  // ----------------------------------------
+
+  &__text {
+    margin-bottom: $spacing-md;
+
+    font-size: 15px;
+    line-height: $line-height-base;
+  }
+
+  // ----------------------------------------
+  // DATE
+  // ----------------------------------------
+
+  &__date {
+    display: block;
+
+    font-size: 13px;
+    opacity: 0.8;
+    text-align: right;
+  }
 }
+
+// ==========================================
+// CONTENU DE LA MODALE
+// ==========================================
 
 .avis-modal-content {
-  max-width: 700px;
   width: 100%;
-  animation: slideFade 0.4s ease;
+  max-width: 700px;
   padding: 20px;
 
-  @media (max-width: 768px) {
-    max-width: 90%;      
-    padding: 15px;
+  animation: slideFade 0.4s ease;
+}
+
+// ==========================================
+// MODALE
+// ==========================================
+
+.avis-modal {
+  position: fixed;
+  inset: 0;
+  z-index: $z-index-modal;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px;
+
+  background: rgba(241, 241, 241, 0.95);
+
+  overflow-y: auto;
+}
+
+// ==========================================
+// FLÈCHES DE NAVIGATION
+// ==========================================
+
+.arrow {
+  position: fixed;
+  z-index: $z-index-modal + 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 50px;
+  height: 50px;
+
+  background: rgba(255, 255, 255, 0.6);
+
+  border: none;
+  border-radius: $border-radius-full;
+
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+
+  font-size: 32px;
+
+  cursor: pointer;
+
+  // ----------------------------------------
+  // POSITION GAUCHE
+  // ----------------------------------------
+
+  &.left {
+    top: 50%;
+    left: 20px;
+
+    transform: translateY(-50%);
   }
 
-  @media (max-width: 480px) {
-    max-width: 95%;
-    padding: 10px;
+  // ----------------------------------------
+  // POSITION DROITE
+  // ----------------------------------------
+
+  &.right {
+    top: 50%;
+    right: 20px;
+
+    transform: translateY(-50%);
   }
 }
 
-.avis-card-GM {
-  background: rgba(255,255,255,0.7);
-  backdrop-filter: blur(20px);
-  border-radius: 15px;
-  padding: 25px;
-  color: #666;
-  transition: 0.3s ease;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  overflow-wrap: break-word;
+// ==========================================
+// BOUTON FERMETURE
+// ==========================================
 
-  &__author { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
-  &__rating { color: #ffd700; margin-bottom: 10px; }
-  &__text { font-size: 15px; line-height: 1.6; margin-bottom: 15px; }
-  &__date { font-size: 13px; opacity: 0.8; text-align: right; display: block; }
+.close-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: $z-index-modal + 2;
 
- 
-  @media (max-width: 768px) {
-    &__author { font-size: 18px; }
-    &__rating { font-size: 16px; }
-    &__text { font-size: 14px; line-height: 1.4; }
-    &__date { font-size: 12px; }
-    padding: 20px;
+  background: transparent;
+  border: none;
+
+  color: #333;
+  font-size: 42px;
+
+  cursor: pointer;
+}
+
+// ==========================================
+// ANIMATIONS
+// ==========================================
+
+@keyframes slideFade {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
   }
 
-  @media (max-width: 480px) {
-    &__author { font-size: 16px; }
-    &__rating { font-size: 15px; }
-    &__text { font-size: 13px; line-height: 1.3; }
-    &__date { font-size: 11px; }
-    padding: 15px;
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
+
+// ==========================================
+// RESPONSIVE
+// ==========================================
+
+// ------------------------------------------
+// Écrans jusqu'à 1440px
+// ------------------------------------------
 
 @media (max-width: 1440px) {
   .avis-container-GM {
-    max-width: 750px;    
-    margin: 40px auto;    
+    max-width: 750px;
+    margin: 40px auto;
     padding: 15px;
     gap: 20px;
 
     &__title {
-      font-size: 28px;    
       margin-bottom: 15px;
+      font-size: 28px;
     }
   }
 
   .avis-card-GM {
-    padding: 20px;        
-    &__author { font-size: 18px; }
-    &__rating { font-size: 16px; }
-    &__text { font-size: 14px; line-height: 1.5; }
-    &__date { font-size: 12px; }
+    padding: 20px;
+
+    &__author {
+      font-size: 18px;
+    }
+
+    &__rating {
+      font-size: 16px;
+    }
+
+    &__text {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    &__date {
+      font-size: 12px;
+    }
   }
 
   .avis-modal-content {
-    max-width: 600px;     
+    max-width: 600px;
     padding: 15px;
   }
 
   .arrow {
     width: 45px;
     height: 45px;
+
     font-size: 30px;
   }
 
@@ -123,71 +276,45 @@
   }
 }
 
-
-@media (max-width: 600px) {
-  .arrow.left { top: auto; bottom: 15px; left: 25%; transform: translateY(0); }
-  .arrow.right { top: auto; bottom: 15px; right: 25%; transform: translateY(0); }
-  .arrow { background: rgba(255,255,255,0.35); }
-}
-
-
-.avis-modal {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(241,241,241,0.95);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  padding: 10px;
-  overflow-y: auto;
-}
-
-
-@keyframes slideFade {
-  from { opacity: 0; transform: translateX(40px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-.arrow {
-  position: fixed;
-  background: rgba(255,255,255,0.6);
-  border: none;
-  font-size: 32px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1001;
-}
-
-.arrow.left { left: 20px; top: 50%; transform: translateY(-50%); }
-.arrow.right { right: 20px; top: 50%; transform: translateY(-50%); }
-
+// ------------------------------------------
+// Tablettes : 860px
+// ------------------------------------------
 
 @media (max-width: 860px) {
-  .arrow.left { top: auto; bottom: 20px; left: 30%; transform: translateY(0); }
-  .arrow.right { top: auto; bottom: 20px; right: 30%; transform: translateY(0); }
-  .arrow { background: rgba(255,255,255,0.4); }
+  .arrow {
+    &.left {
+      top: auto;
+      bottom: 20px;
+      left: 30%;
+
+      transform: translateY(0);
+    }
+
+    &.right {
+      top: auto;
+      bottom: 20px;
+      right: 30%;
+
+      transform: translateY(0);
+    }
+
+    background: rgba(255, 255, 255, 0.4);
+  }
 }
 
-.close-btn {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  font-size: 42px;
-  background: transparent;
-  border: none;
-  color: #333;
-  cursor: pointer;
-  z-index: 1002;
-}
+// ------------------------------------------
+// Mobiles : 768px
+// ------------------------------------------
 
-@media (max-width: 768px) {
-  .arrow { width: 40px; height: 40px; font-size: 28px; }
-  .close-btn { font-size: 36px; }
+@include respond-to(tablet) {
+  .arrow {
+    width: 40px;
+    height: 40px;
+
+    font-size: 28px;
+  }
+
+  .close-btn {
+    font-size: 36px;
+  }
 }

@@ -24,7 +24,6 @@ const CreateFormContact = () => {
     setSuccessMsg("");
   };
 
- 
   const sendWithMailto = () => {
     const subject = encodeURIComponent("Formulaire de contact");
     const body = encodeURIComponent(
@@ -38,7 +37,7 @@ Message :
 ${formData.message}`,
     );
 
-    window.location.href = `mailto:ecsr.rafa@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:saveryse@gmail.com?subject=${subject}&body=${body}`;
   };
 
   const handleSubmit = (e) => {
@@ -73,7 +72,7 @@ ${formData.message}`,
           });
         })
         .catch((error) => {
-         // console.error(error);
+          // console.error(error);
 
           if (error.status === 429) {
             setSuccessMsg(
@@ -85,7 +84,6 @@ ${formData.message}`,
             );
           }
 
-      
           sendWithMailto();
         });
     }

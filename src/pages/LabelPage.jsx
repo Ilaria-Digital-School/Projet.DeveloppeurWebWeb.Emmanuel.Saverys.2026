@@ -60,26 +60,34 @@ Le dispositif <strong>Permis 1€ / Jour</strong> permet de financer votre permi
 
   const [activeTab, setActiveTab] = useState(tabs[0]);
 
-  useEffect(() => {
-    const hash = window.location.hash.replace("#", "");
-    if (hash) {
-      const foundTab = tabs.find((tab) => tab.id === hash);
-      if (foundTab) {
-        setActiveTab(foundTab);
-        setTimeout(() => {
-          const element = document.getElementById("tabs-section");
-          if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
-          }
-        }, 100);
-      }
+useEffect(() => {
+  // Récupère l'identifiant de l'onglet indiqué dans l'URL après le #.
+  const hash = window.location.hash.replace("#", "");
+
+  if (hash) {
+    // Recherche l'onglet correspondant à cet identifiant.
+    const foundTab = tabs.find((tab) => tab.id === hash);
+
+    if (foundTab) {
+      setActiveTab(foundTab);
+
+      // Fait défiler la page jusqu'à la section des onglets après un court délai.
+      setTimeout(() => {
+        const element = document.getElementById("tabs-section");
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
     }
-  }, []);
+  }
+}, []);
 
   return (
     <div className="label-page">
       <main className="label-content">
-        <h1 className="label-title">ECSR Rafa – Labellisée par la Sécurité Routière :</h1>
+        <h1 className="label-title">
+          ECSR Rafa – Labellisée par la Sécurité Routière :
+        </h1>
 
         <div className="label-section">
           <img src={LogoLabel} alt="Label Qualité" className="label-logo" />

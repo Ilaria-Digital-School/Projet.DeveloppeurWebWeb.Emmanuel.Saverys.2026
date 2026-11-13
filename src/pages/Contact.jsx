@@ -2,14 +2,14 @@ import React from "react";
 import CreateFormContact from "../component/FormContact";
 import CreateQuestion from "../component/elements/createQuestion";
 import CreateTopPageInfos from "../component/elements/createTopPageInfos";
-import ReglementInterieur from "../../public/PDF/reglement intérieur.pdf";
-import PostPermis from "../../public/PDF/Formation post-permis.pdf";
-import AAC from "../../public/PDF/AAC.pdf";
-import LITIGE from "../../public/PDF/REclamations ET LITIGE.pdf";
-import CS from "../../public/PDF/J3DP00_DEPLIANT_CONDUITE_SUPERVISEE-web.pdf";
+import ReglementInterieur from "/PDF/reglement intérieur.pdf";
+import PostPermis from "/PDF/Formation post-permis.pdf";
+import AAC from "/PDF/AAC.pdf";
+import LITIGE from "/PDF/REclamations ET LITIGE.pdf";
+import CS from "/PDF/J3DP00_DEPLIANT_CONDUITE_SUPERVISEE-web.pdf";
 import CreateRemoveHour from "../component/elements/createRemoveHour";
 import useDocumentMeta from "../component/useDocumentMeta";
-import CoursTheorique from "../../public/PDF/coursTheorique.pdf";
+import CoursTheorique from "/PDF/coursTheorique.pdf";
 
 const Contact = () => {
   useDocumentMeta({
@@ -33,22 +33,27 @@ const Contact = () => {
         className="faq-search"
         placeholder="Rechercher un mot clef (ex : inscription, CPF, permis...)"
         onChange={(e) => {
+          // Supprime les différences de majuscules et d'accents pour faciliter la recherche.
           const normalize = (str) =>
             str
               .toLowerCase()
               .normalize("NFD")
               .replace(/[\u0300-\u036f]/g, "");
 
+          // Récupère et normalise le texte saisi par l'utilisateur.
           const value = normalize(e.target.value);
 
+          // Récupère toutes les questions et les titres des catégories de la FAQ.
           const items = document.querySelectorAll(".question-card");
           const categories = document.querySelectorAll(".faq-category-title");
 
+          // Affiche uniquement les questions contenant le texte recherché.
           items.forEach((item) => {
             const text = normalize(item.innerText);
             item.style.display = text.includes(value) ? "" : "none";
           });
 
+          // Masque les catégories pendant la recherche et les réaffiche si le champ est vide.
           categories.forEach((category) => {
             category.style.display = value.length > 0 ? "none" : "";
           });
@@ -675,7 +680,11 @@ const Contact = () => {
             manœuvre, répondre à 3 questions sur le véhicule, une de chaque :
             véhicule intérieur/extérieur, premier secours et Questions de
             Sécurité Routière (disponibles{" "}
-            <a href="/quiz-permis-page" target="_blank" rel="noopener noreferrer">
+            <a
+              href="/quiz-permis-page"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               ici
             </a>{" "}
             ou dans l'onglet PDF), puis revenir au centre d’examen.
@@ -916,7 +925,10 @@ const Contact = () => {
             </strong>
             <br />
             <br />
-            <strong>Accessibilité fauteuil roulant, porte d’entrée et sortie de secours:</strong>
+            <strong>
+              Accessibilité fauteuil roulant, porte d’entrée et sortie de
+              secours:
+            </strong>
             <br />
             Sanitaires adaptés PMR.
             <br />

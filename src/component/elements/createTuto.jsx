@@ -13,6 +13,9 @@ import compteurSerie from "../../assets/slideTuto/Compteur.png";
 import refresh from "../../assets/slideTuto/refresh.webp";
 import { Info } from "lucide-react";
 
+// Contient les différents modèles de tutoriels et leurs étapes.
+// Chaque tutoriel possède un nom permettant de l'identifier et un tableau d'étapes.
+// Chaque étape peut contenir une image, une position, un titre et un texte explicatif.
 const tutosTemplates = [
   {
     name: "quiz-Synthèse",
@@ -121,28 +124,46 @@ const tutosTemplates = [
 ];
 
 const CreateTuto = ({ tabNumber = 0 }) => {
+  // Par défaut, tabNumber vaut 0 : le premier tutoriel est donc sélectionné.
   const tuto = tutosTemplates[tabNumber];
+
+  // Référence directe vers la fenêtre du tutoriel dans le DOM.
+  // Elle sera utilisée pour mesurer et ajuster sa hauteur.
   const popupRef = useRef(null); 
 
+  // Détermine si le tutoriel doit être affiché au chargement du composant.
   const [visible, setVisible] = useState(() => {
     if (!tuto) return false;
+
+    // Vérifie dans le localStorage si l'utilisateur a déjà accepté de ne plus afficher ce tutoriel.
     const accepted = localStorage.getItem(`tuto_${tuto.name}_accepted`);
+
+    // Le tutoriel est affiché tant que l'utilisateur ne l'a pas désactivé définitivement.
     return accepted !== "true";
   });
 
+  // Mémorise l'étape actuellement affichée dans le tutoriel.
   const [currentStep, setCurrentStep] = useState(0);
+
+  // Mémorise si l'utilisateur a coché l'option pour ne plus afficher le tutoriel.
   const [dontShowAgain, setDontShowAgain] = useState(false);
 
+  // Récupère les étapes du tutoriel sélectionné.
+  // Le tableau vide évite une erreur si aucun tutoriel ne correspond au numéro reçu.
   const steps = tuto?.steps || [];
 
   useEffect(() => {
+    // Empêche le défilement de la page lorsque le tutoriel est ouvert.
     if (visible) {
       document.body.style.overflow = "hidden";
     } else {
+      // Rétablit le défilement normal lorsque le tutoriel est fermé.
       document.body.style.overflow = "auto";
       document.body.style.overflowX = "hidden";
     }
 
+    // Rétablit les propriétés de défilement lorsque le composant est démonté
+    // ou lorsque la valeur de visible change.
     return () => {
       document.body.style.overflow = "auto";
       document.body.style.overflowX = "hidden";
@@ -150,54 +171,80 @@ const CreateTuto = ({ tabNumber = 0 }) => {
   }, [visible]);
 
   useEffect(() => {
+    // Vérifie que la fenêtre existe et qu'il y a des étapes à mesurer.
     if (popupRef.current && steps.length > 0) {
       let maxHeight = 0;
+
+      // Crée temporairement un élément HTML invisible pour mesurer le contenu de chaque étape.
       const tempDiv = document.createElement("div");
       tempDiv.style.position = "absolute";
       tempDiv.style.visibility = "hidden";
+
+      // Utilise la même largeur que la fenêtre du tutoriel pour obtenir une mesure cohérente.
       tempDiv.style.width = `${popupRef.current.offsetWidth}px`;
+
+      // Ajoute temporairement cet élément au DOM pour pouvoir mesurer sa hauteur.
       document.body.appendChild(tempDiv);
 
       steps.forEach((step) => {
+        // Insère le titre et le texte de chaque étape dans l'élément temporaire.
+        // Cela permet de mesurer la hauteur nécessaire pour chaque contenu.
         tempDiv.innerHTML = `
           <div style="display:flex; flex-direction: column; gap: 30px;">
             <h2>${step.title}</h2>
             <p>${step.text}</p>
           </div>
         `;
+
+        // Compare les hauteurs pour conserver uniquement la plus grande.
+        // Les 150 pixels supplémentaires correspondent à l'espace réservé au padding et aux boutons.
         maxHeight = Math.max(maxHeight, tempDiv.offsetHeight + 150); // +padding et boutons
       });
 
+      // Supprime l'élément temporaire une fois les mesures terminées.
       document.body.removeChild(tempDiv);
+
+      // Applique à la fenêtre du tutoriel la hauteur maximale calculée.
+      // Ainsi, sa hauteur reste identique même lorsque l'on change d'étape.
       popupRef.current.style.height = `${maxHeight}px`;
     }
   }, [steps]);
 
   const closeTuto = () => {
+    // Si l'utilisateur a coché l'option, mémorise son choix dans le navigateur.
+    // localStorage conserve cette information même après la fermeture du navigateur.
     if (dontShowAgain && tuto) {
       localStorage.setItem(`tuto_${tuto.name}_accepted`, "true");
     }
+
+    // Ferme le tutoriel en modifiant son état de visibilité.
     setVisible(false);
   };
 
   const nextStep = () => {
+    // Passe à l'étape suivante uniquement si la dernière étape n'est pas atteinte.
+    // Évite ainsi de dépasser le nombre total d'étapes.
     if (currentStep < steps.length - 1) setCurrentStep(currentStep + 1);
   };
 
   const prevStep = () => {
+    // Revient à l'étape précédente uniquement si l'on n'est pas déjà à la première.
     if (currentStep > 0) setCurrentStep(currentStep - 1);
   };
 
   if (!tuto) return null;
 
+  // Récupère les informations de l'étape actuellement sélectionnée.
   const step = steps[currentStep];
 
   return (
     <>
       {!visible && (
+        // Affiche un bouton d'information pour permettre de rouvrir le tutoriel.
         <button
           className="tuto-reopen"
           onClick={() => {
+            // Réinitialise le tutoriel à sa première étape avant de le rouvrir.
             setCurrentStep(0);
             setVisible(true);
           }}
@@ -207,17 +254,23 @@ const CreateTuto = ({ tabNumber = 0 }) => {
       )}
 
       {visible && (
+        // Fond superposé à la page pour mettre le tutoriel au premier plan.
         <div className="tuto-overlay">
           <div className="tuto-popup" ref={popupRef}>
+            {/* Ferme le tutoriel et enregistre éventuellement le choix de ne plus l'afficher. */}
             <button className="tuto-close" onClick={closeTuto}>
               ✕
             </button>
 
+            {/* Applique une classe CSS différente selon la position définie pour chaque étape. */}
             <div className={`tuto-content ${step.position}`}>
               <div className="tuto-text">
                 <h2>{step.title}</h2>
                 <p>{step.text}</p>
               </div>
+
+              {/* Affiche l'image associée à l'étape.
+                  Si sa position vaut "hide", l'image est masquée. */}
               <img
                 src={step.img}
                 alt={step.title}
@@ -226,25 +279,32 @@ const CreateTuto = ({ tabNumber = 0 }) => {
               />
             </div>
 
+            {/* Contrôles permettant de naviguer entre les différentes étapes. */}
             <div className="tuto-navigation">
               <button onClick={prevStep} disabled={currentStep === 0}>
                 ←
               </button>
+
+              {/* Affiche le numéro de l'étape actuelle et le nombre total d'étapes. */}
               <span>
                 {currentStep + 1} / {steps.length}
               </span>
+
               <button
                 onClick={nextStep}
+                // Désactive le bouton suivant lorsque la dernière étape est atteinte.
                 disabled={currentStep === steps.length - 1}
               >
                 →
               </button>
             </div>
 
+            {/* Case à cocher permettant de mémoriser le choix de l'utilisateur. */}
             <label className="checkbox-container">
               <input
                 type="checkbox"
                 checked={dontShowAgain}
+                // Met à jour l'état selon que la case est cochée ou décochée.
                 onChange={(e) => setDontShowAgain(e.target.checked)}
               />
               Ne plus afficher ce tutoriel

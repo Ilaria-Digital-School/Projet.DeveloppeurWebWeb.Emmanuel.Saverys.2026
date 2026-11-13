@@ -1,56 +1,113 @@
+// ==========================================
+// OVERLAY DU LOADER
+// ==========================================
+
 .loader-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(135deg, #d12d5d 0%, #c92453 60%, #b11f4a 100%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
+
+  background: linear-gradient(
+    135deg,
+    #d12d5d 0%,
+    #c92453 60%,
+    #b11f4a 100%
+  );
 }
+
+// ==========================================
+// CONTENEUR DU LOADER
+// ==========================================
 
 .loader-container {
   position: relative;
+
   width: 180px;
   height: 180px;
 }
 
+// ==========================================
+// LOGO ANIMÉ
+// ==========================================
+
 .loader-logo {
+  position: relative;
+  z-index: 2;
+
   width: 100%;
   height: 100%;
+
   border-radius: 50%;
-  animation: spin 2s linear infinite, pulse 1.5s ease-in-out infinite;
-  z-index: 2;
-  position: relative;
+
+  animation:
+    spin 2s linear infinite,
+    pulse 1.5s ease-in-out infinite;
 }
+
+// ==========================================
+// EFFET LUMINEUX
+// ==========================================
 
 .loader-glow {
   position: absolute;
   top: 50%;
   left: 50%;
+  z-index: 1;
+
   width: 220px;
   height: 220px;
-  background: rgba(255, 255, 255, 0.2); 
+
   border-radius: 50%;
-  transform: translate(-50%, -50%);
+
+  background: rgba(255, 255, 255, 0.2);
   filter: blur(25px);
+
+  transform: translate(-50%, -50%);
+
   animation: glowPulse 2s ease-in-out infinite;
-  z-index: 1;
 }
 
+// ==========================================
+// ANIMATIONS
+// ==========================================
+
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
 }
 
 @keyframes glowPulse {
-  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
-  50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+  }
 }

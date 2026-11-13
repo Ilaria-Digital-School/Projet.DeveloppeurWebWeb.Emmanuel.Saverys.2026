@@ -1,54 +1,130 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+// ==========================================
+// SECTION AVIS
+// ==========================================
+
 .avis-section {
-  padding: 1rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  padding: $spacing-md;
 }
+
+// ==========================================
+// GRILLE DES AVIS
+// ==========================================
 
 .avis-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+
   width: 100%;
-  max-width: 1200px; 
+  max-width: $container-width;
+
+  // Dernier avis seul sur une ligne
+  > .avis-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+
+    max-width: 600px;
+  }
 }
+
+// ==========================================
+// CARTE AVIS
+// ==========================================
 
 .avis-card {
   width: 100%;
   padding: 4rem 3rem;
-  background: transparent; 
+
+  background: transparent;
   text-align: center;
+
+  transition: transform $transition-base;
+
+  &:not(:last-child) {
+    border-right: 1px solid #f3f3f3;
+  }
+
+  &:hover {
+    transform: scale(1.02);
+  }
 }
 
-.avis-card:not(:last-child) {
-  border-right: 1px solid #f3f3f3;
-}
+// ==========================================
+// ÉTOILES
+// ==========================================
 
 .star {
-  font-size: 1.8rem; 
   color: #ddd;
+  font-size: 1.8rem;
+
+  &.filled {
+    color: #f5a623;
+  }
 }
-.star.filled {
-  color: #f5a623;
-}
+
+// ==========================================
+// COMMENTAIRE
+// ==========================================
 
 .avis-comment {
+  margin-bottom: $spacing-xl;
+
+  color: #555;
   font-size: 1.15rem;
   line-height: 1.8;
-  margin-bottom: 2rem;
-  color: #555;
 }
 
-.avis-avatar {
-  width: 30px;
-  height: 30px;
+// ==========================================
+// INFORMATIONS UTILISATEUR
+// ==========================================
+
+.avis-user-top {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+
+  margin-bottom: $spacing-md;
 }
 
 .avis-name {
-  font-size: 1rem;
-  font-weight: 600;
-}
-@media (max-width: 1440px) {
+  position: relative;
+  z-index: 2;
 
+  margin: 0;
+
+  font-size: 1.05rem;
+  font-weight: $font-weight-semibold;
+  text-align: center;
+}
+
+.avis-avatar {
+  position: absolute;
+  right: 0;
+  z-index: 1;
+
+  width: 35px;
+  height: 35px;
+
+  border-radius: $border-radius-full;
+  object-fit: cover;
+}
+
+// ==========================================
+// RESPONSIVE
+// ==========================================
+
+// ------------------------------------------
+// Écrans intermédiaires : 1440px
+// ------------------------------------------
+
+@media (max-width: 1440px) {
   .avis-grid {
     max-width: 1050px;
   }
@@ -65,65 +141,23 @@
   .star {
     font-size: 1.6rem;
   }
-
-  .avis-avatar {
-    width: 30px;
-    height: 30px;
-  }
-
-  .avis-name {
-    font-size: 1rem;
-  }
 }
 
-@media (max-width: 768px) {
+// ------------------------------------------
+// Tablettes et mobiles : 768px
+// ------------------------------------------
+
+@include respond-to(tablet) {
   .avis-grid {
     grid-template-columns: 1fr;
   }
 
   .avis-card {
     padding: 3rem 2rem;
+
+    &:not(:last-child) {
+      border-right: none;
+      border-bottom: 1px solid #f3f3f3;
+    }
   }
-
-  .avis-card:not(:last-child) {
-    border-right: none;
-    border-bottom: 1px solid #f3f3f3;
-  }
 }
-.avis-card {
-  transition: transform 0.3s ease;
-}
-
-.avis-card:hover {
-  transform: scale(1.02);
-}
-.avis-grid > .avis-card:last-child:nth-child(odd) {
-  grid-column: 1 / -1;
-  justify-self: center;
-  max-width: 600px; 
-}
-.avis-user-top {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1rem;
-}
-
-.avis-name {
-  font-size: 1.05rem;
-  font-weight: 600;
-  margin: 0;
-  text-align: center;
-  z-index: 2;
-}
-
-.avis-avatar {
-  position: absolute;
-  right: calc(0%); 
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  object-fit: cover;
-  z-index: 1;
-}
- 

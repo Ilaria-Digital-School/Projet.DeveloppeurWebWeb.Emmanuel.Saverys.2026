@@ -1,88 +1,133 @@
+// ==========================================
+// CARTE SERVICE
+// ==========================================
+
 .service-card {
-  background-color: #fff;
-  border-radius: 12px;
-  padding: 1.5rem 1rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   display: flex;
+  flex: 1 1 30%;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  flex: 1 1 30%; 
-  min-width: 250px; 
-  max-width: 350px; 
+
   box-sizing: border-box;
+  min-width: 250px;
+  max-width: 350px;
+  padding: 1.5rem 1rem;
+
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   }
 
+  // ----------------------------------------
+  // TITRE ET SOUS-TITRE
+  // ----------------------------------------
+
   .service-title {
-    font-size: 1.3rem; 
-    font-weight: 700;
-    color: #c92453;
     margin-bottom: 0.3rem;
+
+    color: #c92453;
+    font-size: 1.3rem;
+    font-weight: 700;
   }
 
   .service-subtitle {
-    font-size: 0.85rem; 
-    font-weight: 600;
-    color: #555;
     margin-bottom: 0.8rem;
+
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 600;
   }
 
+  // ----------------------------------------
+  // LISTE DES PRESTATIONS
+  // ----------------------------------------
+
   .service-points {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 1rem 0;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 
+    margin: 0 0 1rem;
+    padding: 0;
+
+    list-style: none;
+
     li {
-      font-size: 0.9rem;
       color: #333;
+      font-size: 0.9rem;
     }
   }
 
+  // ----------------------------------------
+  // PRIX
+  // ----------------------------------------
+
   .service-price {
-    font-size: 1.2rem; 
-    font-weight: 700;
-    color: #fff;
-    background-color: #c92453;
-    padding: 0.7rem 1rem;
-    border-radius: 50px 50px 0 0;
-    text-align: center;
     align-self: flex-start;
+
     margin-top: auto;
+    padding: 0.7rem 1rem;
+
+    border-radius: 50px 50px 0 0;
+
+    background-color: #c92453;
+    color: #fff;
+
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-align: center;
+
     transform: translateY(10%);
   }
 }
 
+// ==========================================
+// CONTENEUR DES SERVICES
+// ==========================================
+
 .service-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;  
   justify-content: center;
+  gap: 1.5rem;
+
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1rem;
-  width: 100%;
+
   box-sizing: border-box;
 }
+
+// ==========================================
+// BOUTONS DE SÉLECTION
+// ==========================================
 
 .service-toggle {
   display: flex;
   gap: 1rem;
+
   margin-bottom: 1.5rem;
 
   button {
     padding: 0.5rem 1.5rem;
+
     border: none;
     border-radius: 8px;
+
     background: #ddd;
-    cursor: pointer;
+
     font-weight: bold;
+    cursor: pointer;
+
     transition: all 0.3s ease;
 
     &.active {
@@ -98,30 +143,32 @@
   }
 }
 
-
+// ==========================================
+// RESPONSIVE : 1440px
+// ==========================================
 
 @media (max-width: 1440px) {
   .service-card {
-    flex: 1 1 28%;          
-    max-width: 300px;      
-    padding: 1rem 0.8rem;   
-  }
+    flex: 1 1 28%;
+    max-width: 300px;
+    padding: 1rem 0.8rem;
 
-  .service-title {
-    font-size: 1.15rem;
-  }
+    .service-title {
+      font-size: 1.15rem;
+    }
 
-  .service-subtitle {
-    font-size: 0.8rem;
-  }
+    .service-subtitle {
+      font-size: 0.8rem;
+    }
 
-  .service-points li {
-    font-size: 0.85rem;
-  }
+    .service-points li {
+      font-size: 0.85rem;
+    }
 
-  .service-price {
-    font-size: 1rem;
-    padding: 0.6rem 0.8rem;
+    .service-price {
+      padding: 0.6rem 0.8rem;
+      font-size: 1rem;
+    }
   }
 
   .service-container {
@@ -130,53 +177,61 @@
   }
 }
 
+// ==========================================
+// RESPONSIVE : 1024px
+// ==========================================
+
 @media (max-width: 1024px) {
   .service-card {
     flex: 1 1 calc(50% - 1rem);
     max-width: calc(50% - 1rem);
     padding: 0.9rem 0.7rem;
-  }
 
-  .service-title {
-    font-size: 1.1rem;
-  }
+    .service-title {
+      font-size: 1.1rem;
+    }
 
-  .service-subtitle {
-    font-size: 0.75rem;
-  }
+    .service-subtitle {
+      font-size: 0.75rem;
+    }
 
-  .service-points li {
-    font-size: 0.8rem;
-  }
+    .service-points li {
+      font-size: 0.8rem;
+    }
 
-  .service-price {
-    font-size: 0.95rem;
-    padding: 0.5rem 0.8rem;
+    .service-price {
+      padding: 0.5rem 0.8rem;
+      font-size: 0.95rem;
+    }
   }
 }
+
+// ==========================================
+// RESPONSIVE : 768px
+// ==========================================
 
 @media (max-width: 768px) {
   .service-card {
     flex: 1 1 100%;
     max-width: 100%;
     padding: 0.8rem 0.6rem;
-  }
 
-  .service-title {
-    font-size: 1rem;
-  }
+    .service-title {
+      font-size: 1rem;
+    }
 
-  .service-subtitle {
-    font-size: 0.7rem;
-  }
+    .service-subtitle {
+      font-size: 0.7rem;
+    }
 
-  .service-points li {
-    font-size: 0.75rem;
-  }
+    .service-points li {
+      font-size: 0.75rem;
+    }
 
-  .service-price {
-    font-size: 0.9rem;
-    padding: 0.5rem 0.7rem;
+    .service-price {
+      padding: 0.5rem 0.7rem;
+      font-size: 0.9rem;
+    }
   }
 
   .service-container {

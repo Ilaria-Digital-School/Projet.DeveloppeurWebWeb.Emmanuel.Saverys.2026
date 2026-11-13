@@ -1,118 +1,167 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500&display=swap");
+@use "../variables" as *;
+@use "../mixins" as *;
+
+// ==========================================
+// TITRE AVEC SLIDER
+// ==========================================
 
 .bg-title {
+  position: relative;
   width: 100%;
   height: clamp(220px, 45vh, 480px);
   overflow: hidden;
-  position: relative;
 }
+
+// ==========================================
+// SLIDES
+// ==========================================
 
 .slides-wrapper {
   display: flex;
-  transition: transform 0.8s ease;
   width: 100%;
   height: 100%;
+  transition: transform 0.8s ease;
 }
 
 .bg-slide {
+  position: relative;
   min-width: 100%;
   height: 100%;
+
   background-size: cover;
   background-position: center;
-  position: relative;
 }
 
+// ==========================================
+// OVERLAY
+// ==========================================
+
 .overlay {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.8));
+  position: absolute;
+  top: 0;
+  left: 0;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  width: 100%;
+  height: 100%;
+  padding: clamp(1rem, 5vw, 3rem);
+
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.35),
+    rgba(0, 0, 0, 0.8)
+  );
+
   text-align: center;
-  padding: clamp(1rem,5vw,3rem);
-  position: absolute;
-  top: 0;
-  left: 0;
+
+  h1 {
+    margin-bottom: clamp(0.5rem, 2vw, 1rem);
+
+    color: $text-light;
+    font-family: "Poppins", cursive, sans-serif;
+    font-size: inherit;
+    font-weight: $font-weight-bold;
+
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    letter-spacing: 0.5px;
+    line-height: $line-height-heading;
+  }
+
+  p {
+    max-width: 50%;
+
+    color: #f7f7f7;
+    font-family: "Inter", sans-serif;
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+    font-weight: $font-weight-semibold;
+    line-height: $line-height-base;
+  }
 }
 
-.overlay h1 {
-  font-family: "Poppins", cursive, sans-serif;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: clamp(0.5rem, 2vw, 1rem);
-  text-shadow: 0 2px 6px rgba(0,0,0,0.25);
-  letter-spacing: 0.5px;
-  line-height: 1.2;
-}
-
-.overlay p {
-  font-family: "Inter", sans-serif;
-  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
-  font-weight: 600;
-  color: #f7f7f7;
-  max-width: 50%;
-  line-height: 1.6;
-}
+// ==========================================
+// NAVIGATION DU SLIDER
+// ==========================================
 
 .slider-nav {
   position: absolute;
-  bottom: 15px; 
-  left: 50%;      
-  transform: translateX(-50%);
+  bottom: 15px;
+  left: 50%;
+  z-index: $z-index-dropdown;
+
   display: flex;
-  gap: 8px;
-  z-index: 10;
+  gap: $spacing-sm;
+
+  transform: translateX(-50%);
 }
 
 .dot {
   width: 15px;
-  height: 15px; 
-  border-radius: 50%;
-  background: rgba(255,255,255,0.5);
+  height: 15px;
+
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: $border-radius-full;
+
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all $transition-base;
+
+  &:hover {
+    background: $text-light;
+  }
+
+  &.active {
+    background: $text-light;
+    transform: scale(1.2);
+  }
 }
 
-.dot:hover {
-  background: white;
-}
-
-.dot.active {
-  background: #fff;
-  transform: scale(1.2);
-}
+// ==========================================
+// RESPONSIVE
+// ==========================================
 
 @media (max-width: 1228px) {
-  .overlay h1 {
-    font-size: 1.5rem;
-  }
-  .overlay p {
-    font-size: 1.2rem;
-    max-width: 80%;
-  }
-}
-@media (max-width: 768px) {
-  .overlay h1 {
-    font-size: 1.3rem;
-  }
-  .overlay p {
-    font-size: 1rem;
-    max-width: 90%;
+  .overlay {
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      max-width: 80%;
+      font-size: 1.2rem;
+    }
   }
 }
 
-@media (max-width: 480px) {
+@include respond-to(tablet) {
+  .overlay {
+    h1 {
+      font-size: 1.3rem;
+    }
+
+    p {
+      max-width: 90%;
+      font-size: 1rem;
+    }
+  }
+}
+
+@include respond-to(mobile) {
   .bg-title {
     height: 260px;
   }
-  .overlay h1 {
-    font-size: 1.1rem;
+
+  .overlay {
+    h1 {
+      font-size: 1.1rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
   }
-  .overlay p {
-    font-size: 0.9rem;
-  }
+
   .slider-nav {
     bottom: 10px;
   }
