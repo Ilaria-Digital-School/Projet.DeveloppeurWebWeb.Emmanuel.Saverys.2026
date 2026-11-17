@@ -1,0 +1,141 @@
+// ==========================================
+// SECTION TARIFS
+// ==========================================
+
+.tarif-section {
+  display: flex;
+  justify-content: center;
+
+  padding: 4rem 1.5rem;
+}
+
+// ==========================================
+// CONTENEUR DES TARIFS
+// ==========================================
+
+.tarif-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+
+  width: 100%;
+  max-width: 1180px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+// ==========================================
+// COLONNES TARIFS
+// ==========================================
+
+.tarif-column {
+  padding: 2rem;
+
+  background-color: #fff;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+
+  h3 {
+    margin-bottom: 1.5rem;
+
+    color: rgb(168, 8, 8);
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+}
+
+// ==========================================
+// LIGNES DE TARIFS
+// ==========================================
+
+.tarif-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+
+  padding: 0.9rem 0;
+
+  border-bottom: 1px solid #eee;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+// ==========================================
+// LIBELLÉS
+// ==========================================
+
+.tarif-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+
+  span {
+    color: #333;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  small {
+    color: #777;
+    font-size: 0.75rem;
+  }
+}
+
+// ==========================================
+// PRIX
+// ==========================================
+
+.tarif-price {
+  color: #c92453;
+  font-size: 1rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+// ==========================================
+// RESPONSIVE : 1440px
+// ==========================================
+
+@media (max-width: 1440px) {
+  .tarif-section {
+    padding: 3.2rem 1.5rem;
+  }
+
+  .tarif-wrapper {
+    max-width: 1050px;
+    gap: 2rem;
+  }
+
+  .tarif-column {
+    padding: 1.6rem;
+
+    h3 {
+      margin-bottom: 1.2rem;
+      font-size: 1.45rem;
+    }
+  }
+
+  .tarif-row {
+    padding: 0.75rem 0;
+  }
+
+  .tarif-label {
+    span {
+      font-size: 0.9rem;
+    }
+
+    small {
+      font-size: 0.7rem;
+    }
+  }
+
+  .tarif-price {
+    font-size: 0.95rem;
+  }
+}

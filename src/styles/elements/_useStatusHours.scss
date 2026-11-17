@@ -1,0 +1,53 @@
+// ==========================================
+// BARRE DE STATUT
+// ==========================================
+
+.status-bar {
+  position: relative;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  padding: 6px 10px;
+
+  background: #111;
+  color: #fff;
+
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  text-align: center;
+
+  opacity: 0.9;
+  transition: all 0.3s ease;
+
+  // Indicateur de statut
+
+  &::before {
+    content: "";
+
+    width: 6px;
+    height: 6px;
+    margin-right: 8px;
+
+    border-radius: 50%;
+  }
+
+  // Statut ouvert
+
+  &.open {
+    &::before {
+      background: #4caf50;
+    }
+  }
+
+  // Statut fermé
+
+  &.closed {
+    &::before {
+      background: #ff4d4d;
+    }
+  }
+} 

@@ -1,0 +1,276 @@
+// ==========================================
+// INFORMATIONS AVEC IMAGE LATÉRALE
+// ==========================================
+
+.create-side-infos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 4rem 2rem 2rem;
+
+  // ----------------------------------------
+  // ANIMATION D'APPARITION
+  // ----------------------------------------
+
+  opacity: 0;
+  transform: translateY(80px) scale(0.95);
+
+  transition:
+    opacity 1s ease-out,
+    transform 1s ease-out;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  // ----------------------------------------
+  // CONTENEUR PRINCIPAL
+  // ----------------------------------------
+
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+
+    width: 100%;
+    max-width: 1130px;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: space-evenly;
+    }
+
+    &.right {
+      @media (min-width: 768px) {
+        flex-direction: row-reverse;
+      }
+    }
+  }
+
+  // ----------------------------------------
+  // IMAGE
+  // ----------------------------------------
+
+  .image-container {
+    width: 80%;
+    max-width: 300px;
+    flex-shrink: 0;
+
+    @media (min-width: 768px) {
+      width: 45%;
+      max-width: 250px;
+    }
+
+    @media (max-width: 480px) {
+      max-width: 180px;
+      width: 70%;
+    }
+
+    @media (max-width: 1400px) {
+      max-width: 200px;
+      width: 40%;
+    }
+
+    img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.03);
+      }
+    }
+  }
+
+  // ----------------------------------------
+  // CONTENU TEXTE
+  // ----------------------------------------
+
+  .text-container {
+    width: 100%;
+    text-align: center;
+
+    @media (min-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      width: 65%;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+
+      color: rgb(168, 8, 8);
+      font-size: 2rem;
+      font-weight: 700;
+
+      @media (max-width: 1400px) {
+        font-size: 1.5rem;
+      }
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+
+      color: #555;
+      font-size: 1rem;
+      line-height: 1.6;
+
+      @media (max-width: 1400px) {
+        font-size: 0.9rem;
+      }
+    }
+
+    // --------------------------------------
+    // BOUTON
+    // --------------------------------------
+
+    .btn-sideinfo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+
+      width: auto;
+      min-width: 150px;
+      max-width: 250px;
+      padding: 0.75rem 1.5rem;
+
+      border: 2px solid transparent;
+      border-radius: 8px;
+
+      background-color: #c92453;
+      color: white;
+
+      font-weight: 600;
+      text-decoration: none;
+
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+
+      transition:
+        background-color 0.3s ease,
+        transform 0.2s ease,
+        border-color 0.3s ease;
+
+      &:hover {
+        background-color: #f1f1f1;
+        color: #555;
+        border-color: #c92453;
+      }
+
+      .btn-arrow {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 24px;
+        height: 24px;
+
+        border: 2px solid white;
+        border-radius: 50%;
+
+        transition: all 0.3s ease;
+      }
+
+      &:hover .btn-arrow {
+        border-color: #c92453;
+        color: #c92453;
+      }
+    }
+  }
+
+  // ----------------------------------------
+  // ALIGNEMENT DES CONTENUS SUR DESKTOP
+  // ----------------------------------------
+
+  .content-wrapper.right .text-container,
+  .content-wrapper.left .text-container {
+    @media (min-width: 768px) {
+      text-align: left;
+
+      .btn-sideinfo {
+        align-self: flex-start;
+      }
+    }
+  }
+
+  // ----------------------------------------
+  // RESPONSIVE : TABLETTE ET DESKTOP
+  // ----------------------------------------
+
+  @media (min-width: 768px) {
+    gap: 2rem;
+    padding: 5rem 3rem 4rem;
+  }
+}
+
+// ==========================================
+// GROUPE DE SERVICES
+// ==========================================
+
+.service-group {
+  position: relative;
+
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  padding: 3rem 2rem 2rem;
+
+  border: 2px solid rgba(201, 36, 83, 0.3);
+  border-radius: 16px;
+
+  @media (max-width: 1024px) {
+    padding: 0;
+    border: none;
+  }
+}
+
+// ==========================================
+// TITRE DU GROUPE
+// ==========================================
+
+.service-group-title {
+  position: absolute;
+  top: -1.2rem;
+  left: 2rem;
+
+  padding: 0 1rem;
+  border-radius: 20px;
+  border: 2px solid rgba(201, 36, 83, 0.3);
+  background-color: #f1f1f1;
+  color: rgb(168, 8, 8);
+
+  font-size: 1.6rem;
+  font-weight: 700;
+
+  @media (max-width: 1024px) {
+    position: static;
+
+    margin-bottom: 2rem;
+
+    text-align: center;
+  }
+}
+
+// ==========================================
+// CARTES DES SERVICES
+// ==========================================
+
+.service-group-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem;
+
+  @media (max-width: 1024px) {
+    gap: 1rem;
+  }
+}

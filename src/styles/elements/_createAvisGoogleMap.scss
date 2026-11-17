@@ -1,0 +1,320 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+// ==========================================
+// CONTENEUR DES AVIS GOOGLE
+// ==========================================
+
+.avis-container-GM {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 20px;
+
+  cursor: pointer;
+
+  // ----------------------------------------
+  // TITRE
+  // ----------------------------------------
+
+  &__title {
+    margin-bottom: 20px;
+
+    color: #666;
+    font-size: $font-size-title;
+    text-align: center;
+  }
+}
+
+// ==========================================
+// CARTE AVIS GOOGLE
+// ==========================================
+
+.avis-card-GM {
+  padding: 25px;
+
+  color: #666;
+  background: rgba(255, 255, 255, 0.7);
+
+  border-radius: 15px;
+
+  backdrop-filter: blur(20px);
+
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+
+  overflow-wrap: break-word;
+
+  transition:
+    transform $transition-base,
+    box-shadow $transition-base;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+  }
+
+  // ----------------------------------------
+  // AUTEUR
+  // ----------------------------------------
+
+  &__author {
+    margin-bottom: $spacing-sm;
+
+    font-size: $font-size-large;
+    font-weight: $font-weight-semibold;
+  }
+
+  // ----------------------------------------
+  // NOTE
+  // ----------------------------------------
+
+  &__rating {
+    margin-bottom: $spacing-md;
+
+    color: #ffd700;
+  }
+
+  // ----------------------------------------
+  // COMMENTAIRE
+  // ----------------------------------------
+
+  &__text {
+    margin-bottom: $spacing-md;
+
+    font-size: 15px;
+    line-height: $line-height-base;
+  }
+
+  // ----------------------------------------
+  // DATE
+  // ----------------------------------------
+
+  &__date {
+    display: block;
+
+    font-size: 13px;
+    opacity: 0.8;
+    text-align: right;
+  }
+}
+
+// ==========================================
+// CONTENU DE LA MODALE
+// ==========================================
+
+.avis-modal-content {
+  width: 100%;
+  max-width: 700px;
+  padding: 20px;
+
+  animation: slideFade 0.4s ease;
+}
+
+// ==========================================
+// MODALE
+// ==========================================
+
+.avis-modal {
+  position: fixed;
+  inset: 0;
+  z-index: $z-index-modal;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px;
+
+  background: rgba(241, 241, 241, 0.95);
+
+  overflow-y: auto;
+}
+
+// ==========================================
+// FLÈCHES DE NAVIGATION
+// ==========================================
+
+.arrow {
+  position: fixed;
+  z-index: $z-index-modal + 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 50px;
+  height: 50px;
+
+  background: rgba(255, 255, 255, 0.6);
+
+  border: none;
+  border-radius: $border-radius-full;
+
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+
+  font-size: 32px;
+
+  cursor: pointer;
+
+  // ----------------------------------------
+  // POSITION GAUCHE
+  // ----------------------------------------
+
+  &.left {
+    top: 50%;
+    left: 20px;
+
+    transform: translateY(-50%);
+  }
+
+  // ----------------------------------------
+  // POSITION DROITE
+  // ----------------------------------------
+
+  &.right {
+    top: 50%;
+    right: 20px;
+
+    transform: translateY(-50%);
+  }
+}
+
+// ==========================================
+// BOUTON FERMETURE
+// ==========================================
+
+.close-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: $z-index-modal + 2;
+
+  background: transparent;
+  border: none;
+
+  color: #333;
+  font-size: 42px;
+
+  cursor: pointer;
+}
+
+// ==========================================
+// ANIMATIONS
+// ==========================================
+
+@keyframes slideFade {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// ==========================================
+// RESPONSIVE
+// ==========================================
+
+// ------------------------------------------
+// Écrans jusqu'à 1440px
+// ------------------------------------------
+
+@media (max-width: 1440px) {
+  .avis-container-GM {
+    max-width: 750px;
+    margin: 40px auto;
+    padding: 15px;
+    gap: 20px;
+
+    &__title {
+      margin-bottom: 15px;
+      font-size: 28px;
+    }
+  }
+
+  .avis-card-GM {
+    padding: 20px;
+
+    &__author {
+      font-size: 18px;
+    }
+
+    &__rating {
+      font-size: 16px;
+    }
+
+    &__text {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    &__date {
+      font-size: 12px;
+    }
+  }
+
+  .avis-modal-content {
+    max-width: 600px;
+    padding: 15px;
+  }
+
+  .arrow {
+    width: 45px;
+    height: 45px;
+
+    font-size: 30px;
+  }
+
+  .close-btn {
+    font-size: 38px;
+  }
+}
+
+// ------------------------------------------
+// Tablettes : 860px
+// ------------------------------------------
+
+@media (max-width: 860px) {
+  .arrow {
+    &.left {
+      top: auto;
+      bottom: 20px;
+      left: 30%;
+
+      transform: translateY(0);
+    }
+
+    &.right {
+      top: auto;
+      bottom: 20px;
+      right: 30%;
+
+      transform: translateY(0);
+    }
+
+    background: rgba(255, 255, 255, 0.4);
+  }
+}
+
+// ------------------------------------------
+// Mobiles : 768px
+// ------------------------------------------
+
+@include respond-to(tablet) {
+  .arrow {
+    width: 40px;
+    height: 40px;
+
+    font-size: 28px;
+  }
+
+  .close-btn {
+    font-size: 36px;
+  }
+}

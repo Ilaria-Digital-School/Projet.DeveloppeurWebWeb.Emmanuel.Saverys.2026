@@ -1,0 +1,76 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+
+# 🔹 Redirections SEO
+[[redirects]]
+  from = "/about"
+  to = "/contact"
+  status = 301
+
+[[redirects]]
+  from = "/livre-dor"
+  to = "/avis"
+  status = 301
+
+[[redirects]]
+  from = "/r%C3%A8glement"
+  to = "/page-pdf"
+  status = 301
+
+
+# 🔒 Bloquer chemins sensibles
+[[redirects]]
+  from = "/wp-admin/*"
+  to = "/404"
+  status = 404
+
+[[redirects]]
+  from = "/wp-login.php"
+  to = "/404"
+  status = 404
+
+[[redirects]]
+  from = "/storage/*"
+  to = "/404"
+  status = 404
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/404"
+  status = 404
+
+
+# 🔒 Bloquer fichiers sensibles
+[[redirects]]
+  from = "/*.php"
+  to = "/404"
+  status = 404
+
+[[redirects]]
+  from = "/*.env"
+  to = "/404"
+  status = 404
+
+[[redirects]]
+  from = "/env.*"
+  to = "/404"
+  status = 404
+
+[[redirects]]
+  from = "/.git/*"
+  to = "/404"
+  status = 404
+
+[[redirects]]
+  from = "/*.log"
+  to = "/404"
+  status = 404
+
+
+# ⚛️ React Router SPA
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

@@ -1,0 +1,178 @@
+// ==========================================
+// CONTENEUR PRINCIPAL
+// ==========================================
+
+.top-infos {
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  max-width: 900px;
+  margin: 0;
+
+  overflow: hidden;
+
+  background: #f3f3f3;
+  border-radius: 16px;
+}
+
+// ==========================================
+// CONTENEUR INTERNE
+// ==========================================
+
+.top-infos__container {
+  display: flex;
+  flex-direction: row;
+
+  width: 100%;
+}
+
+// ==========================================
+// CONTENU TEXTE
+// ==========================================
+
+.top-infos__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+
+  padding: clamp(15px, 3vw, 30px);
+}
+
+// ==========================================
+// BLOCS D'INFORMATIONS
+// ==========================================
+
+.top-infos__block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+// ==========================================
+// TITRE
+// ==========================================
+
+.top-infos__title {
+  color: #222;
+  font-size: clamp(14px, 1.5vw, 18px);
+  font-weight: 600;
+}
+
+// ==========================================
+// TEXTE
+// ==========================================
+
+.top-infos__text {
+  color: #555;
+  font-size: clamp(13px, 1.4vw, 15px);
+  line-height: 1.5;
+}
+
+// ==========================================
+// SÉPARATEUR
+// ==========================================
+
+.top-infos__separator {
+  width: clamp(40px, 8vw, 80px);
+  height: 3px;
+
+  background: #c92453;
+  border-radius: 50px;
+}
+
+// ==========================================
+// IMAGE / BANNIÈRE
+// ==========================================
+
+.top-infos__banner {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+
+  padding: 15px;
+
+  img {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+
+    object-fit: contain;
+    border-radius: 15px;
+  }
+}
+
+// ==========================================
+// LIEN
+// ==========================================
+
+.top-infos__link {
+  margin-top: 1rem;
+  text-align: center;
+
+  a {
+    color: #c92453;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: underline;
+  }
+}
+
+// ==========================================
+// MARGE AVIS
+// ==========================================
+
+.marginAvis {
+  margin-top: 70px;
+}
+
+// ==========================================
+// RESPONSIVE : MOBILE
+// ==========================================
+
+@media (max-width: 768px) {
+  .top-infos__container {
+    flex-direction: column-reverse;
+  }
+
+  .top-infos__link a {
+    font-size: small;
+  }
+
+  .top-infos__banner {
+    padding: 10px;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  .top-infos__content {
+    align-items: center;
+    text-align: center;
+  }
+}
+
+// ==========================================
+// RESPONSIVE : TABLETTE
+// ==========================================
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .top-infos {
+    max-width: 750px;
+  }
+}
+
+// ==========================================
+// RESPONSIVE : DESKTOP
+// ==========================================
+
+@media (min-width: 1024px) {
+  .top-infos {
+    max-width: 900px;
+  }
+}

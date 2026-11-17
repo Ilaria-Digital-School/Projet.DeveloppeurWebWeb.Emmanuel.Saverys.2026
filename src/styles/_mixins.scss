@@ -1,0 +1,55 @@
+@use "./variables" as *;
+
+// ==========================================
+// FLEXBOX
+// ==========================================
+
+@mixin flex-center($direction: row, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: center;
+  justify-content: center;
+  gap: $gap;
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+
+// Permet d'appliquer des styles selon la taille de l'écran.
+@mixin respond-to($device) {
+  // Si l'écran est un mobile (768px maximum).
+  @if $device == mobile {
+    @media (max-width: 768px) {
+      @content;
+    }
+  }
+
+  // Si l'écran est une tablette (1024px maximum).
+  @else if $device == tablet {
+    @media (max-width: 1024px) {
+      @content;
+    }
+  }
+
+  // Si l'écran est un ordinateur (plus de 1024px).
+  @else if $device == desktop {
+    @media (min-width: 1025px) {
+      @content;
+    }
+  }
+}
+
+/* ==========================================
+   ACCESSIBILITÉ : FOCUS
+   ========================================== */
+
+// Ajoute un contour visible lorsqu'un élément reçoit le focus au clavier.
+@mixin focus-visible {
+  &:focus-visible {
+    outline: 3px solid currentColor;
+    //outline dessine un contour autour de l'élément.
+    outline-offset: 3px;
+    //outline-offset éloigne ce contour de l'élément.
+  }
+}
