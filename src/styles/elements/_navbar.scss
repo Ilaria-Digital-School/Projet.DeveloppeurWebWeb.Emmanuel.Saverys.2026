@@ -1,35 +1,25 @@
 @use "../variables" as *;
 @use "../mixins" as *;
 
-// ==========================================
 // NAVBAR
-// ==========================================
-
 .navbar {
   position: relative;
   z-index: $z-index-modal;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   width: 100%;
   height: clamp(70px, 8vh, 95px);
   padding: 0 clamp(1.5rem, 4vw, 3rem);
-
   background: linear-gradient(
-    135deg,
-    #d12d5d 0%,
-    #c92453 60%,
-    #b11f4a 100%
-  );
-
+  135deg,
+  #d32f63 0%,
+  #a31b44 60%,
+  #a3143f 100%
+);
   box-shadow: $shadow-md;
 
-  // ----------------------------------------
-  // LOGO
-  // ----------------------------------------
-
+  // Logo
   .logo {
     display: flex;
     align-items: center;
@@ -38,10 +28,7 @@
     img.logo-main {
       height: clamp(50px, 6vw, 80px);
       padding-top: 13px;
-
-      transition:
-        transform $transition-base,
-        filter $transition-base;
+      transition: transform $transition-base, filter $transition-base;
 
       &:hover {
         transform: scale(1.08) rotate(-2deg);
@@ -57,32 +44,20 @@
 
       .separator {
         display: inline-block;
-
         width: 74px;
         height: 1px;
-
-        background-color: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.5);
       }
 
       p {
         margin: 0 0 0 -1px;
-
         font-family: "Poppins", sans-serif;
         font-size: clamp(1.2rem, 2vw, 1.4rem);
-
         color: #e1e1e16b;
-
-        background-image: linear-gradient(
-          120deg,
-          rgba(199, 186, 186, 0.5) 35%,
-          rgba(255, 255, 255, 0.75) 50%,
-          rgba(199, 186, 186, 0.5) 65%
-        );
-
+        background-image: linear-gradient(120deg, rgba(199, 186, 186, 0.5) 35%, rgba(255, 255, 255, 0.75) 50%, rgba(199, 186, 186, 0.5) 65%);
         background-size: 200% 100%;
         background-clip: text;
         -webkit-background-clip: text;
-
         animation: text-shine 4.5s infinite ease-in-out;
       }
 
@@ -90,204 +65,160 @@
         display: flex;
         align-items: center;
         gap: 6px;
-
         text-decoration: none;
 
         span {
           font-family: "Inter", sans-serif;
           font-size: 0.75rem;
-
           color: rgba(255, 255, 255, 0.75);
-
           transition: color $transition-base;
         }
 
         img {
           height: 16px;
           opacity: 0.8;
-
-          transition:
-            transform $transition-base,
-            opacity $transition-base;
+          transition: transform $transition-base, opacity $transition-base;
         }
 
         &:hover {
-          span {
-            color: $text-light;
-          }
-
-          img {
-            transform: scale(1.1);
-            opacity: 1;
-          }
+          span { color: $text-light; }
+          img { transform: scale(1.1); opacity: 1; }
         }
       }
     }
   }
 
-  // ----------------------------------------
-  // LIENS DE NAVIGATION
-  // ----------------------------------------
-
+  // Liens
   .nav-links {
     position: relative;
-
     display: flex;
     align-items: center;
     gap: clamp(0.8rem, 2vw, 1.5rem);
 
     a {
       position: relative;
-
-      padding-bottom: 3px;
-      overflow: hidden;
-
+      padding: 8px 12px;
       color: #f1f1f1;
       font-size: clamp(0.9rem, 1.2vw, 1.1rem);
       font-weight: $font-weight-medium;
-
       text-decoration: none;
-
-      &:hover {
-        opacity: 0.8;
-      }
 
       &::after {
         content: "";
-
         position: absolute;
-        bottom: 0;
-        left: 0;
-
+        bottom: 3px;
+        left: 12px;
         width: 0;
         height: 2px;
-
         background: $text-light;
         border-radius: $border-radius-sm;
-
-        transition: width $transition-base;
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
       }
     }
 
-    // --------------------------------------
-    // BOUTON DE FERMETURE
-    // --------------------------------------
-
+    // Fermeture mobile
     .close-btn {
       display: none;
-
       position: absolute;
       top: 15px;
       right: 15px;
-
       font-size: 2rem;
       color: $text-light;
-
       background: none;
       border: none;
-
       cursor: pointer;
 
-      &:hover {
-        opacity: 0.8;
-      }
+      &:hover { opacity: 0.8; }
     }
 
-    // --------------------------------------
-    // MENU MOBILE
-    // --------------------------------------
-
+    // Menu mobile
     @include respond-to(tablet) {
       position: fixed;
       top: 0;
       right: 0;
       z-index: $z-index-tooltip;
-
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: $spacing-xl;
-
-      width: 70vw;
-      max-width: 300px;
+      width: min(82vw, 340px);
       height: 100vh;
       padding: $spacing-xl;
-
-      background: rgba(0, 0, 0, 0.65);
-      backdrop-filter: blur(10px);
-
+      background: linear-gradient(145deg, rgba(209, 45, 93, 0.97), rgba(177, 31, 74, 0.98));
+      box-shadow: -12px 0 35px rgba(0, 0, 0, 0.2);
       transform: translateX(100%);
-      transition: transform $transition-slow;
+      visibility: hidden;
+      transition: transform $transition-slow, visibility $transition-slow;
 
       &.open {
         transform: translateX(0);
+        visibility: visible;
       }
 
       a {
+        width: 100%;
+        padding: 12px 18px;
         font-size: 1.2rem;
         font-weight: $font-weight-semibold;
-
+        text-align: center;
         opacity: 0;
         transform: translateX(20px);
-
         animation: slideIn 0.5s forwards;
 
         @for $i from 1 through 6 {
-          &:nth-child(#{$i}) {
-            animation-delay: #{$i * 0.1}s;
-          }
+          &:nth-child(#{$i}) { animation-delay: #{$i * 0.1}s; }
+        }
+
+        &::after {
+          bottom: 5px;
+          left: 50%;
+          transform: translateX(-50%);
         }
       }
 
-      .close-btn {
-        display: block;
-      }
+      .close-btn { display: block; }
     }
   }
 
-  // ----------------------------------------
-  // LIEN ACTIF
-  // ----------------------------------------
-
-  .active-link::after {
+  // Soulignement du lien actif uniquement
+  .nav-links a.active-link::after {
     animation: underlineLoad 0.8s forwards;
   }
 
-  // ----------------------------------------
-  // MENU HAMBURGER
-  // ----------------------------------------
+  // Flou derrière le menu ouvert
+  @media (max-width: 1024px) {
+    &:has(.nav-links.open)::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: $z-index-tooltip - 1;
+      background: rgba(35, 0, 15, 0.18);
+      backdrop-filter: blur(7px);
+      -webkit-backdrop-filter: blur(7px);
+      pointer-events: none;
+    }
+  }
 
+  // Hamburger : mécanisme conservé
   .hamburger {
     display: none;
     flex-direction: column;
     justify-content: space-between;
-
     width: 30px;
     height: 22px;
-
     cursor: pointer;
     z-index: $z-index-tooltip;
 
     .bar {
       width: 100%;
       height: 3px;
-
       border-radius: $border-radius-full;
-
-      background: linear-gradient(
-        90deg,
-        #fff,
-        #f8cdda,
-        #fff
-      );
-
+      background: linear-gradient(90deg, #fff, #f8cdda, #fff);
       transition: all $transition-slow;
     }
 
-    &.open {
-      display: none;
-    }
+    &.open { display: none; }
 
     @include respond-to(tablet) {
       display: flex;
@@ -295,87 +226,44 @@
   }
 }
 
-// ==========================================
-// ICÔNE HANDICAP MOBILE
-// ==========================================
-
+// Icône handicap mobile
 @media (max-width: 800px) {
   .handicap-icon-mobile {
     position: fixed;
     bottom: 20px;
     left: 20px;
     z-index: $z-index-modal + 1000;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     width: 60px;
     height: 60px;
-
     color: $text-light;
-    background-color: #c92453;
-
+    background: #c92453;
     border-radius: $border-radius-full;
-
     box-shadow: $shadow-md;
     cursor: pointer;
-
-    transition:
-      transform $transition-base,
-      background-color $transition-base;
+    transition: transform $transition-base, background-color $transition-base;
 
     &:hover {
       transform: scale(1.1);
-      background-color: #d12d5d;
+      background: #d12d5d;
     }
   }
 }
 
-// ==========================================
-// ANIMATIONS
-// ==========================================
-
-// ------------------------------------------
-// Soulignement du lien actif
-// ------------------------------------------
-
+// Animations
 @keyframes underlineLoad {
-  from {
-    width: 0;
-  }
-
-  to {
-    width: 100%;
-  }
+  from { width: 0; }
+  to { width: calc(100% - 24px); }
 }
-
-// ------------------------------------------
-// Apparition des liens mobiles
-// ------------------------------------------
 
 @keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
-// ------------------------------------------
-// Effet lumineux du texte
-// ------------------------------------------
-
 @keyframes text-shine {
-  from {
-    background-position: -200% 50%;
-  }
-
-  to {
-    background-position: 200% 50%;
-  }
+  from { background-position: -200% 50%; }
+  to { background-position: 200% 50%; }
 }
