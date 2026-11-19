@@ -97,8 +97,8 @@ const Avis = () => {
           </div>
         </div>
 
-        <div className="service-group">
-          <h2 className="service-group-title">• Satisfaction Élève</h2>
+        <div className="Satisfaction-div">
+          <h2>• Satisfaction Élève</h2>
 
           <CreateInfos
             image={statsImage}
