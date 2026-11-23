@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
+import CreateFormAvis from './createFormAvis';
 
 // Carte d'un avis client
 const AvisCard = ({ avis, onClick }) => (
@@ -17,7 +18,7 @@ const AvisCard = ({ avis, onClick }) => (
 
     {/* Affichage des étoiles selon la note */}
     <div className="avis-card-GM__stars">
-      {'★★★★★'}
+      ★★★★★
     </div>
 
     <p className="avis-card-GM__text">{avis.text}</p>
@@ -165,6 +166,7 @@ const CreateAvisGoogleMap = ({ avis = [] }) => {
           </button>
         </div>
       )}
+      <CreateFormAvis />
     </section>
   );
 };

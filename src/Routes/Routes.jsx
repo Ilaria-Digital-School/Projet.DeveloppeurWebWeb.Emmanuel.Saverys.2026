@@ -21,7 +21,7 @@ function App() {
 
 const path = location.pathname.replace(/\/$/, "").toLowerCase(); // take the path , remove / and everething after 
 
-const allowedPaths = ["/quiz-academique", "/quiz-synthese", "/quiz-permis-page", "/label-qualite"];
+const allowedPaths = ["/quiz-academique", "/quiz-synthese", "/quiz-permis-page", "/label-qualite", "/avis"];
 
 const isQuestionPermis = allowedPaths.includes(path);  // pour edit style : margin footer div 
   return (

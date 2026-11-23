@@ -1,243 +1,296 @@
+
 @use "../variables" as *;
-@use "../mixins" as *;
 
-// ==========================================
-// FORMULAIRE
-// ==========================================
+// COULEURS DU FORMULAIRE
+$form-primary: #d12d5d;
+$form-primary-dark: #b11f4a;
+$form-primary-light: #ed7193;
+$form-background: #fff4f7;
+$form-text: #414047;
+$form-muted: #85818a;
+$form-border: rgba(209, 45, 93, 0.16);
 
+// CONTENEUR PRINCIPAL
 .form-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 2.5rem 2rem;
+  position: relative;
+  width: min(1000px, 100%);
+  box-sizing: border-box;
+  margin: 120px auto 0;
+  padding: clamp(25px, 4vw, 45px);
+  overflow: hidden;
+  border: 1px solid $form-border;
+  border-radius: $border-radius-lg;
+  background: linear-gradient(145deg, #fff, $form-background);
+  box-shadow: 0 12px 35px rgba(177, 31, 74, 0.08);
 
-  background-color: $background-color;
-  border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
-
-  h2 {
-    margin-bottom: 1.5rem;
-
-    color: rgb(168, 8, 8);
-    font-family: "Poppins", sans-serif;
-    font-size: 1.8rem;
-
-    text-align: center;
+  // Barre décorative supérieure
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      $form-primary-dark,
+      $form-primary,
+      $form-primary-light
+    );
   }
 
-  form {
+  h2 {
+    margin: 0 0 $spacing-xl;
+    color: $form-primary-dark;
+    font-size: clamp(26px, 3vw, 34px);
+    font-weight: $font-weight-bold;
+    text-align: center;
+  }
+}
+
+// STRUCTURE DU FORMULAIRE
+.avis-form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+
+  // Nom et prénom sur une même ligne
+  .name-row {
     display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    gap: $spacing-lg;
 
     .form-group {
-      display: flex;
-      flex-direction: column;
-
-      label {
-        margin-bottom: 0.5rem;
-
-        color: $text-color;
-        font-family: "Inter", sans-serif;
-        font-size: 1rem;
-        font-weight: $font-weight-medium;
-      }
-
-      input,
-      select,
-      textarea {
-        padding: 0.75rem 1rem;
-
-        border: 1px solid #ccc;
-        border-radius: $border-radius-md;
-        outline: none;
-
-        font-size: 1rem;
-        transition: border $transition-base;
-
-        &:focus {
-          border-color: rgb(168, 8, 8);
-        }
-      }
-
-      textarea {
-        resize: vertical;
-      }
-    }
-
-    .name-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-
-      .form-group {
-        flex: 1;
-      }
-    }
-
-    .btn-submit {
-      padding: 0.75rem 1.5rem;
-
-      border: none;
-      border-radius: $border-radius-md;
-
-      background-color: #c92453;
-      color: $text-light;
-
-      font-size: 1rem;
-      font-weight: $font-weight-semibold;
-
-      cursor: pointer;
-      transition: background-color $transition-base;
-
-      &:hover {
-        background-color: rgb(168, 8, 8);
-      }
+      flex: 1;
+      min-width: 0;
     }
   }
 }
 
-// ==========================================
-// ÉTOILES
-// ==========================================
+// CHAMPS ET LABELS
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
 
+  label {
+    color: $form-text;
+    font-size: $font-size-small;
+    font-weight: $font-weight-semibold;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 15px;
+    border: 1px solid $form-border;
+    border-radius: $border-radius-md;
+    outline: none;
+    color: $form-text;
+    background: rgba(255, 255, 255, 0.9);
+    font-family: inherit;
+    font-size: $font-size-small;
+    transition:
+      border-color $transition-hover,
+      box-shadow $transition-hover;
+
+    &::placeholder {
+      color: #aaa2a6;
+    }
+
+    &:focus {
+      border-color: $form-primary;
+      box-shadow: 0 0 0 3px rgba(209, 45, 93, 0.09);
+    }
+  }
+
+  select {
+    cursor: pointer;
+  }
+
+  textarea {
+    min-height: 160px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+}
+
+// ÉTOILES DE NOTATION
 .stars {
   display: flex;
   flex-direction: row-reverse;
-  justify-content: start;
-  gap: 0.3rem;
-
+  justify-content: flex-end;
+  align-items: center;
+  gap: 3px;
+  width: fit-content;
+  padding: 6px 10px;
+  border: 1px solid $form-border;
+  border-radius: $border-radius-md;
+  background: white;
   cursor: pointer;
 }
 
 .star {
-  color: #ccc;
-  font-size: 1.8rem;
-  transition: color 0.2s ease;
+  color: #d8d1d4;
+  font-size: 21px;
+  line-height: 1;
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
 
-  &.filled {
-    color: rgb(168, 8, 8);
-  }
-
+  // Colore l'étoile survolée et les précédentes
+  &.filled,
   &:hover,
   &:hover ~ & {
-    color: rgb(200, 50, 50);
+    color: #f5a018;
+  }
+
+  &:hover {
+    transform: scale(1.1);
   }
 }
 
-// ==========================================
 // CHOIX DE PUBLICATION
-// ==========================================
-
 .publication-choice {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  gap: $spacing-md;
 }
 
 .choice-btn {
   flex: 1;
-  padding: 0.7rem 1rem;
-
-  border: 1px solid #ccc;
+  padding: 12px;
+  border: 1px solid $form-border;
   border-radius: $border-radius-md;
-
-  background-color: $surface-color;
-
-  font-weight: $font-weight-medium;
+  color: $form-text;
+  background: white;
+  font-size: $font-size-small;
+  font-weight: $font-weight-semibold;
   cursor: pointer;
-
-  transition: all $transition-base;
+  transition:
+    background $transition-hover,
+    color $transition-hover,
+    border-color $transition-hover,
+    box-shadow $transition-hover;
 
   &:hover {
-    border-color: #c92453;
+    border-color: $form-primary;
+    color: $form-primary;
   }
 
+  // Apparence du choix sélectionné
   &.active {
-    border-color: #c92453;
-    background-color: #c92453;
-    color: $text-light;
+    border-color: $form-primary;
+    color: white;
+    background: linear-gradient(
+      120deg,
+      $form-primary-dark,
+      $form-primary,
+      $form-primary-light
+    );
+    box-shadow: 0 4px 12px rgba(209, 45, 93, 0.15);
   }
 }
 
-// ==========================================
-// RESPONSIVE
-// ==========================================
+// BOUTON D'ENVOI
+.btn-submit {
+  width: 100%;
+  padding: 15px 20px;
+  border: none;
+  border-radius: $border-radius-md;
+  color: white;
+  background: linear-gradient(
+    120deg,
+    $form-primary-dark,
+    $form-primary,
+    $form-primary-light
+  );
+  box-shadow: 0 5px 15px rgba(209, 45, 93, 0.17);
+  font-size: $font-size-small;
+  font-weight: $font-weight-bold;
+  cursor: pointer;
+  transition:
+    transform $transition-hover,
+    box-shadow $transition-hover;
 
-@media (max-width: 1440px) {
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(209, 45, 93, 0.23);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// MESSAGE DE CONFIRMATION OU D'ERREUR
+.avis-form > p {
+  margin: 0;
+  padding: 13px;
+  border-radius: $border-radius-sm;
+  background: $form-background;
+  font-size: $font-size-small;
+  line-height: 1.5;
+  text-align: center;
+}
+
+// TABLETTE
+@media (max-width: 768px) {
   .form-container {
-    max-width: 500px;
-    margin: 2rem auto;
-    padding: 1.8rem 1.2rem;
+    width: 100%;
+    padding: $spacing-xl;
+  }
+
+  .avis-form {
+    gap: $spacing-lg;
+  }
+}
+
+// MOBILE
+@media (max-width: 600px) {
+  .form-container {
+    margin-top: 50px;
+    padding: $spacing-xl $spacing-md;
+    border-radius: $border-radius-md;
 
     h2 {
-      margin-bottom: 1rem;
-      font-size: 1.4rem;
-    }
-
-    form {
-      gap: 1rem;
-
-      .form-group {
-        label {
-          font-size: 0.9rem;
-        }
-
-        input,
-        select,
-        textarea {
-          padding: 0.6rem 0.8rem;
-          font-size: 0.9rem;
-        }
-      }
-
-      .name-row {
-        gap: 0.5rem;
-      }
-
-      .btn-submit {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.9rem;
-      }
+      margin-bottom: $spacing-lg;
+      font-size: 25px;
     }
   }
 
-  .stars {
-    gap: 0.2rem;
+  .avis-form {
+    gap: $spacing-lg;
+  }
+
+  .name-row {
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+
+  .form-group {
+    input,
+    select,
+    textarea {
+      padding: 12px;
+      font-size: 14px;
+    }
+
+    textarea {
+      min-height: 130px;
+    }
   }
 
   .star {
-    font-size: 1.5rem;
+    font-size: 20px;
   }
-}
 
-@include respond-to(mobile) {
-  .form-container {
-    padding: 2rem 1rem;
+  .choice-btn {
+    padding: 11px;
+  }
 
-    h2 {
-      font-size: 1.5rem;
-    }
-
-    form {
-      gap: 1rem;
-
-      .name-row {
-        flex-direction: column;
-      }
-
-      .form-group {
-        input,
-        select,
-        textarea {
-          padding: 0.6rem 0.8rem;
-          font-size: 0.95rem;
-        }
-      }
-
-      .btn-submit {
-        padding: 0.6rem 1rem;
-        font-size: 0.95rem;
-      }
-    }
+  .btn-submit {
+    padding: 13px;
   }
 }

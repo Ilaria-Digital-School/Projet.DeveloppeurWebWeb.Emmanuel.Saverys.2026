@@ -60,7 +60,6 @@ const Avis = () => {
     <div>
         <section className="avis-section-one">
           <div>
-            <h2>• Avis Clients</h2>
 
           <div className="avis-grid">
             <AvisCard
@@ -96,7 +95,7 @@ const Avis = () => {
           
           </div>
         </div>
-
+ <CreateAvisGoogleMap avis={avisMock} />
         <div className="Satisfaction-div">
           <h2>• Satisfaction Élève</h2>
 
@@ -137,8 +136,7 @@ const Avis = () => {
         </div>
       </section>
 
-      <CreateAvisGoogleMap avis={avisMock} />
-      <CreateFormAvis />
+     
     </div>
   );
 };

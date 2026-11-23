@@ -2067,7 +2067,7 @@ a {
   width: 100%;
   min-width: 0;
   box-sizing: border-box;
-  padding: 130px 24px 64px;
+  padding: 170px 24px 64px;
   overflow: hidden;
   background: linear-gradient(145deg, #fff4f7, #fce8ee 50%, #fff2f6);
 }
@@ -2406,180 +2406,227 @@ a {
 }
 
 .form-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 2.5rem 2rem;
-  background-color: rgba(255, 255, 255, 0.8196078431);
-  border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  position: relative;
+  width: min(1000px, 100%);
+  box-sizing: border-box;
+  margin: 120px auto 0;
+  padding: clamp(25px, 4vw, 45px);
+  overflow: hidden;
+  border: 1px solid rgba(209, 45, 93, 0.16);
+  border-radius: 16px;
+  background: linear-gradient(145deg, #fff, #fff4f7);
+  box-shadow: 0 12px 35px rgba(177, 31, 74, 0.08);
+}
+.form-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #b11f4a, #d12d5d, #ed7193);
 }
 .form-container h2 {
-  margin-bottom: 1.5rem;
-  color: rgb(168, 8, 8);
-  font-family: "Poppins", sans-serif;
-  font-size: 1.8rem;
+  margin: 0 0 32px;
+  color: #b11f4a;
+  font-size: clamp(26px, 3vw, 34px);
+  font-weight: 700;
   text-align: center;
 }
-.form-container form {
+
+.avis-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 24px;
 }
-.form-container form .form-group {
+.avis-form .name-row {
+  display: flex;
+  gap: 24px;
+}
+.avis-form .name-row .form-group {
+  flex: 1;
+  min-width: 0;
+}
+
+.form-group {
   display: flex;
   flex-direction: column;
+  gap: 9px;
+  min-width: 0;
 }
-.form-container form .form-group label {
-  margin-bottom: 0.5rem;
-  color: #333333;
-  font-family: "Inter", sans-serif;
-  font-size: 1rem;
-  font-weight: 500;
+.form-group label {
+  color: #414047;
+  font-size: 14px;
+  font-weight: 600;
 }
-.form-container form .form-group input,
-.form-container form .form-group select,
-.form-container form .form-group textarea {
-  padding: 0.75rem 1rem;
-  border: 1px solid #ccc;
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 15px;
+  border: 1px solid rgba(209, 45, 93, 0.16);
   border-radius: 8px;
   outline: none;
-  font-size: 1rem;
-  transition: border 250ms ease;
+  color: #414047;
+  background: rgba(255, 255, 255, 0.9);
+  font-family: inherit;
+  font-size: 14px;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
 }
-.form-container form .form-group input:focus,
-.form-container form .form-group select:focus,
-.form-container form .form-group textarea:focus {
-  border-color: rgb(168, 8, 8);
+.form-group input::-moz-placeholder, .form-group select::-moz-placeholder, .form-group textarea::-moz-placeholder {
+  color: #aaa2a6;
 }
-.form-container form .form-group textarea {
-  resize: vertical;
+.form-group input::placeholder,
+.form-group select::placeholder,
+.form-group textarea::placeholder {
+  color: #aaa2a6;
 }
-.form-container form .name-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #d12d5d;
+  box-shadow: 0 0 0 3px rgba(209, 45, 93, 0.09);
 }
-.form-container form .name-row .form-group {
-  flex: 1;
-}
-.form-container form .btn-submit {
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 8px;
-  background-color: #c92453;
-  color: #ffffff;
-  font-size: 1rem;
-  font-weight: 600;
+.form-group select {
   cursor: pointer;
-  transition: background-color 250ms ease;
 }
-.form-container form .btn-submit:hover {
-  background-color: rgb(168, 8, 8);
+.form-group textarea {
+  min-height: 160px;
+  resize: vertical;
+  line-height: 1.6;
 }
 
 .stars {
   display: flex;
   flex-direction: row-reverse;
-  justify-content: start;
-  gap: 0.3rem;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 3px;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 6px 10px;
+  border: 1px solid rgba(209, 45, 93, 0.16);
+  border-radius: 8px;
+  background: white;
   cursor: pointer;
 }
 
 .star {
-  color: #ccc;
-  font-size: 1.8rem;
-  transition: color 0.2s ease;
+  color: #d8d1d4;
+  font-size: 21px;
+  line-height: 1;
+  transition: color 180ms ease, transform 180ms ease;
 }
-.star.filled {
-  color: rgb(168, 8, 8);
+.star.filled, .star:hover, .star:hover ~ .star {
+  color: #f5a018;
 }
-.star:hover, .star:hover ~ .star {
-  color: rgb(200, 50, 50);
+.star:hover {
+  transform: scale(1.1);
 }
 
 .publication-choice {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  gap: 16px;
 }
 
 .choice-btn {
   flex: 1;
-  padding: 0.7rem 1rem;
-  border: 1px solid #ccc;
+  padding: 12px;
+  border: 1px solid rgba(209, 45, 93, 0.16);
   border-radius: 8px;
-  background-color: #f5f5f5;
-  font-weight: 500;
+  color: #414047;
+  background: white;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 250ms ease;
+  transition: background 200ms ease, color 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
 }
 .choice-btn:hover {
-  border-color: #c92453;
+  border-color: #d12d5d;
+  color: #d12d5d;
 }
 .choice-btn.active {
-  border-color: #c92453;
-  background-color: #c92453;
-  color: #ffffff;
+  border-color: #d12d5d;
+  color: white;
+  background: linear-gradient(120deg, #b11f4a, #d12d5d, #ed7193);
+  box-shadow: 0 4px 12px rgba(209, 45, 93, 0.15);
 }
 
-@media (max-width: 1440px) {
-  .form-container {
-    max-width: 500px;
-    margin: 2rem auto;
-    padding: 1.8rem 1.2rem;
-  }
-  .form-container h2 {
-    margin-bottom: 1rem;
-    font-size: 1.4rem;
-  }
-  .form-container form {
-    gap: 1rem;
-  }
-  .form-container form .form-group label {
-    font-size: 0.9rem;
-  }
-  .form-container form .form-group input,
-  .form-container form .form-group select,
-  .form-container form .form-group textarea {
-    padding: 0.6rem 0.8rem;
-    font-size: 0.9rem;
-  }
-  .form-container form .name-row {
-    gap: 0.5rem;
-  }
-  .form-container form .btn-submit {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.9rem;
-  }
-  .stars {
-    gap: 0.2rem;
-  }
-  .star {
-    font-size: 1.5rem;
-  }
+.btn-submit {
+  width: 100%;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  background: linear-gradient(120deg, #b11f4a, #d12d5d, #ed7193);
+  box-shadow: 0 5px 15px rgba(209, 45, 93, 0.17);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 200ms ease, box-shadow 200ms ease;
 }
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(209, 45, 93, 0.23);
+}
+.btn-submit:active {
+  transform: translateY(0);
+}
+
+.avis-form > p {
+  margin: 0;
+  padding: 13px;
+  border-radius: 4px;
+  background: #fff4f7;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+}
+
 @media (max-width: 768px) {
   .form-container {
-    padding: 2rem 1rem;
+    width: 100%;
+    padding: 32px;
+  }
+  .avis-form {
+    gap: 24px;
+  }
+}
+@media (max-width: 600px) {
+  .form-container {
+    margin-top: 50px;
+    padding: 32px 16px;
+    border-radius: 8px;
   }
   .form-container h2 {
-    font-size: 1.5rem;
+    margin-bottom: 24px;
+    font-size: 25px;
   }
-  .form-container form {
-    gap: 1rem;
+  .avis-form {
+    gap: 24px;
   }
-  .form-container form .name-row {
+  .name-row {
     flex-direction: column;
+    gap: 24px;
   }
-  .form-container form .form-group input,
-  .form-container form .form-group select,
-  .form-container form .form-group textarea {
-    padding: 0.6rem 0.8rem;
-    font-size: 0.95rem;
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 12px;
+    font-size: 14px;
   }
-  .form-container form .btn-submit {
-    padding: 0.6rem 1rem;
-    font-size: 0.95rem;
+  .form-group textarea {
+    min-height: 130px;
+  }
+  .star {
+    font-size: 20px;
+  }
+  .choice-btn {
+    padding: 11px;
+  }
+  .btn-submit {
+    padding: 13px;
   }
 }
 .loader-overlay {
@@ -3367,10 +3414,10 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
   position: relative;
   isolation: isolate;
   width: 100%;
+  margin-top: 130px;
   padding: 48px 24px;
   overflow: hidden;
   color: #414047;
-  background: radial-gradient(ellipse at 15% 15%, rgba(255, 255, 255, 0.9), transparent 45%), linear-gradient(135deg, #fff7f9, #fceaf0 55%, #fff2f6);
 }
 .avis-container-GM::before, .avis-container-GM::after {
   content: "";
@@ -3386,12 +3433,10 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
 .avis-container-GM::before {
   top: -180px;
   right: -100px;
-  background: rgba(237, 113, 147, 0.18);
 }
 .avis-container-GM::after {
   bottom: -220px;
   left: -150px;
-  background: rgba(209, 45, 93, 0.1);
   animation-direction: alternate-reverse;
 }
 .avis-container-GM__empty {
@@ -3408,7 +3453,7 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
   display: inline-block;
   margin-bottom: 8px;
   color: #d12d5d;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 3px;
 }
@@ -3422,7 +3467,7 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
   background-clip: text;
   -webkit-background-clip: text;
   background-size: 200% auto;
-  font-size: clamp(28px, 3vw, 40px);
+  font-size: clamp(32px, 3.5vw, 46px);
   font-weight: 700;
   animation: avis-title-shine 7s linear infinite;
 }
@@ -3445,10 +3490,10 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
 
 .avis-content-GM {
   display: grid;
-  grid-template-columns: 260px minmax(0, 1fr);
+  grid-template-columns: 290px minmax(0, 1fr);
   align-items: stretch;
   gap: 32px;
-  width: min(1400px, 100%);
+  width: min(1550px, 100%);
   margin: 0 auto;
 }
 
@@ -3458,7 +3503,7 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 32px 16px;
+  padding: 48px 24px;
   overflow: hidden;
   border: 1px solid rgba(209, 45, 93, 0.18);
   border-radius: 16px;
@@ -3476,13 +3521,14 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
 }
 .avis-summary-GM__google {
   display: grid;
-  width: 48px;
-  height: 48px;
-  margin-bottom: 8px;
+  flex-shrink: 0;
+  width: 55px;
+  height: 55px;
+  margin-bottom: 16px;
   place-items: center;
   color: #e08fa9;
   font-family: Arial, sans-serif;
-  font-size: 35px;
+  font-size: 40px;
   font-weight: 800;
   animation: avis-google 5s ease-in-out infinite;
 }
@@ -3494,20 +3540,21 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
 }
 .avis-summary-GM strong {
   color: #d12d5d;
-  font-size: 56px;
+  font-size: 64px;
   line-height: 1;
   font-weight: 700;
 }
 .avis-summary-GM strong span {
   color: #aaa2a6;
-  font-size: 19px;
+  font-size: 20px;
   font-weight: 400;
 }
 .avis-summary-GM__stars {
-  margin: 8px 0;
+  margin: 16px 0;
   color: #f5a018;
-  font-size: 20px;
+  font-size: 22px;
   letter-spacing: 3px;
+  white-space: nowrap;
   animation: avis-stars 3s ease-in-out infinite;
 }
 .avis-summary-GM__count {
@@ -3520,7 +3567,8 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 11px 17px;
+  max-width: 100%;
+  padding: 13px 20px;
   border-radius: 4px;
   color: white;
   background: linear-gradient(120deg, #b11f4a, #d12d5d, #ed7193);
@@ -3538,7 +3586,7 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
 .avis-list-GM {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-content: center;
+  align-content: stretch;
   gap: 24px;
   min-width: 0;
 }
@@ -3547,14 +3595,15 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: 180px;
-  padding: 24px;
+  min-width: 0;
+  min-height: 280px;
+  padding: 30px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.95);
-  border-left: 3px solid #ed7193;
+  border-left: 4px solid #ed7193;
   border-radius: 0 16px 16px 0;
-  background: rgba(255, 251, 252, 0.88);
-  box-shadow: 0 8px 22px rgba(177, 31, 74, 0.07);
+  background: rgba(255, 251, 252, 0.9);
+  box-shadow: 0 10px 28px rgba(177, 31, 74, 0.07);
   backdrop-filter: blur(12px);
   cursor: pointer;
   animation: avis-card-in 650ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
@@ -3562,10 +3611,10 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
 }
 .avis-card-GM:hover {
   z-index: 2;
-  transform: translateY(-5px);
+  transform: translateY(-6px);
   border-left-color: #d12d5d;
   background: white;
-  box-shadow: 0 15px 30px rgba(177, 31, 74, 0.12);
+  box-shadow: 0 18px 38px rgba(177, 31, 74, 0.13);
 }
 .avis-card-GM:hover::after {
   transform: scaleX(1);
@@ -3573,11 +3622,11 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
 .avis-card-GM::before {
   content: "“";
   position: absolute;
-  top: -27px;
-  right: 10px;
+  top: -30px;
+  right: 16px;
   color: rgba(209, 45, 93, 0.09);
   font-family: Georgia, serif;
-  font-size: 115px;
+  font-size: 145px;
   font-weight: bold;
   pointer-events: none;
 }
@@ -3587,7 +3636,7 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 2px;
+  height: 3px;
   background: linear-gradient(90deg, #d12d5d, #ed7193);
   transform: scaleX(0.15);
   transform-origin: left;
@@ -3598,65 +3647,65 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
   z-index: 1;
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 9px;
+  gap: 15px;
+  margin-bottom: 18px;
 }
 .avis-card-GM__top > div:last-child {
   min-width: 0;
 }
 .avis-card-GM__top h3 {
-  margin: 0 0 3px;
+  margin: 0 0 5px;
   color: #414047;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 700;
 }
 .avis-card-GM__top p {
   margin: 0;
   overflow: hidden;
   color: #d12d5d;
-  font-size: 11px;
+  font-size: 13px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 .avis-card-GM__avatar {
   display: grid;
-  flex: 0 0 40px;
-  width: 40px;
-  height: 40px;
+  flex: 0 0 52px;
+  width: 52px;
+  height: 52px;
   place-items: center;
   border: 1px solid rgba(209, 45, 93, 0.2);
   border-radius: 50%;
   color: #d12d5d;
   background: #fff0f4;
-  font-size: 13px;
+  font-size: 17px;
   font-weight: 700;
 }
 .avis-card-GM__stars {
   position: relative;
   z-index: 1;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   color: #f5a018;
-  font-size: 15px;
-  letter-spacing: 2px;
+  font-size: 19px;
+  letter-spacing: 3px;
 }
 .avis-card-GM__text {
   display: -webkit-box;
   position: relative;
   z-index: 1;
-  margin: 0 0 8px;
+  margin: 0 0 18px;
   overflow: hidden;
   color: #57535a;
-  font-size: 12px;
-  line-height: 1.6;
+  font-size: 15px;
+  line-height: 1.8;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 5;
 }
 .avis-card-GM small {
   position: relative;
   z-index: 1;
   margin-top: auto;
   color: #99929a;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .avis-footer-GM {
@@ -3664,18 +3713,18 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
   align-items: center;
   justify-content: center;
   gap: 12px;
-  width: min(1400px, 100%);
-  margin: 24px auto 0;
+  width: min(1550px, 100%);
+  margin: 32px auto 0;
 }
 .avis-footer-GM > span {
   color: #85818a;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 1px;
 }
 
 .avis-progress-GM {
-  width: 110px;
-  height: 3px;
+  width: 130px;
+  height: 4px;
   overflow: hidden;
   border-radius: 999px;
   background: rgba(209, 45, 93, 0.12);
@@ -3701,11 +3750,12 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
   animation: avis-modal-in 250ms ease both;
 }
 .avis-modal > div {
-  width: min(600px, 90%);
+  width: min(700px, 90%);
   animation: avis-card-in 350ms ease both;
 }
 .avis-modal .avis-card-GM {
-  min-height: 200px;
+  min-height: 300px;
+  padding: 38px;
   border-color: rgba(209, 45, 93, 0.12);
   cursor: default;
   background: #fffafb;
@@ -3731,9 +3781,9 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
 }
 .avis-modal__arrow {
   top: 50%;
-  width: 42px;
-  height: 42px;
-  font-size: 28px;
+  width: 46px;
+  height: 46px;
+  font-size: 30px;
   transform: translateY(-50%);
 }
 .avis-modal__arrow:first-of-type {
@@ -3745,9 +3795,9 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
 .avis-modal__close {
   top: 20px;
   right: 25px;
-  width: 40px;
-  height: 40px;
-  font-size: 26px;
+  width: 42px;
+  height: 42px;
+  font-size: 27px;
 }
 .avis-modal__close:hover {
   transform: rotate(90deg);
@@ -3796,84 +3846,234 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
 }
 @media (max-width: 1024px) {
   .avis-content-GM {
-    grid-template-columns: 210px minmax(0, 1fr);
-    gap: 16px;
+    grid-template-columns: 230px minmax(0, 1fr);
+    gap: 24px;
   }
   .avis-list-GM {
-    gap: 8px;
+    gap: 18px;
   }
   .avis-card-GM {
-    min-height: 160px;
-    padding: 16px;
+    min-height: 250px;
+    padding: 23px;
+  }
+  .avis-card-GM__top {
+    gap: 12px;
+  }
+  .avis-card-GM__top h3 {
+    font-size: 15px;
+  }
+  .avis-card-GM__avatar {
+    flex-basis: 46px;
+    width: 46px;
+    height: 46px;
+  }
+  .avis-card-GM__text {
+    font-size: 14px;
   }
 }
 @media (max-width: 600px) {
   .avis-container-GM {
+    margin-top: 80px;
     padding: 32px 16px;
   }
   .avis-heading-GM {
-    margin-bottom: 24px;
+    margin-bottom: 32px;
   }
   .avis-heading-GM h2 {
-    font-size: 24px;
+    max-width: 100%;
+    font-size: 26px;
   }
   .avis-heading-GM p {
     font-size: 12px;
   }
   .avis-content-GM {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    width: 100%;
   }
   .avis-summary-GM {
     display: grid;
-    grid-template-columns: auto 1fr auto;
-    justify-items: center;
-    gap: 5px 12px;
-    padding: 16px;
+    grid-template-columns: 48px minmax(0, 1fr) auto;
+    grid-template-areas: "google label score" "google stars score" "count count count" "link link link";
+    align-items: center;
+    justify-items: start;
+    gap: 8px 12px;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 22px 18px;
     text-align: left;
   }
   .avis-summary-GM__google {
-    grid-row: span 2;
+    grid-area: google;
+    width: 48px;
+    height: 48px;
     margin: 0;
+    font-size: 36px;
   }
   .avis-summary-GM__label {
-    justify-self: start;
+    grid-area: label;
+    align-self: end;
+    min-width: 0;
     margin: 0;
+    font-size: 13px;
   }
   .avis-summary-GM strong {
-    grid-column: 3;
-    grid-row: 1/span 2;
-    font-size: 38px;
+    grid-area: score;
+    justify-self: end;
+    align-self: center;
+    white-space: nowrap;
+    font-size: 42px;
   }
-  .avis-summary-GM__stars, .avis-summary-GM__count {
-    grid-column: 2;
-    justify-self: start;
+  .avis-summary-GM strong span {
+    font-size: 16px;
+  }
+  .avis-summary-GM__stars {
+    grid-area: stars;
+    align-self: start;
+    min-width: 0;
     margin: 0;
+    font-size: 17px;
+    letter-spacing: 2px;
+  }
+  .avis-summary-GM__count {
+    grid-area: count;
+    justify-self: center;
+    margin: 5px 0;
+    font-size: 11px;
+    text-align: center;
   }
   .avis-summary-GM a {
-    grid-column: 1/-1;
-    margin-top: 8px;
+    grid-area: link;
+    justify-self: stretch;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 4px;
+    padding: 12px 14px;
+    font-size: 12px;
+    text-align: center;
   }
   .avis-list-GM {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    width: 100%;
   }
   .avis-card-GM {
-    min-height: 140px;
+    min-height: 250px;
+    padding: 25px;
+  }
+  .avis-card-GM__top {
+    gap: 13px;
+    margin-bottom: 15px;
+  }
+  .avis-card-GM__top h3 {
+    font-size: 16px;
+  }
+  .avis-card-GM__top p {
+    font-size: 12px;
+  }
+  .avis-card-GM__avatar {
+    flex-basis: 48px;
+    width: 48px;
+    height: 48px;
+    font-size: 16px;
+  }
+  .avis-card-GM__stars {
+    margin-bottom: 13px;
+    font-size: 18px;
+  }
+  .avis-card-GM__text {
+    margin-bottom: 15px;
+    font-size: 14px;
+    line-height: 1.75;
+    -webkit-line-clamp: 5;
+  }
+  .avis-card-GM small {
+    font-size: 11px;
+  }
+  .avis-footer-GM {
+    margin-top: 24px;
   }
   .avis-modal {
     padding: 16px;
   }
   .avis-modal > div {
-    width: 85%;
+    width: calc(100% - 45px);
+    max-width: 500px;
+  }
+  .avis-modal .avis-card-GM {
+    min-height: 260px;
+    padding: 25px;
   }
   .avis-modal__arrow {
-    width: 36px;
-    height: 36px;
+    top: auto;
+    bottom: 18px;
+    left: 50%;
+    right: auto;
+    width: 38px;
+    height: 38px;
+    font-size: 25px;
+    transform: translateX(-50%);
   }
   .avis-modal__arrow:first-of-type {
-    left: 2%;
+    left: calc(50% - 25px);
+    right: auto;
   }
   .avis-modal__arrow--right {
-    right: 2%;
+    left: calc(50% + 25px);
+    right: auto;
+  }
+  .avis-modal__close {
+    top: 12px;
+    right: 12px;
+  }
+}
+@media (max-width: 380px) {
+  .avis-container-GM {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+  .avis-summary-GM {
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+    gap: 7px 8px;
+    padding: 18px 12px;
+  }
+  .avis-summary-GM__google {
+    width: 40px;
+    height: 40px;
+    font-size: 32px;
+  }
+  .avis-summary-GM__label {
+    font-size: 12px;
+  }
+  .avis-summary-GM strong {
+    font-size: 35px;
+  }
+  .avis-summary-GM strong span {
+    font-size: 14px;
+  }
+  .avis-summary-GM__stars {
+    font-size: 15px;
+    letter-spacing: 1px;
+  }
+  .avis-summary-GM__count {
+    font-size: 10px;
+  }
+  .avis-card-GM {
+    min-height: 230px;
+    padding: 20px;
+  }
+  .avis-heading-GM h2 {
+    font-size: 23px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .avis-card-GM,
+  .avis-heading-GM h2,
+  .avis-summary-GM__google,
+  .avis-summary-GM__stars {
+    animation: none;
+    transition: none;
   }
 }
 .annulation-card {
@@ -4396,6 +4596,7 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
 .Satisfaction-div {
   width: 100%;
   max-width: 1250px;
+  padding-bottom: 150px;
   margin: 0 auto;
   padding-top: 0;
   animation: satisfaction-appear 0.8s ease both;
@@ -4520,7 +4721,7 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
 .top-infos__link {
   display: flex;
   justify-content: center;
-  margin-top: 32px;
+  margin-top: 70px;
 }
 .top-infos__link a {
   display: inline-flex;
