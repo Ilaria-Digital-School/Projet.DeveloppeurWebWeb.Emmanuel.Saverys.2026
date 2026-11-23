@@ -1,81 +1,171 @@
-import React, { useState, useEffect } from 'react';
 
-const AvisCard = ({ authorName, rating, text, time }) => (
-  <div className="avis-card-GM">
-    <h3 className="avis-card-GM__author">{authorName}</h3>
-    <p className="avis-card-GM__rating">⭐ {rating} / 5</p>
-    <p className="avis-card-GM__text">{text}</p>
-    <small className="avis-card-GM__date">{time}</small>
-  </div>
+import React, { useEffect, useState } from 'react';
+
+// Carte d'un avis client
+const AvisCard = ({ avis, onClick }) => (
+  <article className="avis-card-GM" onClick={onClick}>
+    <div className="avis-card-GM__top">
+      <span className="avis-card-GM__avatar">
+        G
+      </span>
+
+      <div>
+        <h3>Avis Google</h3>
+        <p>{avis.authorName}</p>
+      </div>
+    </div>
+
+    {/* Affichage des étoiles selon la note */}
+    <div className="avis-card-GM__stars">
+      {'★★★★★'}
+    </div>
+
+    <p className="avis-card-GM__text">{avis.text}</p>
+    <small>{avis.time}</small>
+  </article>
 );
 
-const CreateAvisGoogleMap = ({ avis }) => {
-  const [activeIndex, setActiveIndex] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
+const CreateAvisGoogleMap = ({ avis = [] }) => {
+  // Index du premier avis affiché et avis ouvert dans la modale
+  const [index, setIndex] = useState(0);
+  const [activeAvis, setActiveAvis] = useState(null);
 
+  // Fait défiler les avis automatiquement
   useEffect(() => {
-    // Bloque le défilement de la page lorsque la fenêtre des avis est ouverte.
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % avis.length);
+    }, 4500);
+
+    return () => clearInterval(interval);
+  }, [activeAvis]);
+
+  // Bloque le défilement de la page lorsque la modale est ouverte
+  useEffect(() => {
+    document.body.style.overflow = activeAvis !== null ? 'hidden' : '';
+
+    return () => {
       document.body.style.overflow = '';
-    }
-    return () => (document.body.style.overflow = '');
-  }, [isOpen]);
+    };
+  }, [activeAvis]);
 
-  const openAvis = (index) => {
-    // Enregistre l'index de l'avis sélectionné et ouvre la fenêtre.
-    setActiveIndex(index);
-    setIsOpen(true);
+  // Crée un tableau contenant jusqu'à 4 avis à afficher.
+  // Le modulo (%) permet de revenir au début du tableau si nécessaire.
+  const visibleAvis = Array.from(
+    {
+      length: Math.min(4, avis.length), // Définit le nombre d'avis à afficher : 4 maximum, ou moins s'il y en a moins de 4.
+    },
+    (_, i) => avis[(index + i) % avis.length] // Récupère les avis à partir de l'index actuel et revient au début du tableau si nécessaire.
+    // _ : représente le premier paramètre (la valeur générée), qu'on n'utilise pas.
+    //i : représente la position de l'élément dans le tableau créé.
+  );
+
+  // Passe à l'avis précédent ou suivant
+  const changeAvis = (direction) => {
+    setActiveAvis((prev) => (prev + direction + avis.length) % avis.length);
   };
 
-  const closeAvis = () => {
-    // Réinitialise l'avis sélectionné et ferme la fenêtre.
-    setActiveIndex(null);
-    setIsOpen(false);
-  };
-
-  const nextAvis = () => {
-    // Passe à l'avis suivant et revient au premier après le dernier.
-    setActiveIndex((prev) => (prev + 1) % avis.length);
-  };
-
-  const prevAvis = () => {
-    // Passe à l'avis précédent et revient au dernier depuis le premier.
-    setActiveIndex((prev) => (prev - 1 + avis.length) % avis.length);
-  };
+  // Message si aucun avis n'est disponible
+  if (!avis.length) {
+    return <p className="avis-container-GM__empty">Aucun avis disponible.</p>;
+  }
 
   return (
-    <div className="avis-container-GM">
-      <h2 className="avis-container-GM__title">• Avis Google Maps</h2>
+    <section className="avis-container-GM">
 
-      {avis && avis.length > 0 ? (
-        avis.map((review, index) => (
-          <div key={index} onClick={() => openAvis(index)}>
-            <AvisCard {...review} />
-          </div>
-        ))
-      ) : (
-        <p className="avis-container-GM__empty">Aucun avis disponible.</p>
-      )}
+      {/* Titre de la section */}
+      <div className="avis-heading-GM">
+        <span>LA CONFIANCE DE NOS CLIENTS</span>
+        <h2>Ils nous ont fait confiance</h2>
+        <p>Découvrez les retours de nos clients sur nos prestations.</p>
+      </div>
 
-      {isOpen && activeIndex !== null && ( // Affiche la modale uniquement si elle est ouverte et qu'un avis est sélectionné.
-        <div className="avis-modal" onClick={closeAvis}> {/* Ferme la modale lorsqu'on clique sur le fond. */}
-          <div className="avis-modal-content" onClick={(e) => e.stopPropagation()}> {/* Empêche le clic dans la fenêtre de remonter jusqu'au fond et de fermer la modale. */}
-            <AvisCard {...avis[activeIndex]} /> {/* Affiche l'avis actuellement sélectionné en transmettant ses propriétés. */}
+      <div className="avis-content-GM">
+
+        {/* Résumé des avis Google */}
+        <div className="avis-summary-GM">
+          <span className="avis-summary-GM__google">G</span>
+          <p className="avis-summary-GM__label">Avis Google</p>
+          <strong>5.0<span>/5</span></strong>
+          <div className="avis-summary-GM__stars">★★★★★</div>
+          <p className="avis-summary-GM__count">+230 avis clients</p>
+
+          <a
+            href="https://www.google.com/maps/place/ECSR+-+%C3%89cole+de+Conduite+et+de+S%C3%A9curit%C3%A9+Routi%C3%A8re+RAFA/@45.7412407,-0.6625389,17z/data=!4m8!3m7!1s0x480103f11b5b3261:0xdaf1d38c5441129f!8m2!3d45.7412407!4d-0.6625389!9m1!1b1!16s%2Fg%2F11t9lm_fbf"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Voir les avis <span>↗</span>
+          </a>
+        </div>
+
+        {/* Liste des avis */}
+        <div className="avis-list-GM">
+          {visibleAvis.map((review, i) => (
+            <AvisCard
+              key={`${index}-${i}`}
+              avis={review}
+              onClick={() => setActiveAvis((index + i) % avis.length)}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Barre de progression */}
+      <div className="avis-footer-GM">
+        <span>AVIS CLIENTS</span>
+        {/* Barre de progression */}
+        <div className="avis-progress-GM">
+          {/* Calcule le pourcentage de progression : +1 car l'index commence à 0, ×100 pour obtenir un pourcentage. */}
+          <span style={{ width: `${((index + 1) / avis.length) * 100}%` }} />
+        </div>
+
+        {/* Affiche l'avis actuel et le nombre total, avec un zéro devant si nécessaire (01 au lieu de 1). */}
+        <span>
+          {index + 1} / {avis.length}
+        </span>
+      </div>
+
+      {/* Modale affichant un avis en grand */}
+      {activeAvis !== null && (
+        <div className="avis-modal" onClick={() => setActiveAvis(null)}>
+
+          <div onClick={(e) => e.stopPropagation()}>
+            <AvisCard avis={avis[activeAvis]} />
           </div>
-          <button className="arrow left" onClick={(e) => { e.stopPropagation(); prevAvis(); }}> {/* Empêche la fermeture de la modale et affiche l'avis précédent. */}
+
+          {/* Les flèches arrêtent la propagation pour ne pas fermer la modale */}
+          <button
+            className="avis-modal__arrow"
+            onClick={(e) => {
+              e.stopPropagation();
+              changeAvis(-1);
+            }}
+            aria-label="Avis précédent"
+          >
             ‹
           </button>
-          <button className="arrow right" onClick={(e) => { e.stopPropagation(); nextAvis(); }}> {/* Empêche la fermeture de la modale et affiche l'avis suivant. */}
+
+          <button
+            className="avis-modal__arrow avis-modal__arrow--right"
+            onClick={(e) => {
+              e.stopPropagation();
+              changeAvis(1);
+            }}
+            aria-label="Avis suivant"
+          >
             ›
           </button>
-          <button className="close-btn" onClick={closeAvis}> {/* Ferme la modale lorsqu'on clique sur la croix. */}
+
+          <button
+            className="avis-modal__close"
+            onClick={() => setActiveAvis(null)}
+            aria-label="Fermer"
+          >
             ×
           </button>
         </div>
       )}
-    </div>
+    </section>
   );
 };
 

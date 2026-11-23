@@ -284,7 +284,7 @@ export default function QuestionsExam() {
         >
           <div
             className="settings-panel"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}// Empêche le clic dans la fenêtre de remonter au fond et de fermer les paramètres.
           >
             <div className="settings-header">
               <h3>Paramètres</h3>
@@ -352,7 +352,7 @@ export default function QuestionsExam() {
         {/* Passe à la série précédente si elle existe */}
         <button
           className="nav-btn prev"
-          disabled={series.indexOf(serie) === 0}
+          disabled={series.indexOf(serie) === 0}// Désactive le bouton si la série actuelle est la première de la liste.
           onClick={() => changeSerie(series[series.indexOf(serie) - 1])}
         >
           ← Série précédente

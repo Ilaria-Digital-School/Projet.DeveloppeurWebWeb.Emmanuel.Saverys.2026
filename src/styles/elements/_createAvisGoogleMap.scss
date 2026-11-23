@@ -1,320 +1,634 @@
+
+// Variables locales à la section des avis
 @use "../variables" as *;
 @use "../mixins" as *;
 
-// ==========================================
-// CONTENEUR DES AVIS GOOGLE
-// ==========================================
+$avis-primary: #d12d5d;
+$avis-primary-dark: #b11f4a;
+$avis-primary-light: #ed7193;
+$avis-background: #fff4f7;
+$avis-surface: #fffafb;
+$avis-text: #414047;
+$avis-muted: #85818a;
+$avis-star: #f5a018;
+$avis-border: rgba(209, 45, 93, 0.12);
+$avis-width: 1400px;
 
+// Section principale
 .avis-container-GM {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  padding: $spacing-2xl $spacing-lg;
+  overflow: hidden;
+  color: $avis-text;
+  background:
+    radial-gradient(ellipse at 15% 15%, rgba(255, 255, 255, 0.9), transparent 45%),
+    linear-gradient(135deg, #fff7f9, #fceaf0 55%, #fff2f6);
 
-  max-width: 900px;
-  margin: 50px auto;
-  padding: 20px;
+  // Décorations lumineuses en arrière-plan
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+    animation: avis-glow 14s ease-in-out infinite alternate;
+  }
 
-  cursor: pointer;
+  &::before {
+    top: -180px;
+    right: -100px;
+    background: rgba(237, 113, 147, 0.18);
+  }
 
-  // ----------------------------------------
-  // TITRE
-  // ----------------------------------------
+  &::after {
+    bottom: -220px;
+    left: -150px;
+    background: rgba(209, 45, 93, 0.1);
+    animation-direction: alternate-reverse;
+  }
 
-  &__title {
-    margin-bottom: 20px;
-
-    color: #666;
-    font-size: $font-size-title;
+  &__empty {
+    padding: $spacing-xl;
+    color: $avis-muted;
     text-align: center;
   }
 }
 
-// ==========================================
-// CARTE AVIS GOOGLE
-// ==========================================
+// Titre
+.avis-heading-GM {
+  margin-bottom: $spacing-2xl;
+  text-align: center;
 
-.avis-card-GM {
-  padding: 25px;
-
-  color: #666;
-  background: rgba(255, 255, 255, 0.7);
-
-  border-radius: 15px;
-
-  backdrop-filter: blur(20px);
-
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-
-  overflow-wrap: break-word;
-
-  transition:
-    transform $transition-base,
-    box-shadow $transition-base;
-
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+  > span {
+    display: inline-block;
+    margin-bottom: $spacing-sm;
+    color: $avis-primary;
+    font-size: 10px;
+    font-weight: $font-weight-bold;
+    letter-spacing: 3px;
   }
 
-  // ----------------------------------------
-  // AUTEUR
-  // ----------------------------------------
+  h2 {
+    position: relative;
+    width: fit-content;
+    margin: 0 auto $spacing-md;
+    color: transparent;
+    background: linear-gradient(100deg, $avis-primary-dark, $avis-primary, $avis-primary-light);
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-size: 200% auto;
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: $font-weight-bold;
+    animation: avis-title-shine 7s linear infinite;
 
-  &__author {
+    // Soulignement du titre
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      width: 65%;
+      height: 4px;
+      border-radius: $border-radius-full;
+      background: linear-gradient(90deg, $avis-primary-dark, $avis-primary-light);
+      transform: translateX(-50%);
+    }
+  }
+
+  p {
+    margin: $spacing-lg 0 0;
+    color: $avis-muted;
+    font-size: $font-size-small;
+  }
+}
+
+// Résumé Google et grille des avis
+.avis-content-GM {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  align-items: stretch;
+  gap: $spacing-xl;
+  width: min($avis-width, 100%);
+  margin: 0 auto;
+}
+
+// Résumé Google
+.avis-summary-GM {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-xl $spacing-md;
+  overflow: hidden;
+  border: 1px solid rgba(209, 45, 93, 0.18);
+  border-radius: $border-radius-lg;
+  background: linear-gradient(145deg, #fff, #fff1f5);
+  box-shadow: 0 12px 35px rgba(177, 31, 74, 0.08);
+  text-align: center;
+
+  // Bordure intérieure décorative
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(209, 45, 93, 0.07);
+    border-radius: $border-radius-md;
+    pointer-events: none;
+  }
+
+  // Logo Google
+  &__google {
+    display: grid;
+    width: 48px;
+    height: 48px;
     margin-bottom: $spacing-sm;
+    place-items: center;
+    color: #e08fa9;
+    font-family: Arial, sans-serif;
+    font-size: 35px;
+    font-weight: 800;
+    animation: avis-google 5s ease-in-out infinite;
+  }
 
-    font-size: $font-size-large;
+  &__label {
+    margin: 0 0 $spacing-md;
+    color: $avis-text;
+    font-size: $font-size-small;
     font-weight: $font-weight-semibold;
   }
 
-  // ----------------------------------------
-  // NOTE
-  // ----------------------------------------
+  // Note moyenne
+  strong {
+    color: $avis-primary;
+    font-size: 56px;
+    line-height: 1;
+    font-weight: $font-weight-bold;
 
-  &__rating {
-    margin-bottom: $spacing-md;
-
-    color: #ffd700;
+    span {
+      color: #aaa2a6;
+      font-size: 19px;
+      font-weight: $font-weight-normal;
+    }
   }
 
-  // ----------------------------------------
-  // COMMENTAIRE
-  // ----------------------------------------
-
-  &__text {
-    margin-bottom: $spacing-md;
-
-    font-size: 15px;
-    line-height: $line-height-base;
+  &__stars {
+    margin: $spacing-sm 0;
+    color: $avis-star;
+    font-size: 20px;
+    letter-spacing: 3px;
+    animation: avis-stars 3s ease-in-out infinite;
   }
 
-  // ----------------------------------------
-  // DATE
-  // ----------------------------------------
+  &__count {
+    margin: 0 0 $spacing-lg;
+    color: $avis-muted;
+    font-size: $font-size-xs;
+  }
 
-  &__date {
-    display: block;
+  // Lien vers les avis Google
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 11px 17px;
+    border-radius: $border-radius-sm;
+    color: white;
+    background: linear-gradient(120deg, $avis-primary-dark, $avis-primary, $avis-primary-light);
+    box-shadow: 0 5px 15px rgba(209, 45, 93, 0.16);
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-decoration: none;
+    transition: transform $transition-hover, box-shadow $transition-hover;
 
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 9px 22px rgba(209, 45, 93, 0.25);
+    }
+  }
+}
+
+// Grille des avis
+.avis-list-GM {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: center;
+  gap: $spacing-lg;
+  min-width: 0;
+}
+
+// Carte individuelle
+.avis-card-GM {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 180px;
+  padding: $spacing-lg;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-left: 3px solid $avis-primary-light;
+  border-radius: 0 $border-radius-lg $border-radius-lg 0;
+  background: rgba(255, 251, 252, 0.88);
+  box-shadow: 0 8px 22px rgba(177, 31, 74, 0.07);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  animation: avis-card-in 650ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  transition: transform $transition-hover, box-shadow $transition-hover, background $transition-hover;
+
+  // Effet au survol
+  &:hover {
+    z-index: 2;
+    transform: translateY(-5px);
+    border-left-color: $avis-primary;
+    background: white;
+    box-shadow: 0 15px 30px rgba(177, 31, 74, 0.12);
+
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+
+  // Guillemet décoratif
+  &::before {
+    content: "“";
+    position: absolute;
+    top: -27px;
+    right: 10px;
+    color: rgba(209, 45, 93, 0.09);
+    font-family: Georgia, serif;
+    font-size: 115px;
+    font-weight: bold;
+    pointer-events: none;
+  }
+
+  // Ligne animée en bas de la carte
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, $avis-primary, $avis-primary-light);
+    transform: scaleX(0.15);
+    transform-origin: left;
+    transition: transform 350ms ease;
+  }
+
+  // Informations sur l'auteur
+  &__top {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 9px;
+
+    > div:last-child {
+      min-width: 0;
+    }
+
+    h3 {
+      margin: 0 0 3px;
+      color: $avis-text;
+      font-size: 13px;
+      font-weight: $font-weight-bold;
+    }
+
+    p {
+      margin: 0;
+      overflow: hidden;
+      color: $avis-primary;
+      font-size: 11px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  // Initiale de l'auteur
+  &__avatar {
+    display: grid;
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    place-items: center;
+    border: 1px solid rgba(209, 45, 93, 0.2);
+    border-radius: 50%;
+    color: $avis-primary;
+    background: #fff0f4;
     font-size: 13px;
-    opacity: 0.8;
-    text-align: right;
+    font-weight: $font-weight-bold;
+  }
+
+  // Étoiles de notation
+  &__stars {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 8px;
+    color: $avis-star;
+    font-size: 15px;
+    letter-spacing: 2px;
+  }
+
+  // Texte limité à trois lignes
+  &__text {
+    display: -webkit-box;
+    position: relative;
+    z-index: 1;
+    margin: 0 0 8px;
+    overflow: hidden;
+    color: #57535a;
+    font-size: 12px;
+    line-height: 1.6;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  small {
+    position: relative;
+    z-index: 1;
+    margin-top: auto;
+    color: #99929a;
+    font-size: 10px;
   }
 }
 
-// ==========================================
-// CONTENU DE LA MODALE
-// ==========================================
+// Pied de section et progression
+.avis-footer-GM {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: min($avis-width, 100%);
+  margin: $spacing-lg auto 0;
 
-.avis-modal-content {
-  width: 100%;
-  max-width: 700px;
-  padding: 20px;
-
-  animation: slideFade 0.4s ease;
+  > span {
+    color: $avis-muted;
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
 }
 
-// ==========================================
-// MODALE
-// ==========================================
+// Barre de progression
+.avis-progress-GM {
+  width: 110px;
+  height: 3px;
+  overflow: hidden;
+  border-radius: $border-radius-full;
+  background: rgba(209, 45, 93, 0.12);
 
+  span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, $avis-primary-dark, $avis-primary-light);
+    transition: width 400ms ease;
+  }
+}
+
+// Modale
 .avis-modal {
   position: fixed;
   inset: 0;
   z-index: $z-index-modal;
-
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: $spacing-lg;
+  background: rgba(55, 28, 38, 0.62);
+  backdrop-filter: blur(10px);
+  animation: avis-modal-in 250ms ease both;
 
-  padding: 10px;
-
-  background: rgba(241, 241, 241, 0.95);
-
-  overflow-y: auto;
-}
-
-// ==========================================
-// FLÈCHES DE NAVIGATION
-// ==========================================
-
-.arrow {
-  position: fixed;
-  z-index: $z-index-modal + 1;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 50px;
-  height: 50px;
-
-  background: rgba(255, 255, 255, 0.6);
-
-  border: none;
-  border-radius: $border-radius-full;
-
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-
-  font-size: 32px;
-
-  cursor: pointer;
-
-  // ----------------------------------------
-  // POSITION GAUCHE
-  // ----------------------------------------
-
-  &.left {
-    top: 50%;
-    left: 20px;
-
-    transform: translateY(-50%);
+  // Carte affichée en grand
+  > div {
+    width: min(600px, 90%);
+    animation: avis-card-in 350ms ease both;
   }
 
-  // ----------------------------------------
-  // POSITION DROITE
-  // ----------------------------------------
+  .avis-card-GM {
+    min-height: 200px;
+    border-color: $avis-border;
+    cursor: default;
+    background: $avis-surface;
 
-  &.right {
+    &:hover {
+      transform: none;
+    }
+  }
+
+  // Boutons de navigation et fermeture
+  button {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    color: $avis-primary-dark;
+    background: $avis-surface;
+    box-shadow: $shadow-md;
+    cursor: pointer;
+    transition: background $transition-hover, transform $transition-hover;
+
+    &:hover {
+      color: white;
+      background: $avis-primary;
+    }
+  }
+
+  // Flèches de navigation
+  &__arrow {
     top: 50%;
-    right: 20px;
-
+    width: 42px;
+    height: 42px;
+    font-size: 28px;
     transform: translateY(-50%);
+
+    &:first-of-type {
+      left: 4%;
+    }
+
+    &--right {
+      right: 4%;
+    }
+  }
+
+  // Fermeture de la modale
+  &__close {
+    top: 20px;
+    right: 25px;
+    width: 40px;
+    height: 40px;
+    font-size: 26px;
+
+    &:hover {
+      transform: rotate(90deg);
+    }
   }
 }
 
-// ==========================================
-// BOUTON FERMETURE
-// ==========================================
-
-.close-btn {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: $z-index-modal + 2;
-
-  background: transparent;
-  border: none;
-
-  color: #333;
-  font-size: 42px;
-
-  cursor: pointer;
+// Animations
+@keyframes avis-glow {
+  to {
+    transform: translate(50px, 35px) scale(1.15);
+  }
 }
 
-// ==========================================
-// ANIMATIONS
-// ==========================================
+@keyframes avis-title-shine {
+  to {
+    background-position: 200% center;
+  }
+}
 
-@keyframes slideFade {
+@keyframes avis-google {
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes avis-stars {
+  0%, 100% {
+    filter: brightness(0.95);
+  }
+
+  50% {
+    filter: brightness(1.3);
+  }
+}
+
+// Apparition des cartes
+@keyframes avis-card-in {
   from {
     opacity: 0;
-    transform: translateX(40px);
+    transform: translateY(18px) scale(0.97);
   }
 
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0) scale(1);
   }
 }
 
-// ==========================================
-// RESPONSIVE
-// ==========================================
+// Apparition de la modale
+@keyframes avis-modal-in {
+  from {
+    opacity: 0;
+  }
 
-// ------------------------------------------
-// Écrans jusqu'à 1440px
-// ------------------------------------------
+  to {
+    opacity: 1;
+  }
+}
 
-@media (max-width: 1440px) {
-  .avis-container-GM {
-    max-width: 750px;
-    margin: 40px auto;
-    padding: 15px;
-    gap: 20px;
+// Tablette
+@include respond-to(tablet) {
+  .avis-content-GM {
+    grid-template-columns: 210px minmax(0, 1fr);
+    gap: $spacing-md;
+  }
 
-    &__title {
-      margin-bottom: 15px;
-      font-size: 28px;
-    }
+  .avis-list-GM {
+    gap: $spacing-sm;
   }
 
   .avis-card-GM {
-    padding: 20px;
+    min-height: 160px;
+    padding: $spacing-md;
+  }
+}
 
-    &__author {
-      font-size: 18px;
+// Mobile
+@media (max-width: 600px) {
+  .avis-container-GM {
+    padding: $spacing-xl $spacing-md;
+  }
+
+  .avis-heading-GM {
+    margin-bottom: $spacing-lg;
+
+    h2 {
+      font-size: 24px;
     }
 
-    &__rating {
-      font-size: 16px;
-    }
-
-    &__text {
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    &__date {
+    p {
       font-size: 12px;
     }
   }
 
-  .avis-modal-content {
-    max-width: 600px;
-    padding: 15px;
+  .avis-content-GM {
+    grid-template-columns: 1fr;
   }
 
-  .arrow {
-    width: 45px;
-    height: 45px;
+  // Résumé Google en disposition compacte
+  .avis-summary-GM {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    justify-items: center;
+    gap: 5px 12px;
+    padding: $spacing-md;
+    text-align: left;
 
-    font-size: 30px;
-  }
-
-  .close-btn {
-    font-size: 38px;
-  }
-}
-
-// ------------------------------------------
-// Tablettes : 860px
-// ------------------------------------------
-
-@media (max-width: 860px) {
-  .arrow {
-    &.left {
-      top: auto;
-      bottom: 20px;
-      left: 30%;
-
-      transform: translateY(0);
+    &__google {
+      grid-row: span 2;
+      margin: 0;
     }
 
-    &.right {
-      top: auto;
-      bottom: 20px;
-      right: 30%;
-
-      transform: translateY(0);
+    &__label {
+      justify-self: start;
+      margin: 0;
     }
 
-    background: rgba(255, 255, 255, 0.4);
+    strong {
+      grid-column: 3;
+      grid-row: 1 / span 2;
+      font-size: 38px;
+    }
+
+    &__stars,
+    &__count {
+      grid-column: 2;
+      justify-self: start;
+      margin: 0;
+    }
+
+    a {
+      grid-column: 1 / -1;
+      margin-top: $spacing-sm;
+    }
   }
-}
 
-// ------------------------------------------
-// Mobiles : 768px
-// ------------------------------------------
-
-@include respond-to(tablet) {
-  .arrow {
-    width: 40px;
-    height: 40px;
-
-    font-size: 28px;
+  .avis-list-GM {
+    grid-template-columns: 1fr;
   }
 
-  .close-btn {
-    font-size: 36px;
+  .avis-card-GM {
+    min-height: 140px;
+  }
+
+  .avis-modal {
+    padding: $spacing-md;
+
+    > div {
+      width: 85%;
+    }
+
+    &__arrow {
+      width: 36px;
+      height: 36px;
+
+      &:first-of-type {
+        left: 2%;
+      }
+
+      &--right {
+        right: 2%;
+      }
+    }
   }
 }
