@@ -1,34 +1,121 @@
+
+// ==========================================
+// NAVBAR ECSR RAFA
+// ==========================================
+
 @use "../variables" as *;
 @use "../mixins" as *;
 
+// Remise à zéro des espacements de la page
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 0;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// ==========================================
 // NAVBAR
+// ==========================================
+
 .navbar {
-  position: relative;
-  z-index: $z-index-modal;
+  position: sticky;
+  top: 0;
+  z-index: 10001;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   width: 100%;
   height: clamp(70px, 8vh, 95px);
+  margin: 0;
   padding: 0 clamp(1.5rem, 4vw, 3rem);
-  background: linear-gradient(
-  135deg,
-  #d32f63 0%,
-  #a31b44 60%,
-  #a3143f 100%
-);
-  box-shadow: $shadow-md;
 
-  // Logo
+  background: linear-gradient(
+    135deg,
+    rgba(177, 31, 74, 0.97),
+    rgba(150, 25, 65, 0.97) 55%,
+    rgba(165, 29, 70, 0.98)
+  );
+
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+
+  border-top: 1px solid rgba(237, 113, 147, 0.55);
+  border-bottom: 1px solid rgba(237, 113, 147, 0.7);
+
+  box-shadow:
+    inset 0 1px 8px rgba(237, 113, 147, 0.16),
+    inset 0 -1px 10px rgba(209, 45, 93, 0.2),
+    0 5px 22px rgba(70, 5, 25, 0.22),
+    0 2px 14px rgba(209, 45, 93, 0.16);
+
+  // Reflets néon
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    pointer-events: none;
+
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(237, 113, 147, 0.7) 25%,
+      rgba(237, 113, 147, 0.95) 50%,
+      rgba(237, 113, 147, 0.7) 75%,
+      transparent
+    );
+
+    background-size: 200% 100%;
+    box-shadow: 0 0 7px rgba(237, 113, 147, 0.5);
+  }
+
+  &::before {
+    top: -1px;
+    animation:
+      neon-travel 8s ease-in-out infinite,
+      neon-pulse 4s ease-in-out infinite;
+  }
+
+  &::after {
+    bottom: -1px;
+    animation:
+      neon-travel 10s ease-in-out infinite reverse,
+      neon-pulse 4.5s ease-in-out infinite;
+  }
+
+  // LOGO
   .logo {
     display: flex;
     align-items: center;
     gap: $spacing-md;
+    flex-shrink: 0;
 
     img.logo-main {
       height: clamp(50px, 6vw, 80px);
       padding-top: 13px;
-      transition: transform $transition-base, filter $transition-base;
+
+      transition:
+        transform $transition-base,
+        filter $transition-base;
 
       &:hover {
         transform: scale(1.08) rotate(-2deg);
@@ -51,13 +138,22 @@
 
       p {
         margin: 0 0 0 -1px;
+
         font-family: "Poppins", sans-serif;
         font-size: clamp(1.2rem, 2vw, 1.4rem);
-        color: #e1e1e16b;
-        background-image: linear-gradient(120deg, rgba(199, 186, 186, 0.5) 35%, rgba(255, 255, 255, 0.75) 50%, rgba(199, 186, 186, 0.5) 65%);
+        color: transparent;
+
+        background-image: linear-gradient(
+          120deg,
+          rgba(255, 220, 232, 0.5) 35%,
+          rgba(255, 255, 255, 0.95) 50%,
+          rgba(255, 220, 232, 0.5) 65%
+        );
+
         background-size: 200% 100%;
         background-clip: text;
         -webkit-background-clip: text;
+
         animation: text-shine 4.5s infinite ease-in-out;
       }
 
@@ -70,200 +166,497 @@
         span {
           font-family: "Inter", sans-serif;
           font-size: 0.75rem;
-          color: rgba(255, 255, 255, 0.75);
+          color: rgba(255, 255, 255, 0.8);
           transition: color $transition-base;
         }
 
         img {
           height: 16px;
           opacity: 0.8;
-          transition: transform $transition-base, opacity $transition-base;
+
+          transition:
+            transform $transition-base,
+            opacity $transition-base;
         }
 
         &:hover {
-          span { color: $text-light; }
-          img { transform: scale(1.1); opacity: 1; }
+          span {
+            color: $text-light;
+          }
+
+          img {
+            transform: scale(1.1);
+            opacity: 1;
+          }
         }
       }
     }
   }
 
-  // Liens
+  // LIENS DE NAVIGATION
   .nav-links {
     position: relative;
+
     display: flex;
     align-items: center;
-    gap: clamp(0.8rem, 2vw, 1.5rem);
+    gap: clamp(0.5rem, 1.5vw, 1.3rem);
 
     a {
       position: relative;
-      padding: 8px 12px;
-      color: #f1f1f1;
-      font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+
+      padding: 8px 10px;
+
+      color: #fff;
+      font-size: clamp(0.85rem, 1.1vw, 1.05rem);
       font-weight: $font-weight-medium;
       text-decoration: none;
+
+      transition:
+        color $transition-base,
+        text-shadow $transition-base;
+
+      .nav-link-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 0.9rem;
+        opacity: 0.85;
+
+        transition:
+          transform $transition-base,
+          opacity $transition-base;
+      }
 
       &::after {
         content: "";
         position: absolute;
         bottom: 3px;
-        left: 12px;
+        left: 10px;
+
         width: 0;
         height: 2px;
-        background: $text-light;
+
+        background: #fff;
         border-radius: $border-radius-sm;
-        box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.45);
+
+        transition: width 0.3s ease;
+      }
+
+      &:hover {
+        color: #fff;
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+
+        .nav-link-icon {
+          transform: translateY(-2px);
+          opacity: 1;
+        }
+      }
+
+      &.active-link::after {
+        animation: underlineLoad 0.8s forwards;
+      }
+    }
+  }
+
+  // BOUTON ACCESSIBILITÉ
+  .handicap-icon-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 44px;
+    height: 44px;
+
+    background: rgba(255, 240, 245, 0.94);
+    border: 1px solid rgba(255, 220, 232, 0.65);
+    border-radius: $border-radius-full;
+
+    box-shadow:
+      inset 0 1px 3px rgba(255, 255, 255, 0.65),
+      0 2px 8px rgba(100, 10, 40, 0.12);
+
+    transition:
+      background-color $transition-base,
+      border-color $transition-base,
+      box-shadow $transition-base,
+      transform $transition-base;
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 100%;
+      height: 100%;
+
+      color: #b11f4a;
+      text-decoration: none;
+
+      svg {
+        display: block;
+        width: 23px;
+        height: 23px;
+        flex-shrink: 0;
       }
     }
 
-    // Fermeture mobile
-    .close-btn {
-      display: none;
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      font-size: 2rem;
-      color: $text-light;
-      background: none;
-      border: none;
-      cursor: pointer;
+    &:hover {
+      background: #fff4f7;
+      border-color: rgba(255, 220, 232, 0.9);
+      box-shadow: 0 3px 12px rgba(100, 10, 40, 0.16);
+      transform: translateY(-2px);
+    }
+  }
 
-      &:hover { opacity: 0.8; }
+  // HAMBURGER
+  .hamburger {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 42px;
+    height: 42px;
+    margin: 0;
+    padding: 0;
+
+    color: #fff;
+    font-size: 1.45rem;
+
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 10px;
+
+    cursor: pointer;
+    z-index: 10002;
+
+    transition:
+      background $transition-base,
+      transform $transition-base;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: scale(1.04);
     }
 
-    // Menu mobile
-    @include respond-to(tablet) {
+    svg {
+      display: block;
+    }
+  }
+}
+
+// ==========================================
+// MENU MOBILE PLEIN ÉCRAN
+// ==========================================
+
+@media (max-width: 800px) {
+  .navbar {
+    // La navbar occupe toute la largeur de l'écran
+    position: sticky;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    max-width: 100%;
+    height: 72px;
+
+    margin: 0;
+    padding: 0 12px;
+
+    // LOGO
+    .logo {
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+
+      img.logo-main {
+        height: 52px;
+        padding-top: 5px;
+      }
+
+      .logo__text {
+        p {
+          font-size: 1.15rem;
+        }
+
+        .separator {
+          width: 62px;
+        }
+
+        .logo__sub {
+          gap: 4px;
+
+          span {
+            font-size: 0.68rem;
+          }
+
+          img {
+            height: 14px;
+          }
+        }
+      }
+    }
+
+    // MENU QUI S'OUVRE JUSQU'AU BORD GAUCHE
+    .nav-links {
+      box-sizing: border-box;
       position: fixed;
-      top: 0;
-      right: 0;
-      z-index: $z-index-tooltip;
+      inset: 0;
+      z-index: 10000;
+
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: stretch;
       justify-content: center;
-      gap: $spacing-xl;
-      width: min(82vw, 340px);
+      gap: 18px;
+
+      width: 100vw;
+      max-width: 100vw;
       height: 100vh;
-      padding: $spacing-xl;
-      background: linear-gradient(145deg, rgba(209, 45, 93, 0.97), rgba(177, 31, 74, 0.98));
-      box-shadow: -12px 0 35px rgba(0, 0, 0, 0.2);
-      transform: translateX(100%);
+      height: 100dvh;
+
+      margin: 0;
+      padding: 80px 28px 30px;
+
+      background: linear-gradient(
+        145deg,
+        rgba(205, 48, 96, 0.995),
+        rgba(177, 31, 74, 0.998),
+        rgba(145, 22, 61, 0.998)
+      );
+
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+
+      box-shadow: 0 0 40px rgba(50, 0, 20, 0.25);
+
+      // Fermé : panneau entièrement hors écran à gauche
+      transform: translateX(-100%);
       visibility: hidden;
-      transition: transform $transition-slow, visibility $transition-slow;
+      pointer-events: none;
+
+      transition:
+        transform $transition-slow,
+        visibility $transition-slow;
 
       &.open {
         transform: translateX(0);
         visibility: visible;
+        pointer-events: auto;
       }
 
       a {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 15px;
+
         width: 100%;
-        padding: 12px 18px;
-        font-size: 1.2rem;
+        margin: 0;
+        padding: 14px 16px;
+
+        color: #fff;
+        font-size: 1.15rem;
         font-weight: $font-weight-semibold;
-        text-align: center;
+        text-align: left;
+
+        border-radius: 10px;
+
         opacity: 0;
-        transform: translateX(20px);
-        animation: slideIn 0.5s forwards;
+        transform: translateX(-20px);
+        animation: slideIn 0.45s forwards;
 
         @for $i from 1 through 6 {
-          &:nth-child(#{$i}) { animation-delay: #{$i * 0.1}s; }
+          &:nth-child(#{$i}) {
+            animation-delay: #{$i * 0.08}s;
+          }
+        }
+
+        .nav-link-icon {
+          display: inline-flex;
+          justify-content: center;
+          width: 24px;
+          font-size: 1.1rem;
         }
 
         &::after {
           bottom: 5px;
-          left: 50%;
-          transform: translateX(-50%);
+          left: 16px;
+        }
+
+        &:hover,
+        &.active-link {
+          background: rgba(255, 255, 255, 0.12);
         }
       }
-
-      .close-btn { display: block; }
-    }
-  }
-
-  // Soulignement du lien actif uniquement
-  .nav-links a.active-link::after {
-    animation: underlineLoad 0.8s forwards;
-  }
-
-  // Flou derrière le menu ouvert
-  @media (max-width: 1024px) {
-    &:has(.nav-links.open)::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: $z-index-tooltip - 1;
-      background: rgba(35, 0, 15, 0.18);
-      backdrop-filter: blur(7px);
-      -webkit-backdrop-filter: blur(7px);
-      pointer-events: none;
-    }
-  }
-
-  // Hamburger : mécanisme conservé
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 22px;
-    cursor: pointer;
-    z-index: $z-index-tooltip;
-
-    .bar {
-      width: 100%;
-      height: 3px;
-      border-radius: $border-radius-full;
-      background: linear-gradient(90deg, #fff, #f8cdda, #fff);
-      transition: all $transition-slow;
     }
 
-    &.open { display: none; }
+    // ACCESSIBILITÉ
+    .handicap-icon-mobile {
+      width: 40px;
+      height: 40px;
+      margin: 0 10px 0 auto;
+      padding: 0;
 
-    @include respond-to(tablet) {
+      a svg {
+        width: 21px;
+        height: 21px;
+      }
+    }
+
+    // HAMBURGER
+    .hamburger {
       display: flex;
+      position: relative;
+      z-index: 10002;
+    }
+
+    // Croix verrouillée en haut à droite
+    &.menu-open {
+      .hamburger {
+        position: fixed;
+        top: 14px;
+        right: 14px;
+
+        width: 44px;
+        height: 44px;
+
+        color: #b11f4a;
+        background: #fff4f7;
+        border: 1px solid rgba(255, 255, 255, 0.85);
+
+        box-shadow: 0 3px 12px rgba(50, 0, 20, 0.2);
+
+        &:hover {
+          background: #fff;
+        }
+      }
     }
   }
 }
 
-// Icône handicap mobile
-@media (max-width: 800px) {
-  .handicap-icon-mobile {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    z-index: $z-index-modal + 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    color: $text-light;
-    background: #c92453;
-    border-radius: $border-radius-full;
-    box-shadow: $shadow-md;
-    cursor: pointer;
-    transition: transform $transition-base, background-color $transition-base;
+// Très petits écrans
+@media (max-width: 420px) {
+  .navbar {
+    height: 66px;
+    padding: 0 9px;
 
-    &:hover {
-      transform: scale(1.1);
-      background: #d12d5d;
+    .logo {
+      gap: 5px;
+
+      img.logo-main {
+        height: 45px;
+      }
+
+      .logo__text {
+        p {
+          font-size: 1rem;
+        }
+
+        .separator {
+          width: 52px;
+        }
+
+        .logo__sub span {
+          font-size: 0.62rem;
+        }
+      }
+    }
+
+    .handicap-icon-mobile {
+      width: 36px;
+      height: 36px;
+      margin-right: 7px;
+    }
+
+    &.menu-open .hamburger {
+      top: 11px;
+      right: 11px;
     }
   }
 }
 
-// Animations
+// ==========================================
+// ANIMATIONS
+// ==========================================
+
 @keyframes underlineLoad {
-  from { width: 0; }
-  to { width: calc(100% - 24px); }
+  from {
+    width: 0;
+  }
+
+  to {
+    width: calc(100% - 20px);
+  }
 }
 
 @keyframes slideIn {
-  from { opacity: 0; transform: translateX(20px); }
-  to { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes text-shine {
-  from { background-position: -200% 50%; }
-  to { background-position: 200% 50%; }
+  from {
+    background-position: -200% 50%;
+  }
+
+  to {
+    background-position: 200% 50%;
+  }
+}
+
+@keyframes neon-travel {
+  0% {
+    background-position: 100% 50%;
+  }
+
+  50% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes neon-pulse {
+  0%,
+  100% {
+    opacity: 0.75;
+    filter: brightness(0.9);
+  }
+
+  50% {
+    opacity: 1;
+    filter: brightness(1.2);
+  }
+}
+
+// Accessibilité : réduction des animations
+@media (prefers-reduced-motion: reduce) {
+  .navbar::before,
+  .navbar::after,
+  .navbar .logo__text p,
+  .navbar .nav-links a {
+    animation: none;
+  }
+
+  .navbar,
+  .navbar * {
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -40,18 +40,6 @@ const Accueil = () => {
             ),
           },
           {
-            image: avisImg,
-            title: "Des moniteurs qui font la différence !",
-            text: (
-              <>
-                {" "}
-                Progresse sans stress avec nos moniteurs passionnés et une
-                méthode d’apprentissage efficace. Découvre pourquoi ECSR Rafa
-                est fait pour toi.
-              </>
-            ),
-          },
-          {
             image: offreImg,
             title: "Nos offres de formation",
             text: (
@@ -91,97 +79,6 @@ const Accueil = () => {
                 conduite accompagnée et la conduite supervisée. Découvre leurs
                 avantages pour gagner de l’expérience, conduire plus sereinement
                 et augmenter tes chances de réussir le permis.
-              </>
-            ),
-          },
-          {
-            image: engagementImg,
-            title: "Nos engagements",
-            text: (
-              <>
-                Chez ECSR Rafa Auto Conduite, nous mettons en place des
-                engagements clairs pour garantir un accompagnement sérieux et
-                une écoute attentive de nos élèves. Découvrez les engagements
-                que nous prenons concernant le suivi, l’écoute et le traitement
-                de vos remarques.
-                <br />
-                <a
-                  href="/contact#engagements"
-                  target="_blank"
-                  style={{ color: "#ff64ec", textDecoration: "underline" }}
-                >
-                  Découvrir nos engagements
-                </a>
-              </>
-            ),
-          },
-          {
-            image: questionImg,
-            title: (
-              <>
-                Une question ? La réponse est{" "}
-                <a
-                  style={{ color: "#ff64ec", textDecoration: "underline" }}
-                  target="_blank"
-                  href="/contact"
-                >
-                  ici
-                </a>
-              </>
-            ),
-            text: (
-              <>
-                {" "}
-                Consulte notre FAQ pour trouver rapidement des réponses sur
-                l’examen du permis, les cours, le fonctionnement de l’auto-école
-                et bien plus encore.
-              </>
-            ),
-          },
-          {
-            image: litigeSlide,
-            title: (
-              <>
-                Réclamations & litiges :{" "}
-                <a
-                  style={{ color: "#ff64ec", textDecoration: "underline" }}
-                  target="_blank"
-                  href={pdfLitige}
-                >
-                  accéder au PDF
-                </a>
-              </>
-            ),
-            text: (
-              <>
-                Accédez à notre tableau de gestion des réclamations et litiges :
-                identification du problème, analyse des causes, mise en place de
-                solutions correctives et suivi de leur efficacité. En cas de
-                besoin, un médiateur peut également être saisi conformément à la
-                réglementation en vigueur.
-              </>
-            ),
-          },
-          {
-            image: quizImg,
-            title: (
-              <>
-                Prépare tes 3 questions du permis{" "}
-                <a
-                  style={{ color: "#ff64ec", textDecoration: "underline" }}
-                  target="_blank"
-                  href="/quiz-permis-page"
-                >
-                  ici
-                </a>{" "}
-                !
-              </>
-            ),
-            text: (
-              <>
-                Découvre nos deux quiz pour t’entraîner aux questions du permis{" "}
-                . L’un est fidèle au PDF officiel, l’autre optimisé sans
-                doublons (158 questions au lieu d’environ 300).
               </>
             ),
           },
