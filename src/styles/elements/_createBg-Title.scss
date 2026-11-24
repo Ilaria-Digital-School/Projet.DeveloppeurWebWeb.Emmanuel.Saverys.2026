@@ -1,168 +1,350 @@
+
 @use "../variables" as *;
 @use "../mixins" as *;
 
-// ==========================================
-// TITRE AVEC SLIDER
-// ==========================================
-
+// SLIDER PRINCIPAL
 .bg-title {
   position: relative;
   width: 100%;
-  height: clamp(220px, 45vh, 480px);
+  height: clamp(490px, 88vh, 740px);
+  min-height: 480px;
   overflow: hidden;
-}
+  background: #100d12;
+  isolation: isolate;
 
-// ==========================================
-// SLIDES
-// ==========================================
-
-.slides-wrapper {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.8s ease;
-}
-
-.bg-slide {
-  position: relative;
-  min-width: 100%;
-  height: 100%;
-
-  background-size: cover;
-  background-position: center;
-}
-
-// ==========================================
-// OVERLAY
-// ==========================================
-
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  width: 100%;
-  height: 100%;
-  padding: clamp(1rem, 5vw, 3rem);
-
-  background: linear-gradient(
-    rgba(0, 0, 0, 0.35),
-    rgba(0, 0, 0, 0.8)
-  );
-
-  text-align: center;
-
-  h1 {
-    margin-bottom: clamp(0.5rem, 2vw, 1rem);
-
-    color: $text-light;
-    font-family: "Poppins", cursive, sans-serif;
-    font-size: inherit;
-    font-weight: $font-weight-bold;
-
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-    letter-spacing: 0.5px;
-    line-height: $line-height-heading;
+  // Conteneur des diapositives
+  .slides-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 1s cubic-bezier(0.65, 0, 0.35, 1);
+    will-change: transform;
   }
 
-  p {
-    max-width: 50%;
+  // Chaque diapositive
+  .bg-slide {
+    position: relative;
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    overflow: hidden;
 
-    color: #f7f7f7;
-    font-family: "Inter", sans-serif;
-    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
-    font-weight: $font-weight-semibold;
-    line-height: $line-height-base;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    // Couche image animée : zoom et dézoom en continu
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+
+      background-image: inherit;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+
+      transform: scale(1.05);
+      transform-origin: center;
+
+      // Zoom lent puis dézoom lent, en boucle infinie
+      animation: imageZoom 20s ease-in-out infinite alternate;
+
+      will-change: transform;
+    }
+
+    // Voile sombre pour améliorer la lisibilité
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(12, 8, 13, 0.52) 0%,
+          rgba(12, 8, 13, 0.28) 50%,
+          rgba(12, 8, 13, 0.52) 100%
+        ),
+        linear-gradient(
+          0deg,
+          rgba(12, 8, 13, 0.42) 0%,
+          transparent 55%,
+          rgba(12, 8, 13, 0.18) 100%
+        );
+    }
+  }
+
+  // Bloc de texte central
+  .overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    width: min(90%, 900px);
+    padding: clamp(28px, 4vw, 48px);
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    color: #fff;
+    background: rgba(35, 27, 35, 0.48);
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 22px;
+
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
+
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
+
+    // Titre
+    h1 {
+      margin: 0 0 18px;
+      color: #fff;
+      font-size: clamp(1.8rem, 2.8vw, 2.9rem);
+      font-weight: 800;
+      line-height: 1.15;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+
+      animation: titleReveal 0.8s ease both;
+
+      &::after {
+        content: "";
+        display: block;
+        width: 52px;
+        height: 4px;
+        margin: 18px auto 0;
+        border-radius: 10px;
+        background: $primary-color;
+      }
+    }
+
+    // Description
+    p {
+      max-width: 680px;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.96);
+      font-size: clamp(0.9rem, 1.05vw, 1.05rem);
+      font-weight: 500;
+      line-height: 1.8;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+
+      animation: textReveal 0.9s ease 0.15s both;
+    }
+
+    a {
+      color: #ff65b9;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      transition: color 0.25s ease;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+
+  // Navigation par points
+  .slider-nav {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    z-index: 3;
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    padding: 9px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    background: rgba(20, 15, 20, 0.55);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    .dot {
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+
+      transition:
+        width 0.3s ease,
+        background 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+
+      &:hover {
+        transform: scale(1.2);
+        background: #fff;
+      }
+
+      &.active {
+        width: 28px;
+        border-radius: 20px;
+        background: $primary-color;
+        border-color: $primary-color;
+        box-shadow: 0 0 12px rgba(209, 45, 93, 0.65);
+      }
+    }
   }
 }
 
-// ==========================================
-// NAVIGATION DU SLIDER
-// ==========================================
+// ANIMATIONS
 
-.slider-nav {
-  position: absolute;
-  bottom: 15px;
-  left: 50%;
-  z-index: $z-index-dropdown;
-
-  display: flex;
-  gap: $spacing-sm;
-
-  transform: translateX(-50%);
-}
-
-.dot {
-  width: 15px;
-  height: 15px;
-
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: $border-radius-full;
-
-  cursor: pointer;
-  transition: all $transition-base;
-
-  &:hover {
-    background: $text-light;
+// Zoom avant puis dézoom progressif en continu
+@keyframes imageZoom {
+  0% {
+    transform: scale(1.05);
   }
 
-  &.active {
-    background: $text-light;
+  100% {
     transform: scale(1.2);
   }
 }
 
-// ==========================================
-// RESPONSIVE
-// ==========================================
+// Apparition du titre
+@keyframes titleReveal {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
 
-@media (max-width: 1228px) {
-  .overlay {
-    h1 {
-      font-size: 1.5rem;
-    }
-
-    p {
-      max-width: 80%;
-      font-size: 1.2rem;
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@include respond-to(tablet) {
-  .overlay {
-    h1 {
-      font-size: 1.3rem;
-    }
+// Apparition du texte
+@keyframes textReveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
 
-    p {
-      max-width: 90%;
-      font-size: 1rem;
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@include respond-to(mobile) {
+// GRANDS ÉCRANS
+@media (min-width: 1600px) {
   .bg-title {
-    height: 260px;
+    height: clamp(560px, 72vh, 800px);
   }
+}
 
-  .overlay {
-    h1 {
-      font-size: 1.1rem;
+// TABLETTES ET PETITS ORDINATEURS
+@media (max-width: 1228px) {
+  .bg-title {
+    height: clamp(480px, 65vh, 620px);
+  }
+}
+
+// TABLETTES
+@media (max-width: 800px) {
+  .bg-title {
+    height: clamp(440px, 62vh, 540px);
+    min-height: 440px;
+
+    .overlay {
+      width: 90%;
+      padding: 30px 24px;
+
+      h1 {
+        font-size: clamp(1.7rem, 4.5vw, 2.3rem);
+      }
+
+      p {
+        font-size: 0.95rem;
+        line-height: 1.7;
+      }
+    }
+  }
+}
+
+// MOBILES
+@media (max-width: 480px) {
+  .bg-title {
+    height: 430px;
+    min-height: 430px;
+
+    .overlay {
+      width: 91%;
+      padding: 26px 18px;
+      border-radius: 17px;
+
+      h1 {
+        font-size: clamp(1.45rem, 5.8vw, 1.8rem);
+        margin-bottom: 15px;
+      }
+
+      p {
+        font-size: 0.88rem;
+        line-height: 1.65;
+      }
     }
 
-    p {
-      font-size: 0.9rem;
+    .slider-nav {
+      bottom: 14px;
     }
   }
+}
 
-  .slider-nav {
-    bottom: 10px;
+// PETITS MOBILES
+@media (max-width: 360px) {
+  .bg-title {
+    height: 390px;
+    min-height: 390px;
+
+    .overlay {
+      padding: 22px 15px;
+
+      h1 {
+        font-size: 1.4rem;
+      }
+
+      p {
+        font-size: 0.82rem;
+      }
+    }
+  }
+}
+
+// ACCESSIBILITÉ : RÉDUCTION DES ANIMATIONS
+@media (prefers-reduced-motion: reduce) {
+  .bg-title {
+    .slides-wrapper {
+      transition: none;
+    }
+
+    .bg-slide::after {
+      animation: none;
+      transform: scale(1.05);
+    }
+
+    .overlay {
+      h1,
+      p {
+        animation: none;
+      }
+    }
   }
 }
