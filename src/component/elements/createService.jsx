@@ -35,7 +35,7 @@ const CreateService = ({ title, subtitle, points, price }) => {
 
       <ul className="service-points">
         {points.map((point, index) => (
-          <li key={index}>• {point}</li>
+          <li key={index}>{point}</li>
         ))}
       </ul>
 

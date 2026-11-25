@@ -13,6 +13,7 @@ import Handicap from "../pages/Handicap.jsx";
 import CreateMultiChoice from "../component/elements/createMultiChoice.jsx";
 import UseStatusHours from "../component/elements/useStatusHours.jsx";
 import ScrollToHash from "../component/elements/ScrollToHash.jsx";
+import ScrollToTop from "../component/elements/ScrollToTop.jsx";
 import LabelPage from "../pages/LabelPage.jsx";
 import QuestionsExam from "../pages/QuestionsExam.jsx";
 
@@ -30,6 +31,7 @@ const isQuestionPermis = allowedPaths.includes(path);  // pour edit style : marg
       style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
     >
       <ScrollToHash />
+      <ScrollToTop />
       <UseStatusHours />
       <Navbar />
 

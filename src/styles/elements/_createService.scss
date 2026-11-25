@@ -1,241 +1,686 @@
-// ==========================================
-// CARTE SERVICE
-// ==========================================
 
-.service-card {
-  display: flex;
-  flex: 1 1 30%;
-  flex-direction: column;
-  justify-content: space-between;
-
-  box-sizing: border-box;
-  min-width: 250px;
-  max-width: 350px;
-  padding: 1.5rem 1rem;
-
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  }
-
-  // ----------------------------------------
-  // TITRE ET SOUS-TITRE
-  // ----------------------------------------
-
-  .service-title {
-    margin-bottom: 0.3rem;
-
-    color: #c92453;
-    font-size: 1.3rem;
-    font-weight: 700;
-  }
-
-  .service-subtitle {
-    margin-bottom: 0.8rem;
-
-    color: #555;
-    font-size: 0.85rem;
-    font-weight: 600;
-  }
-
-  // ----------------------------------------
-  // LISTE DES PRESTATIONS
-  // ----------------------------------------
-
-  .service-points {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-
-    margin: 0 0 1rem;
-    padding: 0;
-
-    list-style: none;
-
-    li {
-      color: #333;
-      font-size: 0.9rem;
-    }
-  }
-
-  // ----------------------------------------
-  // PRIX
-  // ----------------------------------------
-
-  .service-price {
-    align-self: flex-start;
-
-    margin-top: auto;
-    padding: 0.7rem 1rem;
-
-    border-radius: 50px 50px 0 0;
-
-    background-color: #c92453;
-    color: #fff;
-
-    font-size: 1.2rem;
-    font-weight: 700;
-    text-align: center;
-
-    transform: translateY(10%);
-  }
-}
+@use "../variables" as *;
+@use "../mixins" as *;
 
 // ==========================================
-// CONTENEUR DES SERVICES
+// CONTENEUR PRINCIPAL
 // ==========================================
 
 .service-container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.5rem;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(3.5rem, 6vw, 5.5rem);
 
   width: 100%;
-  max-width: 1200px;
+  max-width: 1320px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: clamp(3rem, 6vw, 5.5rem) clamp(1rem, 3vw, 2rem);
 
   box-sizing: border-box;
 }
 
 // ==========================================
-// BOUTONS DE SÉLECTION
+// GROUPE DE SERVICES
+// ==========================================
+
+.service-group {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  gap: 2.5rem;
+}
+
+// ==========================================
+// TITRE PERMIS B
+// ==========================================
+
+.service-group-title {
+  position: static;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  margin: 0;
+  padding: 0 0 1.6rem;
+
+  color: #25212a;
+  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.065em;
+  text-align: center;
+  text-transform: uppercase;
+
+  // Soulignement dégradé
+  &::after {
+    content: "";
+
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+
+    width: clamp(75px, 12vw, 125px);
+    height: 5px;
+
+    transform: translateX(-50%);
+
+    border-radius: 20px;
+    background: linear-gradient(
+      90deg,
+      #b11f4a,
+      #d12d5d,
+      #f18aa8
+    );
+
+    box-shadow: 0 4px 15px rgba(209, 45, 93, 0.2);
+  }
+
+  // Accent visuel autour du titre
+  &::before {
+    content: "FORMATION À LA CONDUITE";
+
+    display: block;
+    margin-bottom: 1rem;
+
+    color: #d12d5d;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    line-height: 1.4;
+  }
+}
+
+// ==========================================
+// SÉLECTEUR MANUELLE / AUTOMATIQUE
 // ==========================================
 
 .service-toggle {
-  display: flex;
-  gap: 1rem;
+  position: relative;
 
-  margin-bottom: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+
+  padding: 0.45rem;
+
+  border: 1px solid rgba(209, 45, 93, 0.13);
+  border-radius: 100px;
+
+  background: #fff0f4;
+  box-shadow: 0 8px 25px rgba(105, 35, 58, 0.06);
 
   button {
-    padding: 0.5rem 1.5rem;
+    position: relative;
+
+    min-width: 155px;
+    padding: 0.95rem 1.6rem;
 
     border: none;
-    border-radius: 8px;
+    border-radius: 100px;
 
-    background: #ddd;
+    background: transparent;
+    color: #766b70;
 
-    font-weight: bold;
+    font-family: inherit;
+    font-size: 0.92rem;
+    font-weight: 750;
+
     cursor: pointer;
 
-    transition: all 0.3s ease;
-
-    &.active {
-      background: #c92453;
-      color: white;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
+    transition:
+      background 0.3s ease,
+      color 0.3s ease,
+      box-shadow 0.3s ease,
+      transform 0.3s ease;
 
     &:hover {
-      background: #a1123b;
-      color: white;
+      color: #b11f4a;
+    }
+
+    &.active {
+      background: linear-gradient(
+        135deg,
+        #d12d5d,
+        #b11f4a
+      );
+
+      color: #fff;
+
+      box-shadow:
+        0 6px 16px rgba(177, 31, 74, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    &:focus-visible {
+      outline: 3px solid rgba(209, 45, 93, 0.3);
+      outline-offset: 4px;
     }
   }
 }
 
 // ==========================================
-// RESPONSIVE : 1440px
+// GRILLE DES FORMULES
 // ==========================================
 
-@media (max-width: 1440px) {
-  .service-card {
-    flex: 1 1 28%;
-    max-width: 300px;
-    padding: 1rem 0.8rem;
+.service-group-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+
+  width: 100%;
+  gap: clamp(1.2rem, 2vw, 2rem);
+
+  &.slide-right {
+    animation: servicesEnterRight 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  &.slide-left {
+    animation: servicesEnterLeft 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+}
+
+@keyframes servicesEnterRight {
+  from {
+    opacity: 0;
+    transform: translateX(35px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes servicesEnterLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-35px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// ==========================================
+// CARTES DE FORMATION
+// ==========================================
+
+.service-card {
+  position: relative;
+  isolation: isolate;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  min-width: 0;
+  min-height: 390px;
+  padding: clamp(1.6rem, 2.5vw, 2.3rem);
+
+  overflow: hidden;
+
+  border: 1px solid rgba(209, 45, 93, 0.1);
+  border-radius: 25px;
+
+  background: #fff;
+
+  box-shadow:
+    0 12px 35px rgba(65, 28, 43, 0.055),
+    0 2px 8px rgba(65, 28, 43, 0.025);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+
+  // Halo décoratif
+  &::before {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+    top: -100px;
+    right: -100px;
+
+    width: 230px;
+    height: 230px;
+
+    border-radius: 50%;
+    background: rgba(209, 45, 93, 0.075);
+    filter: blur(45px);
+
+    transition:
+      transform 0.5s ease,
+      opacity 0.5s ease;
+  }
+
+  // Ligne supérieure
+  &::after {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 5px;
+
+    background: linear-gradient(
+      90deg,
+      #b11f4a,
+      #d12d5d,
+      #f18aa8
+    );
+
+    transform: scaleX(0.25);
+    transform-origin: left;
+
+    transition: transform 0.4s ease;
+  }
+
+  &:hover {
+    transform: translateY(-10px);
+
+    border-color: rgba(209, 45, 93, 0.35);
+
+    box-shadow:
+      0 25px 55px rgba(105, 35, 58, 0.12),
+      0 8px 20px rgba(209, 45, 93, 0.06);
+
+    &::before {
+      transform: scale(1.35);
+    }
+
+    &::after {
+      transform: scaleX(1);
+    }
 
     .service-title {
-      font-size: 1.15rem;
-    }
-
-    .service-subtitle {
-      font-size: 0.8rem;
-    }
-
-    .service-points li {
-      font-size: 0.85rem;
+      color: #d12d5d;
     }
 
     .service-price {
-      padding: 0.6rem 0.8rem;
-      font-size: 1rem;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(177, 31, 74, 0.25);
     }
   }
 
-  .service-container {
-    gap: 1rem;
-    padding: 1.5rem 0.8rem;
+  &:focus-visible {
+    outline: 3px solid rgba(209, 45, 93, 0.4);
+    outline-offset: 5px;
   }
 }
 
 // ==========================================
-// RESPONSIVE : 1024px
+// TITRE DE LA CARTE
+// ==========================================
+
+.service-title {
+  position: relative;
+
+  margin: 0 0 0.7rem;
+
+  color: #29232a;
+  font-size: clamp(1.25rem, 1.7vw, 1.65rem);
+  font-weight: 850;
+  line-height: 1.2;
+  letter-spacing: -0.045em;
+
+  transition: color 0.3s ease;
+}
+
+// ==========================================
+// SOUS-TITRE
+// ==========================================
+
+.service-subtitle {
+  margin: 0 0 1.8rem;
+
+  color: #d12d5d;
+  font-size: 0.83rem;
+  font-weight: 800;
+  line-height: 1.5;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+// ==========================================
+// LISTE DES AVANTAGES
+// ==========================================
+
+.service-points {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  gap: 1rem;
+
+  margin: 0 0 2rem;
+  padding: 1.4rem 0 0;
+
+  border-top: 1px solid #f3e5e9;
+
+  list-style: none;
+
+  li {
+    position: relative;
+
+    padding-left: 1.5rem;
+
+    color: #514750;
+    font-size: 0.94rem;
+    font-weight: 500;
+    line-height: 1.55;
+
+
+    &::before {
+      content: "";
+
+      position: absolute;
+      top: 0.55em;
+      left: 0;
+
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+      background: #d12d5d;
+
+      box-shadow: 0 0 0 4px rgba(209, 45, 93, 0.09);
+    }
+  }
+}
+
+// ==========================================
+// PRIX
+// ==========================================
+
+.service-price {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 125px;
+  margin-top: auto;
+  padding: 0.85rem 1.5rem;
+
+  border-radius: 12px;
+
+  background: linear-gradient(
+    135deg,
+    #d12d5d,
+    #b11f4a
+  );
+
+  color: #fff;
+
+  font-size: 1.3rem;
+  font-weight: 900;
+  letter-spacing: -0.035em;
+
+  box-shadow: 0 7px 18px rgba(177, 31, 74, 0.16);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+// ==========================================
+// BOUTONS D'ACTION
+// ==========================================
+
+.service-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  width: 100%;
+  gap: 1rem;
+
+  margin-top: 0.5rem;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 190px;
+    min-height: 52px;
+    padding: 0.9rem 1.7rem;
+
+    border-radius: 12px;
+
+    font-size: 0.9rem;
+    font-weight: 800;
+    text-decoration: none;
+
+    transition:
+      transform 0.3s ease,
+      background 0.3s ease,
+      box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+
+    &:focus-visible {
+      outline: 3px solid rgba(209, 45, 93, 0.35);
+      outline-offset: 4px;
+    }
+  }
+
+  .btn-primary {
+    border: 1px solid #d12d5d;
+
+    background: linear-gradient(
+      135deg,
+      #d12d5d,
+      #b11f4a
+    );
+
+    color: #fff;
+
+    box-shadow: 0 8px 20px rgba(177, 31, 74, 0.2);
+
+    &:hover {
+      background: #a91c43;
+      box-shadow: 0 12px 25px rgba(177, 31, 74, 0.28);
+    }
+  }
+
+  .btn-secondary {
+    border: 1px solid rgba(209, 45, 93, 0.25);
+
+    background: #fff;
+    color: #b11f4a;
+
+    &:hover {
+      border-color: #d12d5d;
+      background: #fff0f4;
+    }
+  }
+}
+
+// ==========================================
+// TABLETTES
 // ==========================================
 
 @media (max-width: 1024px) {
+  .service-container {
+    gap: 4rem;
+  }
+
+  .service-group-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.3rem;
+  }
+
   .service-card {
-    flex: 1 1 calc(50% - 1rem);
-    max-width: calc(50% - 1rem);
-    padding: 0.9rem 0.7rem;
+    min-height: 360px;
+    padding: 1.7rem;
+  }
 
-    .service-title {
-      font-size: 1.1rem;
+  .service-title {
+    font-size: 1.4rem;
+  }
+}
+
+// ==========================================
+// PETITES TABLETTES
+// ==========================================
+
+@media (max-width: 768px) {
+  .service-container {
+    padding: 3rem 1.2rem;
+    gap: 3.5rem;
+  }
+
+  .service-group {
+    gap: 2rem;
+  }
+
+  .service-group-title {
+    font-size: clamp(2rem, 7vw, 2.8rem);
+  }
+
+  .service-toggle {
+    width: 100%;
+    max-width: 360px;
+
+    button {
+      flex: 1;
+      min-width: 0;
+      padding: 0.85rem 0.7rem;
+      font-size: 0.82rem;
     }
+  }
 
-    .service-subtitle {
-      font-size: 0.75rem;
+  .service-card {
+    min-height: 350px;
+    padding: 1.5rem;
+    border-radius: 20px;
+  }
+
+  .service-points {
+    gap: 0.85rem;
+  }
+}
+
+// ==========================================
+// MOBILES
+// ==========================================
+
+@media (max-width: 560px) {
+  .service-container {
+    padding: 2.5rem 1rem;
+    gap: 3rem;
+  }
+
+  .service-group {
+    gap: 1.7rem;
+  }
+
+  .service-group-title {
+    padding-bottom: 1.3rem;
+    font-size: 2.1rem;
+
+    &::before {
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
     }
+  }
 
-    .service-points li {
-      font-size: 0.8rem;
-    }
+  .service-group-cards {
+    grid-template-columns: 1fr;
+    max-width: 430px;
+    gap: 1.2rem;
+  }
 
-    .service-price {
-      padding: 0.5rem 0.8rem;
-      font-size: 0.95rem;
+  .service-card {
+    min-height: 0;
+    padding: 1.7rem;
+  }
+
+  .service-title {
+    font-size: 1.45rem;
+  }
+
+  .service-subtitle {
+    margin-bottom: 1.4rem;
+  }
+
+  .service-points {
+    margin-bottom: 1.7rem;
+  }
+
+  .service-price {
+    font-size: 1.2rem;
+  }
+
+  .service-actions {
+    flex-direction: column;
+
+    a {
+      width: 100%;
+      max-width: 430px;
     }
   }
 }
 
 // ==========================================
-// RESPONSIVE : 768px
+// PETITS MOBILES
 // ==========================================
 
-@media (max-width: 768px) {
-  .service-card {
-    flex: 1 1 100%;
-    max-width: 100%;
-    padding: 0.8rem 0.6rem;
-
-    .service-title {
-      font-size: 1rem;
-    }
-
-    .service-subtitle {
-      font-size: 0.7rem;
-    }
-
-    .service-points li {
-      font-size: 0.75rem;
-    }
-
-    .service-price {
-      padding: 0.5rem 0.7rem;
-      font-size: 0.9rem;
-    }
+@media (max-width: 360px) {
+  .service-container {
+    padding-right: 0.8rem;
+    padding-left: 0.8rem;
   }
 
-  .service-container {
-    gap: 0.8rem;
-    padding: 1rem 0.5rem;
+  .service-group-title {
+    font-size: 1.8rem;
+  }
+
+  .service-card {
+    padding: 1.35rem;
+  }
+
+  .service-title {
+    font-size: 1.3rem;
+  }
+
+  .service-toggle button {
+    font-size: 0.75rem;
+  }
+}
+
+// ==========================================
+// ACCESSIBILITÉ
+// ==========================================
+
+@media (prefers-reduced-motion: reduce) {
+  .service-card,
+  .service-card *,
+  .service-toggle button,
+  .service-actions a {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .service-group-cards {
+    animation: none !important;
   }
 }

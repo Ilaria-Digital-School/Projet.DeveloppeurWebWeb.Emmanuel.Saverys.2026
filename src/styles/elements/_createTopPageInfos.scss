@@ -4,94 +4,135 @@
 
 .page-header {
   position: relative;
-
   width: 100%;
-  padding: 5rem 1.5rem;
-
+  padding: 5.5rem 1.5rem 6rem;
   overflow: hidden;
-
-  background: linear-gradient(to right, #666, #333);
-  color: #ffffff;
-
-  font-family: fangsong;
+  background: linear-gradient(120deg, #d12d5d 0%, #b11f4a 100%);
+  color: #fff;
+  font-family: Arial, sans-serif;
   text-align: center;
 
-  // ----------------------------------------
-  // DÉCORATION INFÉRIEURE
-  // ----------------------------------------
+  // Décoration lumineuse
+  &::before {
+    position: absolute;
+    z-index: -1;
+    top: -180px;
+    left: 50%;
+    width: 600px;
+    height: 600px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: #f18aa8;
+    opacity: 0.2;
+    filter: blur(100px);
+    content: "";
+  }
 
+  // Vague inférieure
   &::after {
     position: absolute;
     bottom: -1px;
     left: 0;
-
-    display: block;
-
     width: 100%;
     height: 60px;
-
-    background: url("data:image/svg+xml,%3Csvg width='100%' height='60' viewBox='0 0 1440 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23f3f3f3' fill-opacity='1' d='M0,40 C360,0 1080,80 1440,40 L1440,60 L0,60 Z'/%3E%3C/svg%3E")
-      no-repeat bottom;
+    // background: url("data:image/svg+xml,%3Csvg width='100%25' height='60' viewBox='0 0 1440 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23f3f3f3' d='M0,40 C360,0 1080,80 1440,40 L1440,60 L0,60 Z'/%3E%3C/svg%3E")
+    //   no-repeat bottom;
     background-size: cover;
-
     content: "";
   }
 
-  // ----------------------------------------
-  // CONTENU
-  // ----------------------------------------
-
+  // Contenu
   .page-header-content {
     position: relative;
     z-index: 1;
-
     max-width: 900px;
     margin: 0 auto;
-
-    // Titre
+    animation: header-appear 0.8s ease both;
 
     h1 {
-      margin-bottom: 1rem;
-
-      font-family: "Times New Roman", Times, serif;
-      font-size: clamp(1.5rem, 5vw, 2.5rem);
+      position: relative;
+      display: inline-block;
+      margin-bottom: 1.4rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.7rem, 5vw, 2.8rem);
       font-weight: 700;
       line-height: 1.2;
-      letter-spacing: 0.5px;
-    }
+      letter-spacing: 0.4px;
+      text-shadow: 0 3px 15px rgba(70, 0, 25, 0.2);
 
-    // Description
+      &::after {
+        position: absolute;
+        bottom: -0.65rem;
+        left: 50%;
+        width: 65px;
+        height: 3px;
+        transform: translateX(-50%);
+        border-radius: 10px;
+        background: #fff;
+        content: "";
+      }
+    }
 
     p {
       max-width: 750px;
       margin: 0 auto;
-
-      color: rgba(255, 255, 255, 0.95);
-
-      font-family: "Inter", Times, serif;
+      color: rgba(255, 255, 255, 0.94);
+      font-family: Arial, sans-serif;
       font-size: clamp(0.9rem, 2.5vw, 1.05rem);
       font-weight: 400;
-      line-height: 1.7;
+      line-height: 1.8;
     }
   }
 }
 
 // ==========================================
-// RESPONSIVE : TABLETTE
+// ANIMATION
 // ==========================================
 
-@media (max-width: 1024px) {
-  .page-header {
-    padding: 4rem 1.5rem;
+@keyframes header-appear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 // ==========================================
-// RESPONSIVE : MOBILE
+// RESPONSIVE
 // ==========================================
+
+@media (max-width: 1024px) {
+  .page-header {
+    padding: 4.5rem 1.5rem 5.5rem;
+  }
+}
 
 @media (max-width: 480px) {
   .page-header {
-    padding: 3rem 1rem;
+    padding: 3.5rem 1rem 4.5rem;
+
+    &::after {
+      height: 40px;
+    }
+
+    .page-header-content {
+      h1 {
+        margin-bottom: 1.2rem;
+      }
+
+      p {
+        line-height: 1.65;
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-header-content {
+    animation: none;
   }
 }
