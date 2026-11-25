@@ -1,108 +1,110 @@
+
 import React from "react";
-import PdfReg from "/PDF/questions-verifications.pdf"
+import PdfReg from "/PDF/questions-verifications.pdf";
 import useDocumentMeta from "../useDocumentMeta";
 
 const CreateMultiChoice = () => {
-    useDocumentMeta({
+  useDocumentMeta({
     title: "Méthodes d'apprentissage | ECSR Rafa Auto Conduite",
-    description: "Découvrez les différentes méthodes d'apprentissage des questions pour le permis B, le PDF officiel et nos deux quiz .",
-    canonical: "https://ecsr-rafa.com/quiz-permis-page"
+    description:
+      "Découvrez nos différentes méthodes d'apprentissage des questions du permis B : laboratoire, quiz académique, quiz synthèse et PDF officiel.",
+    canonical: "https://ecsr-rafa.com/quiz-permis-page",
   });
-  return (
-    <div className="multiChoice-page">
 
-      <div className="multiChoice-hero">
+  return (
+    <main className="multiChoice-page">
+
+      {/* EN-TÊTE */}
+      <header className="multiChoice-hero">
         <h1>Choisissez votre méthode d’apprentissage</h1>
+
         <p>
           Nous proposons 3 approches différentes pour préparer efficacement
-          vos questions de permis. Un laboratoire et deux formats quiz
-         <br /> adaptés  à différents profils d’apprentissage <strong> totalement gratuit</strong>.
+          vos questions de permis. Un laboratoire et deux formats quiz adaptés
+          à différents profils d’apprentissage.
+          <strong> Totalement gratuit.</strong>
         </p>
-         <a
-            href={PdfReg}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="multiChoice-btn"
-            style={{marginTop: "30px"}}
-          >
-            Accéder au PDF Officiel
-          </a>
-      </div>
+
+        <a
+          href={PdfReg}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="multiChoice-btn"
+          style={{ marginTop: "30px" }}
+        >
+          Consulter le PDF officiel
+        </a>
+      </header>
 
       <div className="multiChoice-container">
 
-  <div className="multiChoice-card multiChoice-card--primary">
+        {/* LABORATOIRE */}
+        <section className="multiChoice-card multiChoice-card--primary">
+          <h2>Laboratoire</h2>
 
-  <h2>Laboratoire</h2>
+          <p>
+            Un espace de travail intégré au site, conçu pour s'entraîner
+            aux questions du permis de manière progressive.
+            Les questions sont générées et organisées en séries pour
+            faciliter la révision et le suivi des progrès.
+            <br />
+            <strong>100 séries · 3 questions par série</strong>
+          </p>
 
-  <p>
-    Le laboratoire est un espace de travail intégré au site, conçu pour s’entraîner au questions de permis de manière progressive. <br />
-    Les questions sont générées et organisées en séries pour faciliter la révision et le suivi des progrès. <br />
-    (100 séries — 1 série = 3 questions)
-  </p>
+          <a
+            href="/laboratoire"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="multiChoice-btn secondary"
+          >
+            Accéder au laboratoire
+          </a>
+        </section>
 
-  <a
-    href="/laboratoire"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="multiChoice-btn secondary"
-  >
-    Accéder au Labo
-  </a>
-
-</div>
-
+        {/* QUIZ */}
         <div className="multiChoice-bottom">
 
-          <div className="multiChoice-card multiChoice-card--quiz">
-            <h3>Quiz Méthode Académique (Nouveauté)</h3>
+          {/* QUIZ ACADÉMIQUE */}
+          <section className="multiChoice-card multiChoice-card--quiz">
+            <h3>Quiz Méthode Académique</h3>
 
             <div className="card-content">
-              <p>
-                100 séries — 1 série = 3 questions
-              </p>
-              <p>
-                300 questions et 300 réponses exactes
-              </p>
-              <p>
-                Formulation officielle identique
-              </p>
-              <p>
-                Apprentissage précis et académique
-              </p>
+              <p>100 séries · 3 questions par série</p>
+              <p>300 questions et 300 réponses exactes</p>
+              <p>Formulation officielle identique</p>
+              <p>Apprentissage précis et académique</p>
             </div>
 
-            <a href="/quiz-academique" className="multiChoice-btn secondary">
+            <a
+              href="/quiz-academique"
+              className="multiChoice-btn secondary"
+            >
               Accéder au Quiz Académique
             </a>
-          </div>
+          </section>
 
-          <div className="multiChoice-card multiChoice-card--quiz">
-            <h3>Quiz Méthode Synthèse (Nouveauté)</h3>
+          {/* QUIZ SYNTHÈSE */}
+          <section className="multiChoice-card multiChoice-card--quiz">
+            <h3>Quiz Méthode Synthèse</h3>
 
             <div className="card-content">
-              <p>
-                158 questions optimisées
-              </p>
-              <p>
-                Suppression de 142 doublons ou très similaires
-              </p>
-              <p>
-                Notions identiques couvertes
-              </p>
-              <p>
-                Apprentissage rapide et efficace
-              </p>
+              <p>158 questions optimisées</p>
+              <p>142 doublons ou questions similaires supprimés</p>
+              <p>Notions identiques couvertes</p>
+              <p>Apprentissage rapide et efficace</p>
             </div>
 
-            <a href="/quiz-synthese" className="multiChoice-btn secondary">
+            <a
+              href="/quiz-synthese"
+              className="multiChoice-btn secondary"
+            >
               Accéder au Quiz Synthèse
             </a>
-          </div>
+          </section>
 
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

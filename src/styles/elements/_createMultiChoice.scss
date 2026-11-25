@@ -1,163 +1,499 @@
+
+@use "../variables" as *;
+@use "../mixins" as *;
+
+// ==========================================
+// PAGE PRINCIPALE
+// ==========================================
+
 .multiChoice-page {
+  position: relative;
+  isolation: isolate; // Isole les éléments décoratifs du reste de la page
   min-height: 100vh;
-  padding: 60px 20px;
-  font-family: "Inter", sans-serif;
-  background: linear-gradient(
-    135deg,
-    #ffe6ee 0%, 
-    #ffe6ee 50%,  
-    #c92453 50%, 
-    #b11f4a 100%  
-  );
-}
+  padding: 75px 20px 110px;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
 
+  background:
+    radial-gradient(rgba(209, 45, 93, 0.09) 1px, transparent 1px), // Motif de petits points
+    radial-gradient(ellipse at 5% 5%, rgba(209, 45, 93, 0.15), transparent 32%), // Halo rose supérieur gauche
+    radial-gradient(ellipse at 95% 40%, rgba(129, 88, 201, 0.12), transparent 30%), // Halo violet supérieur droit
+    radial-gradient(ellipse at 50% 100%, rgba(255, 128, 108, 0.13), transparent 38%), // Halo corail inférieur
+    linear-gradient(145deg, #fff3f6, #fff9f3 48%, #f8f2ff); // Fond dégradé principal
 
-.multiChoice-hero {
-  text-align: center;
-  max-width: 900px;
-  margin: 0 auto 60px auto;
-  color: #4a1f35;
+  background-size: 30px 30px, auto, auto, auto, auto; // Espacement des petits points
 
-  h1 {
-    font-family: "Poppins", sans-serif;
-    font-size: 44px;
-    margin-bottom: 20px;
-    font-weight: 800;
-    color: #b11f4a;
-    letter-spacing: 1px;
+  &::before,
+  &::after {
+    position: absolute;
+    z-index: -1;
+    border-radius: 50%; // Transforme les formes en cercles
+    content: "";
+    pointer-events: none;
   }
 
-  p {
-    font-size: 18px;
-    opacity: 0.9;
-    line-height: 1.6;
-    max-width: 700px;
-    margin: 0 auto;
-    color: #6b1b34;
+  &::before {
+    top: 250px;
+    left: -220px;
+    width: 450px;
+    height: 450px;
+    background: rgba(209, 45, 93, 0.12);
+    filter: blur(100px); // Diffuse le cercle pour créer un halo lumineux
   }
 
   &::after {
-    content: "";
-    display: block;
-    width: 100px;
-    height: 4px;
-    background: linear-gradient(90deg, #d12d5d, #b11f4a);
-    margin: 30px auto 0 auto;
-    border-radius: 2px;
+    right: -200px;
+    bottom: 100px;
+    width: 450px;
+    height: 450px;
+    background: rgba(129, 88, 201, 0.12);
+    filter: blur(100px);
   }
 }
 
-.multiChoice-container {
-  max-width: 1100px;
-  margin: auto;
+// ==========================================
+// EN-TÊTE
+// ==========================================
+
+.multiChoice-hero {
+  position: relative;
+  max-width: 950px;
+  margin: 0 auto 75px;
+  padding: 40px 25px;
+  text-align: center;
+  animation: multiChoice-appear 0.8s ease both;
+
+  &::before {
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    width: 420px;
+    height: 420px;
+    border: 1px solid rgba(209, 45, 93, 0.1);
+    border-radius: 50%; // Grand cercle décoratif derrière le titre
+    content: "";
+    transform: translate(-50%, -50%); // Centre le cercle sur son parent
+    box-shadow:
+      0 0 0 35px rgba(209, 45, 93, 0.025), // Deuxième cercle extérieur rose
+      0 0 0 75px rgba(129, 88, 201, 0.025); // Troisième cercle extérieur violet
+    pointer-events: none;
+  }
+
+  h1 {
+    max-width: 850px;
+    margin: 0 auto 22px;
+    color: #30242b;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2rem, 5vw, 3.2rem); // Adapte la taille du titre à l'écran
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.7px;
+    background: linear-gradient(120deg, #d12d5d 10%, #b11f4a 55%, #8158c9);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; // Affiche le dégradé à l'intérieur des lettres
+  }
+
+  p {
+    max-width: 730px;
+    margin: 0 auto;
+    color: #71616a;
+    font-size: clamp(0.95rem, 2vw, 1.08rem);
+    line-height: 1.85;
+
+    strong {
+      color: #b11f4a;
+      font-weight: 700;
+    }
+  }
+
+  &::after {
+    display: block;
+    width: 85px;
+    height: 5px;
+    margin: 28px auto 0;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #d12d5d, #ff806c, #8158c9);
+    content: "";
+  }
 }
 
-.multiChoice-card {
-  background: #ffffff;
-  border-radius: 22px;
-  padding: 35px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
-  text-align: center;
+// ==========================================
+// CONTENEUR ET ROUTE DÉCORATIVE
+// ==========================================
 
-  &:hover {
-    transform: translateY(-6px);
-   
+.multiChoice-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+
+  &::before,
+  &::after {
+    position: absolute;
+    z-index: -1;
+    content: "";
+    pointer-events: none;
+    border-radius: 50%;
+  }
+
+  // Route sinueuse rose
+  &::before {
+    top: 180px;
+    left: -95px;
+    width: 190px;
+    height: 530px;
+    border: 18px solid rgba(209, 45, 93, 0.055); // Épaisseur et couleur de la route
+    border-right-color: transparent; // Efface un côté pour créer une courbe ouverte
+    transform: rotate(15deg); // Incline la route
+  }
+
+  // Deuxième portion de route violette
+  &::after {
+    top: 380px;
+    right: -100px;
+    width: 180px;
+    height: 380px;
+    border: 15px dashed rgba(129, 88, 201, 0.09); // Bordure en pointillés
+    border-left-color: transparent;
+    transform: rotate(-20deg);
+  }
+}
+
+// ==========================================
+// CARTES
+// ==========================================
+
+.multiChoice-card {
+  position: relative;
+  isolation: isolate; // Permet de gérer les couches des halos internes
+  overflow: hidden;
+  padding: 35px;
+  border: 1px solid rgba(209, 45, 93, 0.12);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.94); // Fond blanc légèrement transparent
+  box-shadow:
+    0 10px 35px rgba(80, 20, 40, 0.055),
+    0 2px 8px rgba(209, 45, 93, 0.035);
+  text-align: center;
+  backdrop-filter: blur(10px); // Floute le décor visible derrière la carte
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+
+  &::before {
+    position: absolute;
+    z-index: -1;
+    top: -100px;
+    right: -100px;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    background: rgba(209, 45, 93, 0.075);
+    filter: blur(45px); // Transforme le cercle en halo diffus
+    content: "";
+    pointer-events: none;
+    transition: transform 0.4s ease;
   }
 
   h2, h3 {
-    margin-bottom: 18px;
+    margin: 0 0 20px;
     color: #b11f4a;
-    font-weight: 700;
+    font-family: Arial, sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    line-height: 1.35;
   }
 
   p {
-    color: #555;
-    font-size: 15px;
-    line-height: 1.6;
-    margin-bottom: 12px;
+    margin: 0 0 12px;
+    color: #71616a;
+    font-size: 0.96rem;
+    line-height: 1.75;
+  }
+
+  &:hover {
+    transform: translateY(-6px); // Soulève légèrement la carte au survol
+    border-color: rgba(209, 45, 93, 0.28);
+    box-shadow: 0 20px 48px rgba(80, 20, 40, 0.11), 0 5px 15px rgba(209, 45, 93, 0.06);
+
+    &::before {
+      transform: scale(1.25); // Agrandit le halo au survol
+    }
   }
 }
+
+// ==========================================
+// LABORATOIRE
+// ==========================================
 
 .multiChoice-card--primary {
-  margin-bottom: 60px;
-  border: 3px solid #d12d5d;
-  background: linear-gradient(135deg, #fff0f4 0%, #ffe6ee 100%);
+  position: relative;
+  margin-bottom: 40px;
+  padding: 48px 40px;
+  border: 1px solid rgba(209, 45, 93, 0.2);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(255, 128, 108, 0.13), transparent 38%), // Halo corail dans le coin
+    linear-gradient(135deg, #fff, #fff1f5 55%, #fff6ee);
+  box-shadow: 0 15px 40px rgba(177, 31, 74, 0.09), 0 0 45px rgba(209, 45, 93, 0.035);
+
+  &::before {
+    top: -120px;
+    right: -80px;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 128, 108, 0.16);
+  }
+
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, #d12d5d, #ff806c, #ffad63, #8158c9); // Bande multicolore supérieure
+    content: "";
+  }
 
   h2 {
-    color: #c92453;
+    margin-bottom: 18px;
+    color: #b11f4a;
+    font-size: 1.8rem;
   }
 
   p {
-    color: #6b1b34;
-    margin-bottom: 25px;
-  }
-
-  .multiChoice-btn {
-    background: linear-gradient(135deg, #d12d5d, #b11f4a);
-    color: white;
-    margin-top: 20px;
+    max-width: 780px;
+    margin: 0 auto 25px;
+    color: #68535e;
+    font-size: 1rem;
+    line-height: 1.9;
   }
 }
+
+// ==========================================
+// CARTES QUIZ
+// ==========================================
 
 .multiChoice-bottom {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); // Deux colonnes de largeur égale
+  gap: 28px;
+  align-items: stretch;
 }
 
 .multiChoice-card--quiz {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 3px solid #d12d5d; 
-  min-height: 350px; 
+  min-height: 360px;
+  padding: 34px 30px;
+  border-top: 5px solid #d12d5d;
+
+  // Identité visuelle du premier quiz
+  &:nth-child(1) {
+    border-top-color: #d12d5d;
+
+    &::before { background: rgba(255, 128, 108, 0.13); }
+    h3 { color: #b11f4a; }
+    .card-content p::before { background: #d12d5d; }
+  }
+
+  // Identité visuelle du deuxième quiz
+  &:nth-child(2) {
+    border-top-color: #8158c9;
+
+    &::before { background: rgba(129, 88, 201, 0.14); }
+    h3 { color: #7046b6; }
+    .card-content p::before { background: #8158c9; }
+  }
+
+  h3 {
+    min-height: 58px;
+    margin-bottom: 24px;
+    font-size: 1.3rem;
+  }
+
+  .card-content {
+    flex: 1; // Occupe l'espace disponible pour aligner les boutons
+    margin-bottom: 25px;
+
+    p {
+      position: relative;
+      margin: 0;
+      padding: 12px 0 12px 24px;
+      border-bottom: 1px solid rgba(209, 45, 93, 0.09);
+      color: #625761;
+      font-size: 0.93rem;
+      text-align: left;
+
+      &::before {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 8px;
+        height: 8px;
+        transform: translateY(-50%); // Centre verticalement le point
+        border-radius: 50%;
+        background: #d12d5d;
+        box-shadow: 0 0 0 4px rgba(209, 45, 93, 0.09); // Petit halo autour du point
+        content: "";
+      }
+
+      &:last-child { border-bottom: none; }
+    }
+  }
 }
 
-.card-content {
-  margin-bottom: 20px;
-}
+// ==========================================
+// BOUTONS
+// ==========================================
 
 .multiChoice-btn {
-  display: inline-block;
-  padding: 14px 30px;
-  border-radius: 30px;
-  background: linear-gradient(135deg, #d12d5d, #b11f4a);
-  color: white;
-  font-weight: 600;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 27px;
+  border: 1px solid transparent;
+  border-radius: 999px; // Forme entièrement arrondie
+  background: linear-gradient(120deg, #d12d5d, #b11f4a);
+  color: #fff;
+  font-size: 0.94rem;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
   text-decoration: none;
-  transition: all 0.25s ease;
-  box-shadow: 0 10px 25px rgba(209, 45, 93, 0.4);
+  box-shadow: 0 7px 20px rgba(209, 45, 93, 0.22);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
 
   &:hover {
     transform: translateY(-3px);
-    box-shadow: 0 14px 30px rgba(209, 45, 93, 0.6);
-     color: #f3f3f3;
-     background-color: none;
-     border-color: #d12d5d;
+    background: linear-gradient(120deg, #b11f4a, #94183d);
+    color: #fff;
+    box-shadow: 0 11px 26px rgba(209, 45, 93, 0.32);
+  }
+
+  &:focus-visible {
+    outline: 3px solid rgba(209, 45, 93, 0.3);
+    outline-offset: 4px; // Éloigne le contour de focus du bouton
+  }
+
+  // Bouton secondaire
+  &.secondary {
+    border-color: rgba(209, 45, 93, 0.35);
+    background: #fff;
+    color: #b11f4a;
+    box-shadow: 0 5px 16px rgba(80, 20, 40, 0.055);
+
+    &:hover {
+      transform: translateY(-3px);
+      border-color: #d12d5d;
+      background: #fff0f4;
+      color: #b11f4a;
+      box-shadow: 0 9px 22px rgba(209, 45, 93, 0.13);
+    }
   }
 }
 
-.multiChoice-btn.secondary {
-  background: #ffffff;
-  color: #b11f4a;
-  border: 2px solid #d12d5d;
+// ==========================================
+// ANIMATION
+// ==========================================
 
-  &:hover {
-    background: #ffe6ee;
-  }
+@keyframes multiChoice-appear {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
 }
+
+// ==========================================
+// RESPONSIVE : TABLETTE
+// ==========================================
 
 @media (max-width: 900px) {
+  .multiChoice-page { padding: 60px 20px 80px; }
+  .multiChoice-hero { margin-bottom: 55px; }
+
+  .multiChoice-container {
+    &::before { left: -130px; opacity: 0.6; }
+    &::after { right: -130px; opacity: 0.6; }
+  }
+
+  .multiChoice-bottom { gap: 22px; }
+  .multiChoice-card { padding: 28px 24px; }
+  .multiChoice-card--primary { padding: 38px 28px; }
+  .multiChoice-card--quiz { min-height: 350px; }
+}
+
+// ==========================================
+// RESPONSIVE : MOBILE
+// ==========================================
+
+@media (max-width: 600px) {
+  .multiChoice-page { padding: 45px 14px 65px; }
+
+  .multiChoice-hero {
+    margin-bottom: 45px;
+    padding: 25px 8px;
+
+    &::before { width: 260px; height: 260px; }
+    h1 { font-size: 2rem; line-height: 1.25; }
+
+    p {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      br { display: none; }
+    }
+  }
+
+  .multiChoice-container {
+    &::before, &::after { opacity: 0.35; }
+    &::before { left: -170px; }
+    &::after { right: -170px; }
+  }
+
   .multiChoice-bottom {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; // Passe les deux cartes l'une sous l'autre
+    gap: 20px;
   }
 
-  .multiChoice-card--quiz {
-    min-height: auto;
+  .multiChoice-card {
+    padding: 27px 20px;
+    border-radius: 19px;
+
+    h2 { font-size: 1.5rem; }
+    h3 { min-height: auto; font-size: 1.15rem; }
+    p { font-size: 0.9rem; }
   }
 
-  .multiChoice-hero h1 {
-    font-size: 32px;
+  .multiChoice-card--primary {
+    margin-bottom: 25px;
+    padding: 35px 20px;
+
+    p {
+      line-height: 1.75;
+      br { display: none; }
+    }
   }
+
+  .multiChoice-card--quiz { min-height: auto; }
+
+  .multiChoice-btn {
+    width: 100%;
+    padding: 13px 18px;
+    font-size: 0.9rem;
+  }
+}
+
+// ==========================================
+// ACCESSIBILITÉ
+// ==========================================
+
+@media (prefers-reduced-motion: reduce) {
+  .multiChoice-hero { animation: none; }
+
+  .multiChoice-card,
+  .multiChoice-btn { transition: none; }
+
+  .multiChoice-card:hover,
+  .multiChoice-btn:hover { transform: none; }
 }

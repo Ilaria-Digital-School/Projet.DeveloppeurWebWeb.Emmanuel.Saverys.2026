@@ -1,113 +1,189 @@
-// ==========================================
-// OVERLAY DU LOADER
-// ==========================================
+
+$primary: #b11f4a;
+$primary-light: #d12d5d;
+$primary-hover: #c92453;
 
 .loader-overlay {
   position: fixed;
   inset: 0;
   z-index: 9999;
-
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at center, rgba(255,255,255,.12) 0%, transparent 48%),
+    linear-gradient(145deg, $primary-light 0%, $primary-hover 48%, $primary 100%);
 
-  width: 100vw;
-  height: 100vh;
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 50%;
+    pointer-events: none;
+  }
 
-  background: linear-gradient(
-    135deg,
-    #d12d5d 0%,
-    #c92453 60%,
-    #b11f4a 100%
-  );
+  &::before {
+    width: 420px;
+    height: 420px;
+    animation: loader-orbit 12s linear infinite;
+  }
+
+  &::after {
+    width: 560px;
+    height: 560px;
+    border-color: rgba(255,255,255,.07);
+    animation: loader-orbit 18s linear infinite reverse;
+  }
 }
-
-// ==========================================
-// CONTENEUR DU LOADER
-// ==========================================
 
 .loader-container {
   position: relative;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 180px;
   height: 180px;
-}
+  animation: loader-entrance .8s cubic-bezier(.2,.8,.2,1) both;
 
-// ==========================================
-// LOGO ANIMÉ
-// ==========================================
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -12px;
+    border: 2px solid rgba(255,255,255,.2);
+    border-top-color: white;
+    border-right-color: rgba(255,255,255,.65);
+    border-radius: 50%;
+    animation: loader-ring 2.2s cubic-bezier(.65,0,.35,1) infinite;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -23px;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 50%;
+    animation: loader-ring 4s linear infinite reverse;
+  }
+}
 
 .loader-logo {
   position: relative;
   z-index: 2;
-
   width: 100%;
   height: 100%;
-
+  object-fit: contain;
   border-radius: 50%;
-
-  animation:
-    spin 2s linear infinite,
-    pulse 1.5s ease-in-out infinite;
+  filter: drop-shadow(0 10px 25px rgba(75,10,30,.25));
+  animation: loader-float 2.5s ease-in-out infinite;
+  will-change: transform;
 }
-
-// ==========================================
-// EFFET LUMINEUX
-// ==========================================
 
 .loader-glow {
   position: absolute;
   top: 50%;
   left: 50%;
   z-index: 1;
-
   width: 220px;
   height: 220px;
-
   border-radius: 50%;
-
-  background: rgba(255, 255, 255, 0.2);
-  filter: blur(25px);
-
+  background: rgba(255,255,255,.28);
+  filter: blur(35px);
   transform: translate(-50%, -50%);
-
-  animation: glowPulse 2s ease-in-out infinite;
+  animation: loader-glow 2.5s ease-in-out infinite;
+  pointer-events: none;
 }
 
-// ==========================================
-// ANIMATIONS
-// ==========================================
+@keyframes loader-entrance {
+  from {
+    opacity: 0;
+    transform: scale(.75);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 
-@keyframes spin {
-  0% {
+@keyframes loader-ring {
+  from {
     transform: rotate(0deg);
   }
-
-  100% {
+  to {
     transform: rotate(360deg);
   }
 }
 
-@keyframes pulse {
-  0%,
-  100% {
+@keyframes loader-float {
+  0%, 100% {
     transform: scale(1);
   }
-
   50% {
-    transform: scale(1.1);
+    transform: scale(1.07);
   }
 }
 
-@keyframes glowPulse {
-  0%,
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0.6;
+@keyframes loader-glow {
+  0%, 100% {
+    opacity: .45;
+    transform: translate(-50%, -50%) scale(.85);
+  }
+  50% {
+    opacity: .9;
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+}
+
+@keyframes loader-orbit {
+  from {
+    transform: rotate(0deg) scale(1);
+  }
+  to {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@media (max-width: 480px) {
+  .loader-container {
+    width: 145px;
+    height: 145px;
+
+    &::before {
+      inset: -10px;
+    }
+
+    &::after {
+      inset: -19px;
+    }
   }
 
-  50% {
-    transform: translate(-50%, -50%) scale(1.2);
-    opacity: 1;
+  .loader-glow {
+    width: 185px;
+    height: 185px;
+  }
+
+  .loader-overlay::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  .loader-overlay::after {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader-overlay *,
+  .loader-container,
+  .loader-logo,
+  .loader-glow {
+    animation: none !important;
   }
 }
